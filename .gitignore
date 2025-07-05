@@ -1,0 +1,15 @@
+# Laravel
+/backend-laravel/vendor/
+/backend-laravel/node_modules/
+/backend-laravel/.env
+/backend-laravel/storage/
+backend-laravel/.phpunit.result.cache
+
+# React
+/frontend-react/node_modules/
+frontend-react/.env
+frontend-react/build/
+
+# General
+.DS_Store
+Thumbs.db
