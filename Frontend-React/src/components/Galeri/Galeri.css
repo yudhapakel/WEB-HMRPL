@@ -1,0 +1,37 @@
+.galeri-section {
+  padding: 80px 0;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+.galeri-title {
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: #333;
+}
+
+.galeri-subtitle {
+  color: #6c757d;
+  max-width: 500px;
+  margin: 10px auto 0;
+}
+
+.galeri-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeri-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.galeri-image {
+  width: 100%;
+  height: 250px; 
+  object-fit: cover; /* Memastikan gambar terisi penuh tanpa distorsi */
+  display: block;
+}

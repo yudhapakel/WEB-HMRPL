@@ -1,0 +1,54 @@
+.footer-section {
+  background-color: #f8f9fa;
+  padding: 60px 0 30px 0;
+  color: #333;
+}
+
+.footer-section h5 {
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #555;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #007bff; 
+  text-decoration: underline;
+}
+
+.connect-us {
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.social-icons a {
+  color: #555;
+  font-size: 1.5rem; 
+  margin-right: 20px;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #000;
+}
+
+.footer-divider {
+  margin-top: 40px;
+  border-color: #e0e0e0;
+}
+
+.copyright-text {
+  padding-top: 20px;
+  font-size: 0.9rem;
+  color: #6c757d;
+}

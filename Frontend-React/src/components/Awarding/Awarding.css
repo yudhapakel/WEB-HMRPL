@@ -1,0 +1,68 @@
+.awarding-section {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.awarding-title {
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: #333;
+}
+
+.awarding-subtitle {
+  color: #6c757d;
+  max-width: 500px;
+  margin: 10px auto 0;
+}
+
+.award-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4; /* Menjaga rasio kartu potret (lebar 3, tinggi 4) */
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  overflow: hidden; /* Penting agar overlay tidak keluar dari radius */
+  color: white;
+  display: flex;
+  align-items: flex-end; /* Mendorong konten ke bawah */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.award-card:hover {
+  transform: translateY(-10px); /* Efek mengangkat saat di-hover */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Gradient gelap di bagian bawah kartu agar teks terbaca */
+.award-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* Kontainer untuk teks di atas overlay */
+.award-card-text {
+  position: relative; /* Agar posisinya di atas overlay */
+  z-index: 2;
+  padding: 20px;
+  text-align: left;
+}
+
+.award-card-text h3 {
+  font-family: 'Oswald', sans-serif; /* Ganti dengan font yang sesuai jika ada */
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.award-card-text p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
