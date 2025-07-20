@@ -11,3 +11,10 @@
 .navbar-brand img {
   height: 40px;
 }
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background-color: #e5e7eb;
+}
+

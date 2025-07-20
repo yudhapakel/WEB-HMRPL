@@ -17,6 +17,7 @@ const Navbar = () => {
       <div className="container-fluid d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center">
           <img src={LogoHima} alt="Logo HIMA" height="40" className="me-2" />
+          <div className="divider" />
           <img src={LogoKabinet} alt="Logo Kabinet" height="40" />
         </div>
         <ul className="navbar-nav ms-auto">
