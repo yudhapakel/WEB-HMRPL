@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Tentang.css';
 
-// Impor gambar yang sudah Anda siapkan
+// Gambar untuk anggota inti
 import ketuaImage from '../../assets/Ketua.jpg';
 import wakilImage from '../../assets/WakilKetua.jpg';
 import sekre1Image from '../../assets/Sekre1.jpg';
@@ -10,15 +10,36 @@ import bend1Image from '../../assets/Bend1.jpg';
 import bend2Image from '../../assets/Bend2.jpg';
 import kepalaMnoImage from '../../assets/kepalamno.jpg';
 import wakilMnoImage from '../../assets/wakilmno.jpg';
-// Contoh gambar untuk kadep
-import kadepInternalImage from '../../assets/Ketua.jpg'; 
-import kadepEksternalImage from '../../assets/WakilKetua.jpg';
 
+// Gambar untuk internal
+import kadepInternalImage from '../../assets/kadeptInternal.jpg'; 
+import kepalakaderisasiImage from '../../assets/kepalakaderisasi.jpg';
+import staffKaderisasiImage from '../../assets/staffkaderisasi.jpg'; 
+import kepalapsdmImage from '../../assets/kepalapsdm.jpg';
+import staffpsdmImage from '../../assets/staffpsdm.jpg';
+import staff2psdmImage from '../../assets/staffpsdm2.jpg';
+import kepalaakademikImage from '../../assets/kepalaakademikriset.jpg'; 
+import staffakademikImage from '../../assets/staffakademikriset.jpg'; 
+
+// Gambar untuk eksternal
+import kadepEksternalImage from '../../assets/kadeptEksternal.jpg';
+import kepalarelasiImage from '../../assets/kepalarelasi.jpg';
+import staffrelasiImage from '../../assets/staffrelasi.jpg';
+import staff2relasiImage from '../../assets/staffrelasi2.jpg'
+import kepalaKerjasamaImage from '../../assets/kepalakerjasama.jpg';
+import staffKerjasamaImage from '../../assets/staffkerjasama.jpg';
+
+// ... (import lainnya tetap sama)
+
+// Gambar untuk media kreatif
+import kadepMediaImage from '../../assets/kadeptMedKraf.jpg'; 
+import kepalakominfoImage from '../../assets/kepalakominfo.jpg';
+import staffkominfoImage from '../../assets/staffkominfo.jpg';
 
 const anggotaData = {
   inti: {
     divisi: [], 
-    anggota: [ // Langsung daftar anggota
+    anggota: [
       { id: 'inti-1', nama: 'Ketua Umum', jabatan: 'Nama Ketua Umum', image: ketuaImage },
       { id: 'inti-2', nama: 'Wakil Ketua Umum', jabatan: 'Nama Wakil Ketua', image: wakilImage },
       { id: 'inti-3', nama: 'Sekretaris I', jabatan: 'Nama Sekretaris I', image: sekre1Image },
@@ -30,12 +51,11 @@ const anggotaData = {
     ]
   },
   internal: {
-    // PERBAIKAN: Properti diubah menjadi 'kepalaDepartemen' dan berupa objek
     kepalaDepartemen: { 
       id: 'kadep-int', 
-      nama: 'Kepala Dept. Internal', 
-      jabatan: 'Nama Kadep Internal', 
-      image: kadepInternalImage 
+      nama: 'Nama Kepala Departemen Internal', 
+      jabatan: 'Kepala Dept. Internal', 
+      image: kadepInternalImage
     },
     divisi: [
       { id: 'kaderisasi', nama: 'Kaderisasi' },
@@ -44,13 +64,17 @@ const anggotaData = {
     ],
     anggota: {
       kaderisasi: [
-        { id: 'int-k-1', nama: 'Anggota Kaderisasi 1', jabatan: 'Jabatan', image: ketuaImage },
+        { id: 'int-k-1', nama: 'Anggota Kaderisasi 1', jabatan: 'Kepala Kaderisasi', image: kepalakaderisasiImage },
+        { id: 'int-k-2', nama: 'Anggota Kaderisasi 2', jabatan: 'Anggota Kaderisasi', image: staffKaderisasiImage },
       ],
       psdm: [
-        { id: 'int-p-1', nama: 'Anggota PSDM 1', jabatan: 'Jabatan', image: wakilImage },
+        { id: 'int-p-1', nama: 'Anggota PSDM 1', jabatan: 'Jabatan', image: kepalapsdmImage },
+        { id: 'int-p-2', nama: 'Anggota PSDM 2', jabatan: 'Jabatan', image: staffpsdmImage },
+        { id: 'int-p-3', nama: 'Anggota PSDM 3', jabatan: 'Jabatan', image: staff2psdmImage },
       ],
       'akademik-riset': [
-        // data anggota akademik & riset
+        { id: 'int-ar-1', nama: 'Anggota Akademik & Riset 1', jabatan: 'Jabatan', image: kepalaakademikImage },
+        { id: 'int-ar-2', nama: 'Anggota Akademik & Riset 2', jabatan: 'Jabatan', image: staffakademikImage }
       ]
     }
   },
@@ -67,31 +91,34 @@ const anggotaData = {
     ],
     anggota: {
       'relasi-eksternal': [
-        { id: 'eks-r-1', nama: 'Anggota Relasi 1', jabatan: 'Jabatan', image: ketuaImage },
+        { id: 'eks-re-1', nama: 'Anggota Relasi 1', jabatan: 'Jabatan', image: kepalarelasiImage },
+        { id: 'eks-re-2', nama: 'Anggota Relasi 2', jabatan: 'Jabatan', image: staffrelasiImage },
+        { id: 'eks-re-3', nama: 'Anggota Relasi 3', jabatan: 'Jabatan', image: staff2relasiImage }
       ],
       kerjasama: [
-        { id: 'eks-k-1', nama: 'Anggota Kerjasama 1', jabatan: 'Jabatan', image: wakilImage },
+        { id: 'eks-k-1', nama: 'Anggota Kerjasama 1', jabatan: 'Jabatan', image: kepalaKerjasamaImage },
+        { id: 'eks-k-2', nama: 'Anggota Kerjasama 2', jabatan: 'Jabatan', image: staffKerjasamaImage }
       ]
     }
   },
-  'media-kreatif': {
-    kepalaDepartemen:{
-        id:'Kadep-eks',
-        nama:'kepala Dept. Media',
-        jabatan:'Nama kadep media',
-        image:kadepEksternalImage
+  mediakreatif: {
+    kepalaDepartemen: {
+      id: 'kadep-medkraf',
+      nama: 'Kepala Dept. Media',
+      jabatan: 'Nama Kadep Media',
+      image: kadepMediaImage
     },
-
     divisi: [
-        {id:'komunikasiInformasi',nama:'Komunikasi & Informasi'}
-
+      { id: 'komunikasiInformasi', nama: 'Komunikasi & Informasi' }
     ],
-    anggota: [
-      { id: 'med-1', nama: 'Anggota Medkraf 1', jabatan: 'Jabatan', image: kepalaMnoImage },
-    ]
-  },
+    anggota: {
+      komunikasiInformasi: [
+        { id: 'med-1', nama: 'Anggota Medkraf 1', jabatan: 'Jabatan', image: kepalakominfoImage },
+        { id: 'med-2', nama: 'Anggota Medkraf 2', jabatan: 'Jabatan', image: staffkominfoImage }
+      ]
+    }
+  }
 };
-
 
 const DaftarAnggota = () => {
   const [activeTab, setActiveTab] = useState('inti');
@@ -147,7 +174,7 @@ const DaftarAnggota = () => {
           <button className={`anggota-tab ${activeTab === 'inti' ? 'active' : ''}`} onClick={() => setActiveTab('inti')}>INTI</button>
           <button className={`anggota-tab ${activeTab === 'internal' ? 'active' : ''}`} onClick={() => setActiveTab('internal')}>INTERNAL</button>
           <button className={`anggota-tab ${activeTab === 'eksternal' ? 'active' : ''}`} onClick={() => setActiveTab('eksternal')}>EKSTERNAL</button>
-          <button className={`anggota-tab ${activeTab === 'media-kreatif' ? 'active' : ''}`} onClick={() => setActiveTab('media-kreatif')}>MEDIA KREATIF</button>
+          <button className={`anggota-tab ${activeTab === 'mediakreatif' ? 'active' : ''}`} onClick={() => setActiveTab('mediakreatif')}>MEDIA KREATIF</button>
         </div>
 
         {/* FITUR BARU: Tampilkan Ketua Departemen jika datanya ada */}
