@@ -18,7 +18,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
+  width: 250px;
   height: 4px;
   background-color: #007bff; 
 }
@@ -73,7 +73,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
+  width: 250px;
   height: 4px;
   background-color: #007bff;
 }
@@ -172,8 +172,12 @@
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.anggota-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .anggota-image {
@@ -183,15 +187,6 @@
   display: block;
 }
 
-.anggota-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  text-align: center;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
-}
 
 .anggota-nama {
   font-weight: 700;
@@ -233,4 +228,24 @@
   background-color: #f0f8f6;
   border-color: #1abc9c;
   color: #1abc9c;
+}
+
+
+.anggota-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;;
+}
+
+
+.anggota-info h5,
+.anggota-info p {
+  margin-bottom: 0;
+}
+
+
+.anggota-info h5 {
+  margin-bottom: 4px;
 }

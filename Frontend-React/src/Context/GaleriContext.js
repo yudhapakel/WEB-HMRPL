@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { getGaleri } from '../ApiFake/mockApi'; // menggunakan api palsu
+import { getGaleri } from '../ApiFake/mockApi';
 
 const GaleriContext = createContext();
 const ITEMS_PER_PAGE = 6;
@@ -25,17 +25,19 @@ export const GaleriProvider = ({ children }) => {
     }
   };
   
+  // Ambil data pertama kali
   useEffect(() => {
     fetchImages(1);
   }, []);
   
-
+  // Fungsi untuk tombol "See more"
   const loadMore = () => {
     if (hasMore) {
       fetchImages(page);
     }
   };
 
+  // Fungsi untuk tombol "See less"
   const resetAndReload = () => {
     const section = document.querySelector('.galeri-kegiatan-section');
     if (section) section.scrollIntoView({ behavior: 'smooth' });

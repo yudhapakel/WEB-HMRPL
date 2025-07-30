@@ -32,6 +32,6 @@
 .galeri-image {
   width: 100%;
   height: 250px; 
-  object-fit: cover; /* Memastikan gambar terisi penuh tanpa distorsi */
+  object-fit: cover;
   display: block;
 }

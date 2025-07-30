@@ -1,5 +1,3 @@
-
-
 .kabar-section {
   text-align: center;
   padding: 80px 0;
@@ -16,11 +14,10 @@
   margin-bottom: 40px;
 }
 
-
 .kabar-swiper {
-  max-width: 900px;  
+  max-width: 900px;
   width: 100%;
-  margin: 0 auto;    
+  margin: 0 auto;
   padding-bottom: 60px !important;
   position: relative;
 }
@@ -28,48 +25,52 @@
 
 .kabar-slide {
   display: flex;
-  
 }
+
 
 .kabar-card {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  align-items: center; 
+  gap: 2rem;
+  padding: 24px;
   background-color: #fff;
   border-radius: 16px;
-  padding: 24px;
-  gap: 2rem;
   border: 2px solid #00a5cf;
-  box-shadow: none;
-  width: 100%; 
+  width: 100%;
+  height: 300px; 
+  position: relative;
 }
 
 .kabar-text {
   flex: 1;
   text-align: left;
 }
+
 .kabar-text h5 {
   font-weight: bold;
   font-size: 1.25rem;
 }
+
 .kabar-date {
   color: #00a5cf;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
+
 .kabar-description {
   color: #6c757d;
   font-size: 0.95rem;
-}
-.kabar-image {
-  width: 300px;
-  height: 200px;
-  border-radius: 12px;
-  object-fit: cover;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 60px; 
 }
 
 .btn-selengkapnya {
-  margin-top: 15px;
+  position: absolute;
+  bottom: 24px; 
+  left: 24px; 
   background-color: white;
   border: 1px solid #00a5cf;
   color: #00a5cf;
@@ -87,36 +88,14 @@
   color: white;
 }
 
-
-.swiper-button-prev,
-.swiper-button-next {
-  background-color: transparent;
-  box-shadow: none;
-  position: absolute;
-  top: 93%;
-  transform: translateY(-50%);
-  z-index: 10;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.kabar-image {
+  width: 300px;
+  height: 200px; 
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 
-.swiper-button-prev {
-  left: calc(50% - 90px); 
-}
-
-.swiper-button-next {
-  right: calc(50% - 90px);
-}
-
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #00a5cf;
-}
 
 .swiper-pagination {
   bottom: 0px !important;

@@ -1,0 +1,58 @@
+.aspirasi-form {
+  background-color: #fff;
+  padding: 40px; 
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+  margin-top: 30px;
+  border-top: 4px solid #0689A0; 
+}
+
+
+.aspirasi-form .form-control,
+.aspirasi-form .form-select {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px 15px;
+  transition: all 0.3s ease;
+}
+
+
+.aspirasi-form .form-control:focus,
+.aspirasi-form .form-select:focus {
+  background-color: #fff;
+  border-color: #0689A0;
+  box-shadow: 0 0 0 3px rgba(6, 137, 160, 0.15);
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+
+.btn-kirim {
+  background: linear-gradient(45deg, #0689A0);
+  color: white !important;
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 50px; 
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  transition: all 0.3s ease;
+
+}
+
+.btn-kirim:hover {
+  transform: translateY(-3px); 
+  box-shadow: 0 7px 20px rgba(6, 137, 160, 0.3);
+  color: white;
+}
+
+.btn-kirim:disabled {
+  background: #6c757d;
+  box-shadow: none;
+  transform: none;
+}
