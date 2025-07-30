@@ -1,0 +1,24 @@
+
+.aspirasi-page-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #f7f9fc; 
+  border-radius: 12px;
+}
+
+.aspirasi-title {
+  font-weight: 800;
+  font-size: 2.5rem;
+  background: linear-gradient(45deg, black);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.aspirasi-subtitle {
+  color: #6c757d;
+  margin-top: 10px;
+  font-size: 1.1rem;
+}

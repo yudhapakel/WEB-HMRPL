@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Awarding.css';
-
-// Nanti, data ini akan datang dari API, bukan ditulis di sini.
 import tioImage from '../../assets/StafTerbaik.jpeg'; 
 import kemitraanImage from '../../assets/DepartementTerbaik.jpeg';
 import internalImage from '../../assets/DivisiTerbaik.jpeg';
@@ -9,20 +7,14 @@ import internalImage from '../../assets/DivisiTerbaik.jpeg';
 const dummyAwards = [
   {
     id: 1,
-    title: 'TIO FUNNY',
-    subtitle: 'Staf Ahli Relasi Eksternal',
     imageUrl: tioImage,
   },
   {
     id: 2,
-    title: 'KEMITRAAN DAN KEWIRAUSAHAAN',
-    subtitle: 'Departemen Eksternal',
     imageUrl: kemitraanImage,
   },
   {
     id: 3,
-    title: 'DEPARTEMEN INTERNAL',
-    subtitle: 'KABINET SYVELTA',
     imageUrl: internalImage,
   },
 ];
@@ -59,7 +51,7 @@ const Awarding = () => {
     };
 
     fetchAwards();
-  }, []); // [] berarti useEffect hanya berjalan sekali saat komponen dimuat
+  }, []); 
 
   return (
     <section className="awarding-section">
@@ -71,10 +63,10 @@ const Awarding = () => {
 
         <div className="row mt-5">
           {loading ? (
-            // Tampilan saat data sedang dimuat
+            
             <p>Memuat penghargaan...</p>
           ) : (
-            // Tampilan setelah data berhasil dimuat
+           
             awards.map(award => (
               <div key={award.id} className="col-lg-4 col-md-6 mb-4">
                 <div 

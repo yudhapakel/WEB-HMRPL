@@ -156,8 +156,6 @@ const DaftarAnggota = () => {
         <div className="anggota-card">
           <img src={anggota.image} alt={anggota.nama} className="anggota-image" />
           <div className="anggota-info">
-            <h5 className="anggota-nama">{anggota.nama}</h5>
-            <p className="anggota-jabatan">{anggota.jabatan}</p>
           </div>
         </div>
       </div>
@@ -184,8 +182,6 @@ const DaftarAnggota = () => {
               <div className="anggota-card">
                 <img src={currentData.kepalaDepartemen.image} alt={currentData.kepalaDepartemen.nama} className="anggota-image" />
                 <div className="anggota-info">
-                  <h5 className="anggota-nama">{currentData.kepalaDepartemen.nama}</h5>
-                  <p className="anggota-jabatan">{currentData.kepalaDepartemen.jabatan}</p>
                 </div>
               </div>
             </div>
@@ -208,7 +204,7 @@ const DaftarAnggota = () => {
         )}
 
         {/* Konten Anggota Sesuai Tab */}
-        <div className="row mt-5">
+        <div className="row mt-5 justify-content-center">
           {renderAnggota()}
         </div>
       </div>
