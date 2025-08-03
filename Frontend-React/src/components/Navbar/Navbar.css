@@ -1,3 +1,16 @@
+.navbar {
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  min-height: 80px; 
+  font-size: 1.1rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar img {
+  height: 52px; /* sesuaikan logo agar tidak terlalu besar */
+}
+
 .navbar .nav-link {
   font-weight: 500;
   color: #333;
@@ -7,7 +20,6 @@
 .navbar .nav-link:hover {
   color: #007bff;
 }
-
 
 .navbar .nav-link.active-link {
   color: #0056b3;
