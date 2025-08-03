@@ -38,9 +38,6 @@ const Hero = () => {
             Tentang Kami
             </a>
 
-           
-
-
           </div>
 
           {/* Kanan: Logo Kabinet */}

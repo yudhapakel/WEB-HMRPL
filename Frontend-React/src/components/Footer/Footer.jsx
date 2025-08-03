@@ -45,7 +45,7 @@ const Footer = () => {
           <div className="col-lg-4 col-md-12 mb-4 mb-lg-0">
             <h5>Website</h5>
             <ul className="footer-links list-unstyled">
-              <li><a href="https://rpl.fi.telkomuniversity.ac.id/" target="_blank" rel="noopener noreferrer">Program Studi S1 Rekayasa Perangkat Lunak</a></li>
+              <li><a href="https://bse.telkomuniversity.ac.id/" target="_blank" rel="noopener noreferrer">Program Studi S1 Rekayasa Perangkat Lunak</a></li>
               <li><a href="https://bpa.telkomuniversity.ac.id/" target="_blank" rel="noopener noreferrer">Badan Pengembangan Akademik (telkomuniversity.ac.id)</a></li>
             </ul>
           </div>

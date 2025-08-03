@@ -14,8 +14,9 @@
 }
 
 .hero-subtitle {
-  font-size: 20px;
+  font-size: 30px;
   color: #555;
+  text-align: justify;
 }
 
 .kabinet-title {
