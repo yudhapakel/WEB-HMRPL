@@ -1,0 +1,7 @@
+.berita-page-container {
+  max-width: 1140px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.berita-title { font-weight: 800; }
+.berita-subtitle { color: #6c757d; }
