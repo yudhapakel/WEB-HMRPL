@@ -9,6 +9,7 @@ import AspirasiPage from './pages/AspirasiPage';
 import RekrutmenPage from './pages/RekrutmenPage';
 import BeritaPage from './pages/BeritaPage';
 import BeritaDetailPage from './pages/BeritaDetailPage';
+import TestLogin from './pages/TestLogin';
 import { GaleriProvider } from './Context/GaleriContext';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route path="/rekrutmen" element={<RekrutmenPage />} />
               <Route path="/berita" element={<BeritaPage />} />
               <Route path="/berita/:slug" element={<BeritaDetailPage />} />
+              <Route path="/login" element={<TestLogin />} />
               {/* Tambahkan rute lainnya sesuai kebutuhan */}
               
               
