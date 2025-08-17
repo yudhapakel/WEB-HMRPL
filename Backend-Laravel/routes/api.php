@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->group(function () {
 //         'token' => $request->bearerToken()
 //     ]);
 // });
+
+// sukses konek
