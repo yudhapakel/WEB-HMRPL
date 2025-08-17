@@ -1,0 +1,8 @@
+.image-preview {
+  margin-top: 15px;
+  max-width: 300px;
+  max-height: 150px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  object-fit: cover;
+}

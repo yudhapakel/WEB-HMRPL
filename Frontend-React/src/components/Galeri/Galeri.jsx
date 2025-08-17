@@ -1,34 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import './Galeri.css';
-
-// -gambar dummy
-import galeri1 from '../../assets/Galeri1.JPG'; 
-import galeri2 from '../../assets/Galeri2.JPG';
-import galeri3 from '../../assets/Galeri3.png';
-
-const dummyImages = [
-  { id: 1, src: galeri1, title: 'Rapat Kerja Awal Periode' },
-  { id: 2, src: galeri2, title: 'Makrab HMRPL 2024' },
-  { id: 3, src: galeri3, title: 'Studi Banding Himpunan' },
-  // Tambahkan gambar kalo perlu doang ini cman dummy dan bakal dihapus kalo udah ada backend
-];
-
+import { useGaleri } from '../../Context/GaleriContext';
 
 const Galeri = () => {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { images, loading } = useGaleri();
+  const latestImages = images.slice(0, 3);
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    // Pengambilan data
-    setLoading(true);
-    setTimeout(() => {
-      setImages(dummyImages);
-      setLoading(false);
-    }, 1000);
 
     //NANTI, ganti dengan fetch yang asli di backedn oke yud jan bilang gabisa gw gedik lu 
     /*
@@ -39,7 +20,6 @@ const Galeri = () => {
         setLoading(false);
       });
     */
-  }, []);
 
   const handleImageClick = (clickedIndex) => {
     setIndex(clickedIndex);

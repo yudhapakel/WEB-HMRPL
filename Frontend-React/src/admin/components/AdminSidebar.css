@@ -1,0 +1,67 @@
+.admin-sidebar {
+  width: 260px;
+  min-width: 260px;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #eee;
+}
+.sidebar-header span {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.admin-sidebar .components {
+  padding: 15px;
+  flex-grow: 1;
+}
+.admin-sidebar .components p {
+  color: #a5a5a5;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.admin-sidebar .components a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 5px;
+  transition: all 0.2s ease-in-out;
+}
+.admin-sidebar .components a:hover {
+  background-color: #28a745; 
+  color: #fff;             
+}
+.admin-sidebar .components a.active {
+  background-color: #28a745; /* Warna hijau */
+  color: #fff;
+}
+.sidebar-footer {
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  color: #dc3545; /* Warna merah */
+  text-decoration: none;
+  font-weight: 500;
+}
+.sidebar-footer a:hover {
+  background-color: #fbeaea;
+}

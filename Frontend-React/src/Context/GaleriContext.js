@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { getGaleri } from '../ApiFake/mockApi';
+import axiosInstance from '../api/axiosInstance'; // Pastikan path ini benar
 
 const GaleriContext = createContext();
 const ITEMS_PER_PAGE = 6;
@@ -11,12 +11,14 @@ export const GaleriProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const fetchImages = async (pageNum) => {
-    setLoading(true);
+    // Set loading yang sesuai: loading utama untuk halaman 1, loadingMore untuk sisanya
+    if (pageNum === 1) setLoading(true);
+
     try {
-      const response = await getGaleri(pageNum, ITEMS_PER_PAGE);
+      const response = await axiosInstance.get(`/galeri?page=${pageNum}&limit=${ITEMS_PER_PAGE}`);
       // Jika halaman 1, ganti seluruh data. Jika tidak, tambahkan data baru.
-      setImages(prev => pageNum === 1 ? response.data : [...prev, ...response.data]);
-      setHasMore(response.meta.current_page < response.meta.last_page);
+      setImages(prev => pageNum === 1 ? response.data.data : [...prev, ...response.data.data]);
+      setHasMore(response.data.meta.current_page < response.data.meta.last_page);
       setPage(pageNum + 1);
     } catch (error) {
       console.error("Gagal mengambil data galeri:", error);
@@ -41,7 +43,7 @@ export const GaleriProvider = ({ children }) => {
   const resetAndReload = () => {
     const section = document.querySelector('.galeri-kegiatan-section');
     if (section) section.scrollIntoView({ behavior: 'smooth' });
-    fetchImages(1);
+    fetchImages(1); // Ambil kembali hanya data halaman pertama
   };
 
   const value = { images, loading, hasMore, loadMore, resetAndReload };
