@@ -12,9 +12,29 @@
   border-radius: 16px;
   border: 2px solid #e9ecef;
 }
-.berita-text { flex: 1; text-align: left; }
+.berita-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.berita-description {
+  margin-bottom: 1rem;
+}
+
+.btn-selengkapnya {
+  align-self: flex-start;
+}
+
 .berita-date { color: #007bff; font-size: 0.9rem; }
-.berita-image-utama { width: 40%; object-fit: cover; border-radius: 12px; }
+
+.berita-image-utama {
+  width: 35%;        
+  max-width: 400px;  
+  object-fit: cover; 
+  border-radius: 12px;
+}
 
 /* Style Berita Lainnya */
 .berita-card {

@@ -32,6 +32,9 @@ import LihatRespondenPage from './admin/pages/LihatRespondenPage';
 import AddGaleriPage from './admin/pages/AddGaleriPage';
 import AddOprecPage from './admin/pages/AddOprecPage';
 
+// (opsional buat testing aja)
+// import TestLogin from './pages/TestLogin';
+
 function App() {
   return (
     <Router>
@@ -66,6 +69,8 @@ function App() {
             {/* Rute Login */}
             <Route path="/login" element={<LoginPage />} />
 
+            {/* Opsional buat testing */}
+            {/* <Route path="/testlogin" element={<TestLogin />} /> */}
           </Routes>
         </GaleriProvider>
       </AuthProvider>

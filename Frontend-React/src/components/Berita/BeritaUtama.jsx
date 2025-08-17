@@ -11,9 +11,11 @@ const BeritaUtama = ({ berita }) => {
       <h2 className="section-title">Berita Utama</h2>
       <div className="berita-utama-card">
         <div className="berita-text">
-          <h5>{berita.title}</h5>
-          <p className="berita-date">{berita.date}</p>
-          <p className="berita-description">{berita.excerpt}</p>
+          <div>
+            <h5>{berita.title}</h5>
+            <p className="berita-date">{berita.date}</p>
+            <p className="berita-description">{berita.excerpt}</p>
+          </div>
           <Link to={`/berita/${berita.slug}`} className="btn-selengkapnya">
             Selengkapnya <FaChevronRight size={12} />
           </Link>
