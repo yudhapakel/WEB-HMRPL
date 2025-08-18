@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 
 import "./LoginPage.css";
 import { useAuth } from "../Context/AuthContext";
@@ -8,6 +8,8 @@ import LogoHima from "../assets/LogoHima.png";
 import LogoKabinet from "../assets/LogoKabinet.png";
 
 import { FaInstagram, FaYoutube, FaLinkedin } from "react-icons/fa";
+
+import axios from "axios";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -23,17 +25,30 @@ const LoginPage = () => {
     setError("");
 
     try {
-      // await axiosInstance.post('/login', { username, password });
+      const res = await axios.post('http://localhost:8000/api/login', {
+        email: username,
+        password: password},
+        {withCredentials: true});
+
+      // Jika berhasil ambil token dari user data
+      const token = res.data.token;
+      const userData = res.data.user;
+
+      // Simpan ke context
+      login(userData, token);
+      console.log("Login berhasil", res.data);
 
       // Simulasi delay login
-      setTimeout(() => {
-         const userData = { name: username };
-                const token = 'dummy-token-12345';
-                console.log("Data yang dikirim ke context:", userData);
-                login(userData, token);
-      }, 1000);
+      // setTimeout(() => {
+      //    const userData = { name: username };
+      //           const token = 'dummy-token-12345';
+      //           console.log("Data yang dikirim ke context:", userData);
+      //           login(userData, token);
+      // }, 1000);
     } catch (err) {
-      setError("Username atau password salah.");
+      console.error("Login gagal", err);
+      setError(err.response?.data?.message || "Username atau password salah");
+    } finally {
       setLoading(false);
     }
   };

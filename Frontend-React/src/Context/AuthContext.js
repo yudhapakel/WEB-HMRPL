@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      axiosInstance.get('/profile', {
+      axiosInstance.get('/me', {
         headers: { 'Authorization': `Bearer ${token}` }
       }).then(response => {
         setUser(response.data); 

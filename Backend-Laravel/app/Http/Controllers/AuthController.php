@@ -29,7 +29,7 @@ class AuthController extends Controller
             'message' => 'Login sukses',
             'token' => $token,
             'user' => $user
-        ]);
+        ])->cookie('token', $token, 60, '/', null, true, true, false, 'Strict');
     }
 
     public function logout(Request $request) {
