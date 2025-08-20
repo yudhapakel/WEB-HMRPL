@@ -15,6 +15,7 @@ import TentangPage from './pages/TentangPage';
 import KegiatanPage from './pages/KegiatanPage';
 import AspirasiPage from './pages/AspirasiPage';
 import RekrutmenPage from './pages/RekrutmenPage';
+import { RekrutmenProvider } from './Context/RekrutmenContext';
 import BeritaPage from './pages/BeritaPage';
 import BeritaDetailPage from './pages/BeritaDetailPage';
 
@@ -47,7 +48,14 @@ function App() {
               <Route path="/tentang" element={<TentangPage />} />
               <Route path="/kegiatan" element={<KegiatanPage />} />
               <Route path="/aspirasi" element={<AspirasiPage />} />
-              <Route path="/rekrutmen" element={<RekrutmenPage />} />
+              <Route 
+              path="/rekrutmen" 
+              element={
+                <RekrutmenProvider>
+                  <RekrutmenPage />
+                </RekrutmenProvider>
+              } 
+            />
               <Route path="/berita" element={<BeritaPage />} />
               <Route path="/berita/:slug" element={<BeritaDetailPage />} />
             </Route>

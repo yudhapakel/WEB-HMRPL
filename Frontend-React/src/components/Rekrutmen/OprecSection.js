@@ -1,0 +1,40 @@
+// src/components/OprecSection/OprecSection.js
+
+import React, { useState, useEffect } from 'react';
+import axiosInstance from '../../api/axiosInstance'; // Sesuaikan path-mu
+
+const OprecSection = () => {
+  const [posterUrl, setPosterUrl] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLatestPoster = async () => {
+      try {
+        const response = await axiosInstance.get('/api/rekrutmen/terbaru');
+        setPosterUrl(response.data.poster_url);
+      } catch (err) {
+        // Jika error (misal 404), kita biarkan saja posternya tidak muncul
+        console.log('Info: Tidak ada poster rekrutmen saat ini.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchLatestPoster();
+  }, []);
+
+  // Jangan tampilkan apa-apa saat loading atau jika tidak ada poster
+  if (isLoading || !posterUrl) {
+    return null;
+  }
+
+  // Hanya tampilkan section ini jika posternya berhasil didapatkan
+  return (
+    <section style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+      <h2>Open Recruitment</h2>
+      <img src={posterUrl} alt="Poster Open Recruitment" style={{ maxWidth: '100%', height: 'auto', border: '1px solid #ddd', borderRadius: '8px' }} />
+    </section>
+  );
+};
+
+export default OprecSection;

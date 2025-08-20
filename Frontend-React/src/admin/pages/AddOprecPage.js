@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
-// import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import './AddOprecPage.css'; 
 
 const AddOprecPage = () => {
@@ -32,9 +32,10 @@ const AddOprecPage = () => {
     
     try {
       // kode buat backend
-      // await axiosInstance.post('/rekrutmen', formData, {
-      //   headers: { 'Content-Type': 'multipart/form-data' }
-      // });
+      await axiosInstance.post('/api/rekrutmen', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        withCredentials: true
+      });
       
       await new Promise(resolve => setTimeout(resolve, 1500));
       console.log('Poster dikirim:', file.name);
