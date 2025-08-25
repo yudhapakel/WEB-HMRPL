@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useNavigate } from 'react-router-dom';
-// import axiosInstance from '../../api/axiosInstance'; // terhubung sama backend nanti
+ import axiosInstance from '../../api/axiosInstance'; // terhubung sama backend nanti
 
 const AddBeritaPage = () => {
   const [title, setTitle] = useState('');
@@ -28,10 +28,9 @@ const AddBeritaPage = () => {
     }
     
     try {
-      // Simulasi submit ke backend
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log('Data yang akan dikirim:', { title, content, image });
-      
+      await axiosInstance.post('/api/admin/berita', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+     });
       setStatus('Berita berhasil ditambahkan!');
       setTimeout(() => navigate('/admin/berita'), 2000);
 

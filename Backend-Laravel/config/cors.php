@@ -1,11 +1,13 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'aspirasi'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => explode(',', env('FRONTEND_URL', 'http://localhost:3000')), // Ganti ini sesuai FE lo
+    'allowed_origins' => [
+        'http://localhost:3000', // <-- 2. KITA TULIS LANGSUNG, LEBIH AMAN UNTUK DEV
+    ], // Ganti ini sesuai FE lo
 
     'allowed_origins_patterns' => [],
 

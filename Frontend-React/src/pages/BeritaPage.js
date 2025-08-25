@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BeritaList from '../components/Berita/BeritaList';
 import './BeritaPage.css';
-// import axiosInstance from '../api/axiosInstance'; // nanti diaktifin kalo api nya udah ada
+import axiosInstance from '../api/axiosInstance'; // nanti diaktifin kalo api nya udah ada
 
 const BeritaPage = () => {
   const [semuaBerita, setSemuaBerita] = useState([]);
@@ -13,19 +13,9 @@ const BeritaPage = () => {
     const fetchBerita = async () => {
       setLoading(true);
       try {
-        const dummyResponse = {
-          data: Array.from({ length: 7 }, (v, i) => ({ 
-            id: i + 1, 
-            slug: `judul-berita-${i + 1}`,
-            title: i === 0 ? 'Peluncuran Website Himpunan' : `Judul Berita Lainnya ${i}`, 
-            date: '30 September 2025', 
-            excerpt: 'Bandung - Ini adalah cuplikan singkat dari berita...', 
-            imageUrl: 'https://via.placeholder.com/400x300' 
-          })),
-          meta: { last_page: 4 }
-        };
-        setSemuaBerita(dummyResponse.data);
-        setTotalPages(dummyResponse.meta.last_page);
+       const response = await axiosInstance.get(`/api/berita?page=${currentPage}`);
+      setSemuaBerita(response.data.data);
+      setTotalPages(response.data.meta.last_page);
       } catch (error) {
         console.error("Gagal mengambil data berita:", error);
       } finally {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 import { FaFileExcel } from 'react-icons/fa';
-// import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 
 const LihatRespondenPage = () => {
   const [responden, setResponden] = useState([]);
@@ -11,20 +11,12 @@ const LihatRespondenPage = () => {
     const fetchResponden = async () => {
       setLoading(true);
       try {
-        // Simulasi data dummy
-        const dummyData = [
-          { id: 1, nama: 'Budi Santoso', nim: '123456', kategori: 'Saran', pesan: 'Acaranya sudah bagus...', isAnonim: false },
-          { id: 2, nama: '', nim: '', kategori: 'Kritik', pesan: 'Jadwal kegiatan seringkali bentrok...', isAnonim: true },
-          { id: 3, nama: 'Citra Lestari', nim: '789012', kategori: 'Apresiasi', pesan: 'Terima kasih untuk workshopnya!', isAnonim: false },
-        ];
-        // Tambahkan delay untuk simulasi loading
-        setTimeout(() => {
-          setResponden(dummyData);
-          setLoading(false);
-        }, 500);
-
+        // Panggil API dari backend
+        const response = await axiosInstance.get('/api/aspirasi');
+        setResponden(response.data); // Simpan data asli ke state
       } catch (error) {
         console.error("Gagal mengambil data responden:", error);
+      } finally {
         setLoading(false);
       }
     };

@@ -42,7 +42,7 @@ const AspirasiForm = () => {
     setSubmitStatus(null);
     try {
       // Kirim data ke backend
-      await axiosInstance.post('/aspirasi', formData);
+      await axiosInstance.post('/api/aspirasi', formData);
       setSubmitStatus({ type: 'success', message: 'Aspirasi Anda berhasil terkirim. Terima kasih!' });
       setFormData(initialFormData); // Reset form setelah berhasil
     } catch (error) {

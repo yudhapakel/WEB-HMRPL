@@ -24,16 +24,11 @@ const EditBeritaPage = () => {
       setLoading(true);
       try {
         // --- KODE ASLI NANTI ---
-        // const response = await axiosInstance.get(`/berita/${id}`);
-        // setTitle(response.data.title);
-        // setContent(response.data.content);
-        // setImagePreview(response.data.imageUrl);
-
-        //dummyData aja
-        const dummyData = { title: `Judul Berita ID ${id}`, content: `<p>Ini adalah isi konten untuk berita ID ${id}.</p>`, imageUrl: 'https://via.placeholder.com/400x300' };
-        setTitle(dummyData.title);
-        setContent(dummyData.content);
-        setImagePreview(dummyData.imageUrl);
+        const response = await axiosInstance.get(`/api/admin/berita/${id}`);
+      setTitle(response.data.title);
+      setContent(response.data.content);
+      // Bangun URL gambar lengkap
+      setImagePreview(`${process.env.REACT_APP_API_URL}/storage/${response.data.image_path}`);
       } catch (error) {
         console.error("Gagal mengambil data berita:", error);
       } finally {
@@ -67,9 +62,11 @@ const EditBeritaPage = () => {
 
     try {
       // pake post nanti buat formdata
-      // await axiosInstance.post(`/berita/${id}`, formData, {
-      //   headers: { 'Content-Type': 'multipart/form-data' }
-      // });
+      await axiosInstance.post(`/api/admin/berita/${id}`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        setStatus('Berita berhasil diperbarui!');
+        setTimeout(() => navigate('/admin/berita'), 2000);
       
       await new Promise(resolve => setTimeout(resolve, 1500));
       console.log('Data pembaruan dikirim untuk ID:', id);

@@ -11,17 +11,9 @@ const ManageBeritaPage = () => {
     const fetchBerita = async () => {
       setLoading(true);
       try {
-        // const response = await axiosInstance.get('/berita');
-        // setBerita(response.data.data);
-        
-        // dummy api
-        const dummyData = [
-          { id: 1, title: 'Peluncuran Website Himpunan', date: '2025-09-30' },
-          { id: 2, title: 'Open Recruitment Pengurus HIMARPL', date: '2025-10-05' },
-        ];
-        setBerita(dummyData);
-        
-
+      // Sesuaikan dengan endpoint admin jika berbeda, atau pakai yg publik
+      const response = await axiosInstance.get('/api/berita');
+      setBerita(response.data.data); // Ambil dari .data karena ada paginasi
       } catch (error) {
         console.error("Gagal mengambil data berita:", error);
       } finally {
@@ -34,7 +26,7 @@ const ManageBeritaPage = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus berita ini?')) {
       try {
-        // await axiosInstance.delete(`/berita/${id}`);
+        await axiosInstance.delete(`/berita/${id}`);
         setBerita(berita.filter(item => item.id !== id));
         alert('Berita berhasil dihapus!');
       } catch (error) {
