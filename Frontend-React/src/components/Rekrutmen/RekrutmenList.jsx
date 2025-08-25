@@ -47,7 +47,11 @@ const RekrutmenList = () => {
     <div className="rekrutmen-list">
       {posters.map(poster => (
         <div key={poster.id} className="poster-item">
-          <img src={poster.imageUrl} alt={poster.altText} className="img-fluid" />
+        <img 
+          src={`${process.env.REACT_APP_API_URL}${poster.poster_url}`}  
+          alt={`Poster Rekrutmen ${poster.id}`} 
+          className="img-fluid" 
+        />
         </div>
       ))}
     </div>

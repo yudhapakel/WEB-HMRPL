@@ -5,7 +5,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000'], // Ganti ini sesuai FE lo
+    'allowed_origins' => explode(',', env('FRONTEND_URL', 'http://localhost:3000')), // Ganti ini sesuai FE lo
 
     'allowed_origins_patterns' => [],
 

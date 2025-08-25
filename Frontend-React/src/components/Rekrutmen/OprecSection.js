@@ -10,7 +10,7 @@ const OprecSection = () => {
   useEffect(() => {
     const fetchLatestPoster = async () => {
       try {
-        const response = await axiosInstance.get('/api/rekrutmen/terbaru');
+        const response = await axiosInstance.get('/api/rekrutmen');
         setPosterUrl(response.data.poster_url);
       } catch (err) {
         // Jika error (misal 404), kita biarkan saja posternya tidak muncul
