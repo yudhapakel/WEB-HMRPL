@@ -61,7 +61,7 @@ class BeritaController extends Controller
      * Display the specified resource.
      */
     // menampilkan satu berita(untuk edit dan detail page)
-    public function show(string $id)
+    public function show(Berita $berita)
     {
         return $berita;
     }
@@ -70,44 +70,43 @@ class BeritaController extends Controller
      * Update the specified resource in storage.
      */
     // memperbarui berita (admin)
-    public function update(Request $request, string $id)
+    public function update(Request $request, Berita $berita)
     {
-         $validated = $request->validate([
-        'title' => 'required|string|max:255',
-        'content' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+       $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    // 1. SIAPKAN NILAI AWAL DARI GAMBAR YANG SUDAH ADA
-    $db_path = $berita->image_path;
+        // Gunakan variabel $path secara konsisten
+        $path = $berita->image_path;
 
-    // 2. JIKA ADA GAMBAR BARU DIUPLOAD, BARU PERBARUI NILAI VARIABELNYA
-    if ($request->hasFile('image')) {
-        // Hapus file lama
-        Storage::disk('public')->delete($berita->image_path);
-        // Simpan file baru dan perbarui variabel $db_path
-        $db_path = $request->file('image')->store('berita', 'public');
-    }
+        if ($request->hasFile('image')) {
+            Storage::disk('public')->delete($berita->image_path);
+            $path = $request->file('image')->store('berita', 'public');
+        }
 
-    // 3. SEKARANG $db_path PASTI PUNYA NILAI (PATH LAMA ATAU PATH BARU)
-    $berita->update([
-        'title' => $validated['title'],
-        'slug' => Str::slug($validated['title']),
-        'content' => $validated['content'],
-        'image_path' => $path,
-    ]);
+        // Sekarang kita bisa panggil update langsung pada objek $berita
+        $berita->update([
+            'title' => $validated['title'],
+            'slug' => Str::slug($validated['title']),
+            'content' => $validated['content'],
+            'image_path' => $path, // Gunakan $path yang sudah konsisten
+        ]);
 
-    return response()->json($berita);
+        return response()->json($berita);
     }
 
     /**
      * Remove the specified resource from storage.
      */
     // menghapus berita (admin) 
-    public function destroy(string $id)
+    public function destroy(Berita $berita)
     {
         // Hapus file gambar dari disk 'public'
         Storage::disk('public')->delete($berita->image_path);
+
+        // Hapus record dari database
         $berita->delete();
 
         return response()->json(['message' => 'Berita berhasil dihapus']);

@@ -26,7 +26,7 @@ const ManageBeritaPage = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus berita ini?')) {
       try {
-        await axiosInstance.delete(`/berita/${id}`);
+        await axiosInstance.delete(`/api/admin/berita/${id}`);
         setBerita(berita.filter(item => item.id !== id));
         alert('Berita berhasil dihapus!');
       } catch (error) {

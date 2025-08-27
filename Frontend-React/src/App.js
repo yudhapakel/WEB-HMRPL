@@ -19,6 +19,7 @@ import { RekrutmenProvider } from './Context/RekrutmenContext';
 import BeritaPage from './pages/BeritaPage';
 import BeritaDetailPage from './pages/BeritaDetailPage';
 
+
 // Halaman Login
 import LoginPage from './pages/LoginPage';
 
@@ -32,6 +33,7 @@ import EditAwardingPage from './admin/pages/EditAwardingPage';
 import LihatRespondenPage from './admin/pages/LihatRespondenPage';
 import AddGaleriPage from './admin/pages/AddGaleriPage';
 import AddOprecPage from './admin/pages/AddOprecPage';
+import ManageGaleriPage from './admin/pages/ManageGaleriPage';
 
 // (opsional buat testing aja)
 // import TestLogin from './pages/TestLogin';
@@ -46,7 +48,12 @@ function App() {
             <Route element={<PublicLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/tentang" element={<TentangPage />} />
-              <Route path="/kegiatan" element={<KegiatanPage />} />
+              <Route path="/kegiatan" element={
+                 <GaleriProvider>
+                  <KegiatanPage />
+                  </GaleriProvider>
+               }
+              />
               <Route path="/aspirasi" element={<AspirasiPage />} />
               <Route 
               path="/rekrutmen" 
@@ -69,6 +76,7 @@ function App() {
                 <Route path="berita/edit/:id" element={<EditBeritaPage />} />
                 <Route path="awarding" element={<EditAwardingPage />} />
                 <Route path="aspirasi" element={<LihatRespondenPage />} />
+                <Route path="galeri" element={<ManageGaleriPage />} />
                 <Route path="galeri/tambah" element={<AddGaleriPage />} />
                 <Route path="oprec/tambah" element={<AddOprecPage />} />
               </Route>

@@ -1,0 +1,81 @@
+// src/admin/pages/ManageGaleriPage.jsx
+
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axiosInstance from '../../api/axiosInstance';
+import { FaTrash, FaPlus } from 'react-icons/fa';
+// import './ManageGaleriPage.css'; // Buat file CSS ini untuk styling jika perlu
+
+const ManageGaleriPage = () => {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fungsi untuk mengambil semua data gambar dari backend
+  useEffect(() => {
+    const fetchImages = async () => {
+      setLoading(true);
+      try {
+        // Kita gunakan endpoint publik yang sudah ada
+        const response = await axiosInstance.get('/api/galeri');
+        setImages(response.data.data); // Ambil dari .data karena ada paginasi
+      } catch (error) {
+        console.error("Gagal mengambil data galeri:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchImages();
+  }, []);
+
+  // Fungsi untuk menghapus gambar
+  const handleDelete = async (id) => {
+    if (window.confirm('Apakah Anda yakin ingin menghapus gambar ini?')) {
+      try {
+        // Panggil endpoint DELETE yang sudah kita siapkan
+        await axiosInstance.delete(`/api/admin/galeri/${id}`);
+        // Hapus gambar dari state agar UI langsung update
+        setImages(images.filter(item => item.id !== id));
+        alert('Gambar berhasil dihapus!');
+      } catch (error) {
+        console.error('Gagal menghapus gambar:', error);
+        alert('Gagal menghapus gambar.');
+      }
+    }
+  };
+
+  if (loading) {
+    return <p className="text-center">Memuat data galeri...</p>;
+  }
+
+  return (
+    <div className="p-4 bg-white rounded shadow-sm">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="h3 mb-0">Kelola Galeri</h1>
+        <Link to="/admin/galeri/tambah" className="btn btn-primary">
+          <FaPlus className="me-2" />Tambah Gambar Baru
+        </Link>
+      </div>
+
+      {images.length > 0 ? (
+        <div className="row">
+          {images.map((image) => (
+            <div key={image.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+              <div className="card h-100">
+                <img src={image.imageUrl} className="card-img-top" alt={`Galeri ${image.id}`} style={{ height: '180px', objectFit: 'cover' }} />
+                <div className="card-body text-center">
+                  <button onClick={() => handleDelete(image.id)} className="btn btn-sm btn-danger">
+                    <FaTrash className="me-1" /> Hapus
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-center">Belum ada gambar di galeri. Silakan tambahkan gambar baru.</p>
+      )}
+    </div>
+  );
+};
+
+export default ManageGaleriPage;

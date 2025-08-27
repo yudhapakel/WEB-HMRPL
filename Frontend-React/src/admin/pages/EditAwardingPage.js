@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaUpload } from 'react-icons/fa';
-// import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import './EditAwardingPage.css';
 
 const EditAwardingPage = () => {
@@ -24,17 +24,13 @@ const EditAwardingPage = () => {
   // Ambil data gambar yang sekarang saat halaman dimuat
   useEffect(() => {
     const fetchCurrentAwards = async () => {
-      // simulasi aja ini
-      setPreviews({
-        staff: 'https://via.placeholder.com/400x200.png?text=Current+Staff+Award',
-        divisi: 'https://via.placeholder.com/400x200.png?text=Current+Divisi+Award',
-        departemen: 'https://via.placeholder.com/400x200.png?text=Current+Departemen+Award',
-      });
-
-      // kode buat nanti backend
-      // const response = await axiosInstance.get('/awarding');
-      // setPreviews(response.data);
-    };
+        try {
+      const response = await axiosInstance.get('/api/awarding');
+      setPreviews(response.data);
+    } catch (error) {
+      console.error("Gagal mengambil data awarding:", error);
+    }
+  };
     fetchCurrentAwards();
   }, []);
 
@@ -48,38 +44,33 @@ const EditAwardingPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setStatus('');
+  setIsSubmitting(true);
+  setStatus('');
 
-    const formData = new FormData();
-    if (files.staff) formData.append('staff_image', files.staff);
-    if (files.divisi) formData.append('divisi_image', files.divisi);
-    if (files.departemen) formData.append('departemen_image', files.departemen);
+  // Pengecekan yang lebih simpel dan anti-gagal
+  if (!files.staff && !files.divisi && !files.departemen) {
+    setStatus('Tidak ada gambar baru yang dipilih untuk diunggah.');
+    setIsSubmitting(false);
+    return;
+  }
 
-    // Ngecek kalo file nya udah di upload
-    if (formData.entries().next().done) {
-      setStatus('Tidak ada gambar baru yang dipilih untuk diunggah.');
-      setIsSubmitting(false);
-      return;
-    }
+  const formData = new FormData();
+  if (files.staff) formData.append('staff_image', files.staff);
+  if (files.divisi) formData.append('divisi_image', files.divisi);
+  if (files.departemen) formData.append('departemen_image', files.departemen);
 
-    try {
-      // kode buat nanti backend
-      // await axiosInstance.post('/awarding', formData, {
-      //   headers: { 'Content-Type': 'multipart/form-data' }
-      // });
-      
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log('Data gambar dikirim!');
-
-      setStatus('Gambar awarding berhasil diperbarui!');
-    } catch (error) {
-      console.error('Gagal upload gambar:', error);
-      setStatus('Gagal upload gambar. Coba lagi.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  try {
+    await axiosInstance.post('/api/admin/awarding', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    setStatus('Gambar awarding berhasil diperbarui!');
+  } catch (error) {
+    console.error('Gagal upload gambar:', error);
+    setStatus('Gagal upload gambar. Coba lagi.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="p-4 bg-white rounded shadow-sm">

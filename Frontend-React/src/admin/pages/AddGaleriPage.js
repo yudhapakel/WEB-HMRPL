@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
-// import axiosInstance from '../../api/axiosInstance';
+import axiosInstance from '../../api/axiosInstance';
 import './AddGaleriPage.css'; 
 
 const AddGaleriPage = () => {
@@ -37,9 +37,9 @@ const AddGaleriPage = () => {
     
     try {
       // Kode buat backend nya
-      // await axiosInstance.post('/galeri', formData, {
-      //   headers: { 'Content-Type': 'multipart/form-data' }
-      // });
+      await axiosInstance.post('/api/admin/galeri', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
       
       await new Promise(resolve => setTimeout(resolve, 2000));
       console.log(`Mengirim ${files.length} gambar.`);

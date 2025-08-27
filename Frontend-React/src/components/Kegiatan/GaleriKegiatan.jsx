@@ -3,8 +3,6 @@ import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import './GaleriKegiatan.css';
 import { motion, AnimatePresence } from 'framer-motion';
-
-
 import { useGaleri } from '../../Context/GaleriContext';
 
 const cardVariants = {
@@ -14,7 +12,6 @@ const cardVariants = {
 };
 
 const GaleriKegiatan = () => {
-
   const { 
     images, 
     loading, 
@@ -22,8 +19,7 @@ const GaleriKegiatan = () => {
     loadMore, 
     resetAndReload 
   } = useGaleri();
-
- 
+  
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -32,12 +28,20 @@ const GaleriKegiatan = () => {
     setOpen(true);
   };
 
- 
   if (loading && images.length === 0) {
     return (
       <section className="galeri-kegiatan-section">
         <div className="container text-center"><p>Memuat Galeri...</p></div>
       </section>
+    );
+  }
+  
+  // Tambahkan ini untuk handle jika tidak ada gambar sama sekali
+  if (!loading && images.length === 0) {
+    return (
+        <section className="galeri-kegiatan-section">
+            <div className="container text-center"><p>Belum ada gambar di galeri.</p></div>
+        </section>
     );
   }
 
@@ -64,7 +68,12 @@ const GaleriKegiatan = () => {
                   layout
                 >
                   <div className="galeri-kegiatan-card" onClick={() => handleImageClick(idx)}>
-                    <img src={image.src} alt={image.title} className="galeri-kegiatan-image" />
+                    {/* ===== PERBAIKAN #1: GANTI image.src MENJADI image.imageUrl ===== */}
+                    <img 
+                      src={image.imageUrl} 
+                      alt={image.caption || `Galeri ${image.id}`} 
+                      className="galeri-kegiatan-image" 
+                    />
                   </div>
                 </motion.div>
               ))}
@@ -82,9 +91,15 @@ const GaleriKegiatan = () => {
         </div>
       </section>
 
-      <Lightbox open={open} close={() => setOpen(false)} slides={images} index={index}/>
+      {/* ===== PERBAIKAN #2: TRANSFORMASI DATA 'slides' UNTUK LIGHTBOX ===== */}
+      <Lightbox 
+        open={open} 
+        close={() => setOpen(false)} 
+        slides={images.map(img => ({ src: img.imageUrl }))} 
+        index={index}
+      />
     </>
   );
 };
 
-export default GaleriKegiatan;  
+export default GaleriKegiatan;

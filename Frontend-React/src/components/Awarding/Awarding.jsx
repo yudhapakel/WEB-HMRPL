@@ -1,57 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import './Awarding.css';
-import tioImage from '../../assets/StafTerbaik.jpeg'; 
-import kemitraanImage from '../../assets/DepartementTerbaik.jpeg';
-import internalImage from '../../assets/DivisiTerbaik.jpeg';
+import axiosInstance from '../../api/axiosInstance';
 
-const dummyAwards = [
-  {
-    id: 1,
-    imageUrl: tioImage,
-  },
-  {
-    id: 2,
-    imageUrl: kemitraanImage,
-  },
-  {
-    id: 3,
-    imageUrl: internalImage,
-  },
-];
-//hanya dummy saja
+// const dummyAwards = [
+//   {
+//     id: 1,
+//     imageUrl: tioImage,
+//   },
+//   {
+//     id: 2,
+//     imageUrl: kemitraanImage,
+//   },
+//   {
+//     id: 3,
+//     imageUrl: internalImage,
+//   },
+// ];
+// //hanya dummy saja
 
 
 const Awarding = () => {
   const [awards, setAwards] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // --- SIMULASI PENGAMBILAN DATA DARI BACKEND ---
-    const fetchAwards = () => {
+    useEffect(() => {
+    // Definisikan fungsi untuk mengambil data
+    const fetchAwards = async () => {
       setLoading(true);
-      // setTimeout mensimulasikan delay jaringan (misal: 1 detik)
-      setTimeout(() => {
-        setAwards(dummyAwards);
+      try {
+        const response = await axiosInstance.get('/api/awarding');
+        
+        // Ubah objek dari backend menjadi array yang bisa di-map
+        const awardsData = [
+          { id: 1, imageUrl: response.data.staff, title: 'Staff Terbaik' },
+          { id: 2, imageUrl: response.data.divisi, title: 'Divisi Terbaik' },
+          { id: 3, imageUrl: response.data.departemen, title: 'Departemen Terbaik' },
+        ].filter(award => award.imageUrl); // Filter yang gambarnya ada saja
+        
+        setAwards(awardsData);
+      } catch (error) {
+        console.error("Error fetching awards:", error);
+      } finally {
         setLoading(false);
-      }, 1000);
-
-      // --- NANTI, GANTI SIMULASI DI ATAS DENGAN KODE FETCH ASLI DI BAWAH INI ---
-      /*
-      fetch('https://alamat-api-.com/api/awards')
-        .then(response => response.json())
-        .then(data => {
-          setAwards(data);
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error("Error fetching awards:", error);
-          setLoading(false);
-        });
-      */
+      }
     };
 
+    // PENTING: Panggil fungsinya di sini!
     fetchAwards();
-  }, []); 
+
+  }, []);
+
 
   return (
     <section className="awarding-section">

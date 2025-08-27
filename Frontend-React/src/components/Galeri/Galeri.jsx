@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import './Galeri.css';
@@ -6,26 +6,25 @@ import { useGaleri } from '../../Context/GaleriContext';
 
 const Galeri = () => {
   const { images, loading } = useGaleri();
-  const latestImages = images.slice(0, 3);
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
-
-
-    //NANTI, ganti dengan fetch yang asli di backedn oke yud jan bilang gabisa gw gedik lu 
-    /*
-    fetch('https://alamat-api-punyaYudha.com/api/galeri')
-      .then(res => res.json())
-      .then(data => {
-        setImages(data);
-        setLoading(false);
-      });
-    */
 
   const handleImageClick = (clickedIndex) => {
     setIndex(clickedIndex);
     setOpen(true);
   };
 
+  // Tampilkan pesan loading jika data belum siap (Sudah Benar)
+  if (loading && images.length === 0) {
+    return <p className="text-center">Memuat galeri...</p>;
+  }
+
+  // Tampilkan pesan jika tidak ada gambar (Sudah Benar)
+  if (!loading && images.length === 0) {
+    return <p className="text-center">Belum ada gambar di galeri.</p>;
+  }
+
+  // 👇 BAGIAN RETURN YANG SUDAH DIPERBAIKI 👇
   return (
     <>
       <section className="galeri-section">
@@ -36,20 +35,22 @@ const Galeri = () => {
           </p>
 
           <div className="row mt-5">
-            {loading ? (
-              <p>Memuat galeri...</p>
-            ) : (
-              images.map((image, idx) => (
-                <div key={image.id} className="col-lg-4 col-md-6 mb-4">
-                  <div
-                    className="galeri-card"
-                    onClick={() => handleImageClick(idx)}
-                  >
-                    <img src={image.src} alt={image.title} className="galeri-image" />
-                  </div>
+            {/* Kita tidak perlu cek 'loading' lagi di sini karena sudah ditangani di atas */}
+            {images.map((gambar, idx) => (
+              <div key={gambar.id} className="col-lg-4 col-md-6 mb-4">
+                <div
+                  className="galeri-card"
+                  onClick={() => handleImageClick(idx)}
+                >
+                  {/* PERBAIKAN #1: Ganti 'image.src' menjadi 'gambar.imageUrl' */}
+                  <img 
+                    src={gambar.imageUrl} 
+                    alt={gambar.caption || `Galeri HMRPL ${gambar.id}`} 
+                    className="galeri-image" 
+                  />
                 </div>
-              ))
-            )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -57,7 +58,8 @@ const Galeri = () => {
       <Lightbox
         open={open}
         close={() => setOpen(false)}
-        slides={images}
+        // PERBAIKAN #2: Transformasi data 'images' agar sesuai format yang diminta Lightbox
+        slides={images.map(img => ({ src: img.imageUrl }))}
         index={index}
       />
     </>

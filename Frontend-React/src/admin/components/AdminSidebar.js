@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './AdminSidebar.css'; 
 import LogoHima from '../../assets/LogoHima.png';
-import { FaTachometerAlt, FaEdit, FaPlusSquare, FaEye, FaFileAlt, FaImage, FaSignOutAlt } from 'react-icons/fa';
+import { FaTachometerAlt, FaEdit, FaNewspaper, FaEye, FaFileAlt, FaImage, FaSignOutAlt } from 'react-icons/fa';
 
 const AdminSidebar = () => {
   return (
@@ -20,13 +20,13 @@ const AdminSidebar = () => {
           <NavLink to="/admin/awarding"><FaEdit /> Edit Awarding</NavLink>
         </li>
         <li>
-          <NavLink to="/admin/berita/tambah"><FaPlusSquare /> Tambah Berita</NavLink>
+          <NavLink to="/admin/berita"><FaNewspaper /> Kelola Berita</NavLink>
         </li>
         <li>
           <NavLink to="/admin/aspirasi"><FaEye /> Lihat Responden</NavLink>
         </li>
         <li>
-          <NavLink to="/admin/galeri/tambah"><FaImage /> Tambah Galeri</NavLink>
+          <NavLink to="/admin/galeri"><FaImage /> Kelola Galeri</NavLink>
         </li>
         <li>
           <NavLink to="/admin/oprec/tambah"><FaFileAlt /> Tambah Oprec</NavLink>

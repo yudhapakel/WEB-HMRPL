@@ -15,10 +15,11 @@ export const GaleriProvider = ({ children }) => {
     if (pageNum === 1) setLoading(true);
 
     try {
-      const response = await axiosInstance.get(`/galeri?page=${pageNum}&limit=${ITEMS_PER_PAGE}`);
+      const response = await axiosInstance.get(`/api/galeri?page=${pageNum}&limit=${ITEMS_PER_PAGE}`);
+      console.log('Data mentah dari Backend:', response.data);
       // Jika halaman 1, ganti seluruh data. Jika tidak, tambahkan data baru.
       setImages(prev => pageNum === 1 ? response.data.data : [...prev, ...response.data.data]);
-      setHasMore(response.data.meta.current_page < response.data.meta.last_page);
+      setHasMore(response.data.current_page < response.data.last_page);
       setPage(pageNum + 1);
     } catch (error) {
       console.error("Gagal mengambil data galeri:", error);

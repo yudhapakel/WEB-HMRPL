@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OprecController;
 use App\Http\Controllers\AspirasiController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\AwardingController;
 
 // Login + Logout routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -37,16 +39,36 @@ Route::get('/berita', [BeritaController::class, 'index']);
 // Mengambil satu berita berdasarkan slug-nya (untuk halaman detail)
 Route::get('/berita/{berita:slug}', [BeritaController::class, 'show']);
 
-// route admin(wajib login)
+// route admin berita(wajib login)
 Route::middleware('auth:sanctum')->group(function () {
-    // Rute untuk menampilkan satu berita (untuk halaman edit)
-    Route::get('/admin/berita/{berita}', [BeritaController::class, 'show']);
-    // Rute untuk menyimpan berita baru
-    Route::post('/admin/berita', [BeritaController::class, 'store']);
-    // Rute untuk memperbarui berita
-    Route::post('/admin/berita/{berita}', [BeritaController::class, 'update']); // React pakai POST + _method:PUT
-    // Rute untuk menghapus berita
-    Route::delete('/admin/berita/{berita}', [BeritaController::class, 'destroy']);
+    Route::apiResource('admin/berita', BeritaController::class)->parameters([
+    'berita' => 'berita',
+    ]);
+});
+
+// RUTE PUBLIK: Untuk menampilkan semua gambar di galeri
+Route::get('/galeri', [GaleriController::class, 'index']);
+
+// RUTE ADMIN (WAJIB LOGIN)
+Route::middleware('auth:sanctum')->group(function () {
+    // ... rute admin lain ...
+
+    // Rute untuk admin mengupload gambar baru
+    Route::post('/admin/galeri', [GaleriController::class, 'store']);
+    
+    // Rute untuk admin menghapus gambar
+    Route::delete('/admin/galeri/{galeri}', [GaleriController::class, 'destroy']);
+});
+
+// RUTE PUBLIK: Untuk menampilkan gambar awarding di homepage
+Route::get('/awarding', [AwardingController::class, 'show']);
+
+// RUTE ADMIN (WAJIB LOGIN)
+Route::middleware('auth:sanctum')->group(function () {
+    // ... rute admin lain ...
+
+    // Rute untuk admin meng-update gambar awarding
+    Route::post('/admin/awarding', [AwardingController::class, 'update']);
 });
 
 
