@@ -11,7 +11,6 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-      {/* PERUBAHAN DI SINI: dari container-fluid menjadi container */}
       <div className="container">
         {/* Bagian Logo */}
         <NavLink className="navbar-brand d-flex align-items-center" to="/">

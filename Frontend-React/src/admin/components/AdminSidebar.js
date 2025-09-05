@@ -2,9 +2,18 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './AdminSidebar.css'; 
 import LogoHima from '../../assets/LogoHima.png';
+import { useAuth } from '../../Context/AuthContext'; 
 import { FaTachometerAlt, FaEdit, FaNewspaper, FaEye, FaFileAlt, FaImage, FaSignOutAlt } from 'react-icons/fa';
 
 const AdminSidebar = () => {
+  const { logout } = useAuth();
+
+  const handleLogout = (e) => {
+    e.preventDefault(); 
+    if (window.confirm('Apakah Anda yakin ingin keluar?')) {
+      logout();
+    }
+  };
   return (
     <nav className="admin-sidebar">
       <div className="sidebar-header">
@@ -33,7 +42,9 @@ const AdminSidebar = () => {
         </li>
       </ul>
       <div className="sidebar-footer">
-        <NavLink to="/logout"><FaSignOutAlt /> Keluar</NavLink>
+       <a href="/logout" onClick={handleLogout} className="logout-link">
+          <FaSignOutAlt /> Keluar
+        </a>
       </div>
     </nav>
   );

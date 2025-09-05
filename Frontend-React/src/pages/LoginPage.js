@@ -9,7 +9,6 @@ import LogoKabinet from "../assets/LogoKabinet.png";
 
 import { FaInstagram, FaYoutube, FaLinkedin } from "react-icons/fa";
 
-// import axios from "axios";
 
 import axiosInstance from "../api/axiosInstance";
 
@@ -21,46 +20,6 @@ const LoginPage = () => {
 
   const { login } = useAuth(); 
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   setError("");
-
-  //   try {
-  //     await axiosInstance.get('/sanctum/csrf-cookie');
-  //     console.log("CSRF Cookie didapatkan");
-
-  //     const res = await axiosInstance.post('/api/login', {
-  //       email: username,
-  //       password: password},
-  //       {withCredentials: true});
-
-  //     // Jika berhasil ambil token dari user data
-  //     const token = res.data.token;
-  //     const userData = res.data.user;
-
-  //     localStorage.setItem('token', token);
-
-  //     // Simpan ke context
-  //     login(userData, token);
-  //     console.log("Login berhasil", res.data);
-
-  //     // Simulasi delay login
-  //     // setTimeout(() => {
-  //     //    const userData = { name: username };
-  //     //           const token = 'dummy-token-12345';
-  //     //           console.log("Data yang dikirim ke context:", userData);
-  //     //           login(userData, token);
-  //     // }, 1000);
-  //   } catch (err) {
-  //     console.error("Login gagal", err);
-  //     setError(err.response?.data?.message || "Username atau password salah");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // Ganti fungsi handleSubmit di LoginPage.js dengan ini
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -70,50 +29,41 @@ const handleSubmit = async (e) => {
   console.log("--- MEMULAI PROSES LOGIN ---");
 
   try {
-    // Langkah 1: Memastikan fungsi berjalan
     console.log("Langkah 1: Mengambil CSRF cookie...");
     await axiosInstance.get('/sanctum/csrf-cookie');
     console.log("Langkah 1: CSRF Cookie berhasil didapat.");
 
-    // Langkah 2: Mengirim request login
     console.log("Langkah 2: Mengirim data login ke /api/login...", { email: username, password: "Password sengaja disembunyikan" });
     const res = await axiosInstance.post('/api/login', {
       email: username,
       password: password
     }, { withCredentials: true });
 
-    // Langkah 3: Menganalisis response dari Laravel (INI BAGIAN KRUSIAL)
     console.log("Langkah 3: Menerima response dari Laravel. Isinya:", res);
     console.log("Langkah 3.1: Data di dalam response (res.data):", res.data);
 
-    // Langkah 4: Mencoba mengambil token
     const token = res.data.token;
     console.log("Langkah 4: Mencoba mengambil token dari res.data.token. Isinya:", token);
 
-    // Jika tokennya kosong atau undefined, kita hentikan dan beri pesan
     if (!token) {
         console.error("!!! KESALAHAN KRITIS: Token tidak ditemukan di dalam response dari server. Cek 'Langkah 3.1' di atas, pastikan object 'data' memiliki properti 'token'.");
         setError("Gagal mendapatkan token dari server.");
         setLoading(false);
-        return; // Hentikan eksekusi
+        return; 
     }
 
-    // Langkah 5: Menyimpan token
     console.log("Langkah 5: Mencoba menyimpan token ke localStorage...");
     localStorage.setItem('token', token);
     console.log("Langkah 5.1: Token SEHARUSNYA sudah tersimpan. Silakan cek tab Application > Local Storage sekarang.");
 
-    // Langkah 6: Menyimpan data user ke context
     console.log("Langkah 6: Login berhasil, data user dan token akan disimpan ke context.");
     const userData = res.data.user;
     login(userData, token);
 
   } catch (err) {
-    // Jika ada error di salah satu langkah di atas, akan masuk ke sini
     console.error("!!! TERJADI ERROR DI BLOK CATCH !!!");
     console.error("Isi error (err):", err);
 
-    // Tampilkan juga response error dari server jika ada
     if (err.response) {
       console.error("Response error dari server (err.response):", err.response);
       setError(err.response?.data?.message || "Terjadi kesalahan pada server");
@@ -187,13 +137,13 @@ const handleSubmit = async (e) => {
         <div className="social-media-section">
           <p>Kunjungi sosial media HMRPL</p>
           <div className="social-icons">
-            <a href="https://instagram.com">
+            <a href="https://www.instagram.com/hmrpl.telu/">
               <FaInstagram />
             </a>
             <a href="https://youtube.com">
               <FaYoutube />
             </a>
-            <a href="https://linkedin.com">
+            <a href="https://www.linkedin.com/company/hmrpl-telkom-university/">
               <FaLinkedin />
             </a>
           </div>

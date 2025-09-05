@@ -11,9 +11,8 @@ const LihatRespondenPage = () => {
     const fetchResponden = async () => {
       setLoading(true);
       try {
-        // Panggil API dari backend
         const response = await axiosInstance.get('/api/aspirasi');
-        setResponden(response.data); // Simpan data asli ke state
+        setResponden(response.data); 
       } catch (error) {
         console.error("Gagal mengambil data responden:", error);
       } finally {
@@ -24,7 +23,6 @@ const LihatRespondenPage = () => {
   }, []);
 
   const handleExport = () => {
-    // Siapkan data untuk export, ganti nama & nim anonim
     const dataToExport = responden.map(item => ({
       Nama: item.isAnonim ? 'Anonim' : item.nama,
       NIM: item.isAnonim ? 'Anonim' : item.nim,

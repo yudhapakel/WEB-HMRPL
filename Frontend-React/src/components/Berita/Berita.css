@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   text-align: left;
+  position: relative;
 }
 
 .berita-description {
@@ -63,3 +64,23 @@
 .btn-selengkapnya:hover { background-color: #007bff; color: white; }
 .pagination-nav .page-link { color: #007bff; }
 .pagination-nav .page-item.active .page-link { background-color: #007bff; border-color: #007bff; color: white; }
+
+.berita-card-link {
+  text-decoration: none; 
+  color: inherit;      
+  display: block;       
+}
+.berita-card-link h5,
+.berita-card-link h6,
+.berita-card-link p {
+  color: #212529; 
+}
+.berita-card-link .berita-date {
+  color: #007bff;
+}
+.berita-card-link:hover .berita-card,
+.berita-card-link:hover .berita-utama-card {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}

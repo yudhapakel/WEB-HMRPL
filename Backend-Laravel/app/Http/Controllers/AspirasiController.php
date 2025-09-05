@@ -17,7 +17,6 @@ class AspirasiController extends Controller
             'isAnonim' => 'required|boolean',
         ]);
 
-        // Ganti key 'isAnonim' menjadi 'is_anonim' agar sesuai dengan database
         $validatedData['is_anonim'] = $validatedData['isAnonim'];
         unset($validatedData['isAnonim']);
 
@@ -31,7 +30,6 @@ class AspirasiController extends Controller
      */
     public function index()
     {
-        // Ambil semua data, urutkan dari yang terbaru
         return Aspirasi::latest()->get();
     }
 }

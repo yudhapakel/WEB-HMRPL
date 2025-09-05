@@ -31,7 +31,6 @@ const AddOprecPage = () => {
     formData.append('poster', file);
     
     try {
-      // kode buat backend
       await axiosInstance.post('/api/rekrutmen', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true

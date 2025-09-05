@@ -27,7 +27,6 @@ const BeritaPage = () => {
 
   return (
     <div className="berita-page-container">
-        <h1>INI TES HALAMAN BERITA</h1> 
       <div className="berita-header text-center">
         <h1 className="berita-title">SE-NEWS</h1>
         <p className="berita-subtitle">Berita seputar himpunan mahasiswa rekayasa perangkat lunak</p>

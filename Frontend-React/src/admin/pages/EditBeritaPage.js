@@ -58,7 +58,7 @@ const handleSubmit = async (e) => {
   if (image) {
     formData.append('image', image);
   }
-  formData.append('_method', 'PUT');
+  // formData.append('_method', 'PUT');
 
   try {
     // 1. Kirim data ke backend (ini sudah benar)

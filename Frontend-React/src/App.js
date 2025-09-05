@@ -35,8 +35,6 @@ import AddGaleriPage from './admin/pages/AddGaleriPage';
 import AddOprecPage from './admin/pages/AddOprecPage';
 import ManageGaleriPage from './admin/pages/ManageGaleriPage';
 
-// (opsional buat testing aja)
-// import TestLogin from './pages/TestLogin';
 
 function App() {
   return (
@@ -82,11 +80,8 @@ function App() {
               </Route>
             </Route>
             
-            {/* Rute Login */}
             <Route path="/login" element={<LoginPage />} />
 
-            {/* Opsional buat testing */}
-            {/* <Route path="/testlogin" element={<TestLogin />} /> */}
           </Routes>
         </GaleriProvider>
       </AuthProvider>

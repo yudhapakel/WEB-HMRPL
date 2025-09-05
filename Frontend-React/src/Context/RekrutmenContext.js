@@ -6,15 +6,15 @@ import axiosInstance from '../api/axiosInstance';
 const RekrutmenContext = createContext();
 
 export const RekrutmenProvider = ({ children }) => {
-  const [posters, setPosters] = useState([]); // <-- Ganti jadi array kosong
+  const [posters, setPosters] = useState([]); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAllPosters = async () => {
       setLoading(true);
       try {
-        const response = await axiosInstance.get('/api/rekrutmen'); // <-- Panggil endpoint baru
-        setPosters(response.data); // <-- Simpan seluruh array
+        const response = await axiosInstance.get('/api/rekrutmen'); 
+        setPosters(response.data);
       } catch (error) {
         console.error("Gagal mengambil data rekrutmen:", error);
       } finally {
@@ -24,7 +24,7 @@ export const RekrutmenProvider = ({ children }) => {
     fetchAllPosters();
   }, []);
 
-  const value = { posters, loading }; // <-- Kirim 'posters' (plural)
+  const value = { posters, loading };
 
   return (
     <RekrutmenContext.Provider value={value}>

@@ -15,11 +15,8 @@ class GaleriController extends Controller
        // Ambil limit dari query parameter, jika tidak ada, default-nya 6
         $limit = $request->query('limit', 6);
 
-    // GUNAKAN ->paginate() BUKAN ->get()
         $galeriPaginated = Galeri::latest()->paginate($limit);
 
-    // Transformasi data untuk menambahkan URL lengkap
-    // Ini penting agar gambar bisa tampil
         $galeriPaginated->getCollection()->transform(function ($item) {
         // Buat properti baru 'imageUrl'
             $item->imageUrl = Storage::url($item->image_path);
@@ -33,8 +30,8 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'images' => 'required|array', // Pastikan 'images' adalah array
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' // Validasi setiap item di dalam array
+            'images' => 'required|array', 
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' 
         ]);
 
         $uploadedImages = [];

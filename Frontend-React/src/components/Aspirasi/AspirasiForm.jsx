@@ -41,7 +41,6 @@ const AspirasiForm = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
     try {
-      // Kirim data ke backend
       await axiosInstance.post('/api/aspirasi', formData);
       setSubmitStatus({ type: 'success', message: 'Aspirasi Anda berhasil terkirim. Terima kasih!' });
       setFormData(initialFormData); // Reset form setelah berhasil
@@ -55,7 +54,6 @@ const AspirasiForm = () => {
 
   return (
     <form className="aspirasi-form" onSubmit={handleSubmit}>
-      {/* --- Alert untuk status submit --- */}
       {submitStatus && (
         <div className={`alert alert-${submitStatus.type === 'success' ? 'success' : 'danger'}`}>
           {submitStatus.message}

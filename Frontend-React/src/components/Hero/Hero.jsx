@@ -2,6 +2,7 @@ import React from 'react';
 import './Hero.css';
 import LogoHima from '../../assets/LogoHima.png';
 import LogoKabinet from '../../assets/LogoKabinet.png';
+import { Link } from 'react-router-dom'; 
 
 const Hero = () => {
   return (
@@ -34,10 +35,9 @@ const Hero = () => {
             <p className="kabinet-subtitle">
               Badan Pengurus Himpunan Mahasiswa Rekayasa Perangkat Lunak 2024/2025
             </p>
-            <a href="#tentang" className="custom-tentang-btn mt-2">
-            Tentang Kami
-            </a>
-
+           <Link to="/tentang" className="custom-tentang-btn mt-2">
+              Tentang Kami
+          </Link>
           </div>
 
           {/* Kanan: Logo Kabinet */}

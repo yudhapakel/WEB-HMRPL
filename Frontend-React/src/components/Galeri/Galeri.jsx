@@ -14,17 +14,14 @@ const Galeri = () => {
     setOpen(true);
   };
 
-  // Tampilkan pesan loading jika data belum siap (Sudah Benar)
   if (loading && images.length === 0) {
     return <p className="text-center">Memuat galeri...</p>;
   }
 
-  // Tampilkan pesan jika tidak ada gambar (Sudah Benar)
   if (!loading && images.length === 0) {
     return <p className="text-center">Belum ada gambar di galeri.</p>;
   }
 
-  // 👇 BAGIAN RETURN YANG SUDAH DIPERBAIKI 👇
   return (
     <>
       <section className="galeri-section">
@@ -35,14 +32,12 @@ const Galeri = () => {
           </p>
 
           <div className="row mt-5">
-            {/* Kita tidak perlu cek 'loading' lagi di sini karena sudah ditangani di atas */}
             {images.map((gambar, idx) => (
               <div key={gambar.id} className="col-lg-4 col-md-6 mb-4">
                 <div
                   className="galeri-card"
                   onClick={() => handleImageClick(idx)}
                 >
-                  {/* PERBAIKAN #1: Ganti 'image.src' menjadi 'gambar.imageUrl' */}
                   <img 
                     src={gambar.imageUrl} 
                     alt={gambar.caption || `Galeri HMRPL ${gambar.id}`} 
@@ -58,7 +53,6 @@ const Galeri = () => {
       <Lightbox
         open={open}
         close={() => setOpen(false)}
-        // PERBAIKAN #2: Transformasi data 'images' agar sesuai format yang diminta Lightbox
         slides={images.map(img => ({ src: img.imageUrl }))}
         index={index}
       />

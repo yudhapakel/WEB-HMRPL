@@ -11,7 +11,7 @@ const EditAwardingPage = () => {
     departemen: null,
   });
   
-  // State untuk menyimpan URL gambara (dari backend)
+  // State untuk menyimpan URL gambar(dari backend)
   const [previews, setPreviews] = useState({
     staff: '',
     divisi: '',
@@ -47,7 +47,6 @@ const EditAwardingPage = () => {
   setIsSubmitting(true);
   setStatus('');
 
-  // Pengecekan yang lebih simpel dan anti-gagal
   if (!files.staff && !files.divisi && !files.departemen) {
     setStatus('Tidak ada gambar baru yang dipilih untuk diunggah.');
     setIsSubmitting(false);

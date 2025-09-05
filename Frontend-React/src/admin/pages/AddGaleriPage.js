@@ -30,13 +30,11 @@ const AddGaleriPage = () => {
     setStatus('');
 
     const formData = new FormData();
-    // Loop melalui semua file dan tambahkan ke FormData
     files.forEach((file, index) => {
-      formData.append('images[]', file); // 'images[]' agar biar dibaca nanti sebagai array di backend
+      formData.append('images[]', file); 
     });
     
     try {
-      // Kode buat backend nya
       await axiosInstance.post('/api/admin/galeri', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });

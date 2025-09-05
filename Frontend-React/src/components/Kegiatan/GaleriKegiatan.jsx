@@ -36,7 +36,6 @@ const GaleriKegiatan = () => {
     );
   }
   
-  // Tambahkan ini untuk handle jika tidak ada gambar sama sekali
   if (!loading && images.length === 0) {
     return (
         <section className="galeri-kegiatan-section">
@@ -68,7 +67,6 @@ const GaleriKegiatan = () => {
                   layout
                 >
                   <div className="galeri-kegiatan-card" onClick={() => handleImageClick(idx)}>
-                    {/* ===== PERBAIKAN #1: GANTI image.src MENJADI image.imageUrl ===== */}
                     <img 
                       src={image.imageUrl} 
                       alt={image.caption || `Galeri ${image.id}`} 
@@ -91,7 +89,6 @@ const GaleriKegiatan = () => {
         </div>
       </section>
 
-      {/* ===== PERBAIKAN #2: TRANSFORMASI DATA 'slides' UNTUK LIGHTBOX ===== */}
       <Lightbox 
         open={open} 
         close={() => setOpen(false)} 

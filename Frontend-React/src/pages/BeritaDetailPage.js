@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; 
 import axiosInstance from '../api/axiosInstance';
+import DOMPurify from 'dompurify';
 import './BeritaDetailPage.css';
 
 const BeritaDetailPage = () => {
@@ -12,21 +13,12 @@ const BeritaDetailPage = () => {
     const fetchArticle = async () => {
       setLoading(true);
       try {
-        // memanggil API untuk satu artikel menggunakan slug
-        setTimeout(() => {
-          setArticle({
-            title: 'Peluncuran Website Himpunan Rekayasa Perangkat Lunak Universitas Telkom',
-            date: '30 September 2025',
-            author: 'AdminHMRPL',
-            imageUrl: 'https://via.placeholder.com/1200x500',
-            content: `<p>Dalam rangka meningkatkan keterbukaan informasi dan pelayanan digital kepada mahasiswa, Himpunan Mahasiswa Rekayasa Perangkat Lunak (HMRPL) Universitas Telkom resmi meluncurkan website resmi mereka pada tanggal 30 September 2025.</p><p>Website ini dirancang sebagai pusat informasi yang memuat berbagai kegiatan, program kerja, berita terkini, rekrutmen, hingga wadah aspirasi dari mahasiswa RPL.</p><p>Melalui platform ini, HMRPL berharap dapat mempererat komunikasi antara pengurus dan seluruh mahasiswa program studi S1 Rekayasa Perangkat Lunak, sekaligus menjadi etalase digital dari karya dan kontribusi yang telah dilakukan himpunan.</p>`
-          });
-          setLoading(false);
-        }, 500);
-       
-
+         const response = await axiosInstance.get(`/api/berita/${slug}`);
+        setArticle(response.data);
       } catch (error) {
         console.error("Gagal mengambil detail artikel:", error);
+        setArticle(null);
+      } finally {
         setLoading(false);
       }
     };
@@ -42,16 +34,20 @@ const BeritaDetailPage = () => {
     return <div className="container text-center p-5">Artikel tidak ditemukan.</div>;
   }
 
+  const cleanHtml = DOMPurify.sanitize(article.content);
+
   return (
     <div className="article-container">
       <h1 className="article-title">{article.title}</h1>
-      <p className="article-meta">{article.date} / {article.author}</p>
-      <img src={article.imageUrl} alt={article.title} className="article-image img-fluid" />
+      <p className="article-meta">
+        {new Date(article.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })} / Admin
+      </p>
+      {/* --- 4. BANGUN URL GAMBAR LENGKAP --- */}
+      <img src={`${process.env.REACT_APP_API_URL}/storage/${article.image_path}`} alt={article.title} className="article-image img-fluid" />
       
-    
-      <div 
-        className="article-content" 
-        dangerouslySetInnerHTML={{ __html: article.content }} 
+      <div
+        className="article-content"
+        dangerouslySetInnerHTML={{ __html: cleanHtml }}
       />
     </div>
   );

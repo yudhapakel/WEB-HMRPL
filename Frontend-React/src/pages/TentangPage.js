@@ -17,7 +17,6 @@ const TentangPage = () => {
        <VisiMisi />
        <StrukturOrganisasi/>
        <DaftarAnggota/>
-      {/* Nanti bagian Visi & Misi akan ditambahkan di sini */}
     </>
   );
 };

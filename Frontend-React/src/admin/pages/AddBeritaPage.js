@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useNavigate } from 'react-router-dom';
- import axiosInstance from '../../api/axiosInstance'; // terhubung sama backend nanti
+ import axiosInstance from '../../api/axiosInstance'; 
 
 const AddBeritaPage = () => {
   const [title, setTitle] = useState('');

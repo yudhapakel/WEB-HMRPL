@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../api/axiosInstance';
 import { FaTrash, FaPlus } from 'react-icons/fa';
-// import './ManageGaleriPage.css'; // Buat file CSS ini untuk styling jika perlu
+
 
 const ManageGaleriPage = () => {
   const [images, setImages] = useState([]);
@@ -15,9 +15,8 @@ const ManageGaleriPage = () => {
     const fetchImages = async () => {
       setLoading(true);
       try {
-        // Kita gunakan endpoint publik yang sudah ada
         const response = await axiosInstance.get('/api/galeri');
-        setImages(response.data.data); // Ambil dari .data karena ada paginasi
+        setImages(response.data.data); 
       } catch (error) {
         console.error("Gagal mengambil data galeri:", error);
       } finally {
@@ -27,13 +26,10 @@ const ManageGaleriPage = () => {
     fetchImages();
   }, []);
 
-  // Fungsi untuk menghapus gambar
   const handleDelete = async (id) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus gambar ini?')) {
       try {
-        // Panggil endpoint DELETE yang sudah kita siapkan
         await axiosInstance.delete(`/api/admin/galeri/${id}`);
-        // Hapus gambar dari state agar UI langsung update
         setImages(images.filter(item => item.id !== id));
         alert('Gambar berhasil dihapus!');
       } catch (error) {

@@ -23,9 +23,9 @@ const Footer = () => {
             <h5>HMRPL 2025</h5>
             <p className="connect-us">Connect With Us</p>
             <div className="social-icons">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+              <a href="https://www.instagram.com/hmrpl.telu/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
               <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/company/hmrpl-telkom-university/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
             </div>
           </div>
 
@@ -45,8 +45,16 @@ const Footer = () => {
           <div className="col-lg-4 col-md-12 mb-4 mb-lg-0">
             <h5>Website</h5>
             <ul className="footer-links list-unstyled">
-              <li><a href="https://bse.telkomuniversity.ac.id/" target="_blank" rel="noopener noreferrer">Program Studi S1 Rekayasa Perangkat Lunak</a></li>
-              <li><a href="https://bpa.telkomuniversity.ac.id/" target="_blank" rel="noopener noreferrer">Badan Pengembangan Akademik (telkomuniversity.ac.id)</a></li>
+              <li>
+      <a href="https://bse.telkomuniversity.ac.id/" target="_blank" rel="noopener noreferrer">
+        Program Studi S1 Rekayasa Perangkat Lunak
+      </a>
+    </li>
+    <li>
+      <a href="https://bpa.telkomuniversity.ac.id/" target="_blank" rel="noopener noreferrer">
+        Badan Pengembangan Akademik
+      </a>
+    </li>
             </ul>
           </div>
         </div>

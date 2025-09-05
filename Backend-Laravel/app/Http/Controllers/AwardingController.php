@@ -11,10 +11,8 @@ class AwardingController extends Controller
     // FUNGSI UNTUK MENGAMBIL DATA GAMBAR TERKINI (UNTUK PUBLIK & ADMIN)
     public function show()
     {
-        // Ambil baris pertama (satu-satunya) dari tabel awardings
         $awards = Awarding::first();
 
-        // Siapkan response default jika belum ada data sama sekali
         $response = [
             'staff' => null,
             'divisi' => null,
@@ -41,7 +39,6 @@ class AwardingController extends Controller
             'departemen_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Ambil data yang ada, atau buat baru jika tabelnya kosong
         $awards = Awarding::firstOrCreate([]);
 
         $categories = ['staff', 'divisi', 'departemen'];
@@ -51,13 +48,10 @@ class AwardingController extends Controller
             $dbColumn = $category . '_image_path';
 
             if ($request->hasFile($fileKey)) {
-                // 1. Hapus file lama jika ada
                 if ($awards->$dbColumn) {
                     Storage::disk('public')->delete($awards->$dbColumn);
                 }
-                // 2. Simpan file baru
                 $path = $request->file($fileKey)->store('awarding', 'public');
-                // 3. Update path di database
                 $awards->$dbColumn = $path;
             }
         }

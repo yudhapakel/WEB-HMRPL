@@ -2,21 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Awarding.css';
 import axiosInstance from '../../api/axiosInstance';
 
-// const dummyAwards = [
-//   {
-//     id: 1,
-//     imageUrl: tioImage,
-//   },
-//   {
-//     id: 2,
-//     imageUrl: kemitraanImage,
-//   },
-//   {
-//     id: 3,
-//     imageUrl: internalImage,
-//   },
-// ];
-// //hanya dummy saja
 
 
 const Awarding = () => {
@@ -45,7 +30,6 @@ const Awarding = () => {
       }
     };
 
-    // PENTING: Panggil fungsinya di sini!
     fetchAwards();
 
   }, []);

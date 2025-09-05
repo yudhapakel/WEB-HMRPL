@@ -15,59 +15,55 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 Route::middleware('auth:sanctum')->get('/me', function (Request $request) {
     return response()->json($request->user());
 });
-// Route::middleware('auth:sanctum')->group(function () {
-//     Route::get('/dasboard', [DasboardController::class, 'index']);
-// });
+// Rekrutmen routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/rekrutmen', [OprecController::class, 'store']);
 });
 Route::get('/rekrutmen', [OprecController::class, 'index']);
 
+// Aspirasi routes
 Route::post('/aspirasi', [AspirasiController::class, 'store']);
 
 // Grup rute yang perlu login (untuk Admin)
 Route::middleware('auth:sanctum')->group(function () {
-    // ... route admin lain (rekrutmen, logout, dll) ...
 
-    // Rute untuk admin melihat semua aspirasi
     Route::get('/aspirasi', [AspirasiController::class, 'index']);
 });
 
-// route public(user)
-// Mengambil semua berita (dengan paginasi)
+// route berita public(user)
 Route::get('/berita', [BeritaController::class, 'index']);
-// Mengambil satu berita berdasarkan slug-nya (untuk halaman detail)
+
+Route::get('/berita/terbaru', [BeritaController::class, 'latest']);
+
 Route::get('/berita/{berita:slug}', [BeritaController::class, 'show']);
 
 // route admin berita(wajib login)
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('admin/berita', BeritaController::class)->parameters([
-    'berita' => 'berita',
-    ]);
+    Route::get('/admin/berita', [BeritaController::class, 'index']); // Daftar berita
+    Route::post('/admin/berita', [BeritaController::class, 'store']); // Simpan berita baru
+    Route::get('/admin/berita/{berita}', [BeritaController::class, 'show']); // Lihat satu berita (untuk edit)
+    Route::delete('/admin/berita/{berita}', [BeritaController::class, 'destroy']); // Hapus berita
+
+    Route::post('/admin/berita/{berita}', [BeritaController::class, 'update']);
 });
 
-// RUTE PUBLIK: Untuk menampilkan semua gambar di galeri
+// RUTE PUBLIK galeri
 Route::get('/galeri', [GaleriController::class, 'index']);
 
 // RUTE ADMIN (WAJIB LOGIN)
 Route::middleware('auth:sanctum')->group(function () {
-    // ... rute admin lain ...
 
-    // Rute untuk admin mengupload gambar baru
     Route::post('/admin/galeri', [GaleriController::class, 'store']);
-    
-    // Rute untuk admin menghapus gambar
+
     Route::delete('/admin/galeri/{galeri}', [GaleriController::class, 'destroy']);
 });
 
-// RUTE PUBLIK: Untuk menampilkan gambar awarding di homepage
+// RUTE PUBLIK awarding
 Route::get('/awarding', [AwardingController::class, 'show']);
 
 // RUTE ADMIN (WAJIB LOGIN)
 Route::middleware('auth:sanctum')->group(function () {
-    // ... rute admin lain ...
 
-    // Rute untuk admin meng-update gambar awarding
     Route::post('/admin/awarding', [AwardingController::class, 'update']);
 });
 
@@ -78,26 +74,3 @@ Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
         'token' => $request->bearerToken()
     ]);
 });
-
-// Rute untuk debugging, bisa dihapus setelah masalah selesai
-// Route::get('/check-file/{filename}', function ($filename) {
-//     $path = 'posters/' . $filename;
-
-//     if (Storage::disk('public')->exists($path)) {
-//         return response()->json([
-//             'status' => 'BERHASIL DITEMUKAN',
-//             'message' => "Laravel berhasil menemukan file di dalam disk 'public'. Ini artinya masalah ada di web server (Apache/Artisan Serve) yang tidak bisa mengakses symbolic link.",
-//             'path_yang_dicek' => $path,
-//             'lokasi_fisik_seharusnya' => storage_path('app/public/' . $path)
-//         ]);
-//     }
-
-//     return response()->json([
-//         'status' => 'TIDAK DITEMUKAN',
-//         'message' => "Laravel GAGAL menemukan file. Ini artinya masalah ada pada saat proses upload, file tidak tersimpan di lokasi yang benar.",
-//         'path_yang_dicek' => $path,
-//         'lokasi_fisik_seharusnya' => storage_path('app/public/' . $path)
-//     ], 404);
-// });
-
-// sukses konek
