@@ -20,7 +20,7 @@ const BeritaUtama = ({ berita }) => {
             Selengkapnya <FaChevronRight size={12} />
           </Link>
         </div>
-        <img src={berita.imageUrl} alt={berita.title} className="berita-image-utama" />
+        <img src={`${process.env.REACT_APP_API_URL}/storage/${berita.image_path}`} alt={berita.title} className="berita-image-utama" />
       </div>    
     </div>
   );

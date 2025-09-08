@@ -8,40 +8,42 @@ use App\Models\Oprec;
 
 class OprecController extends Controller
 {
-    public function store(Request $request)
-    {
-        $request->validate([
-            'poster' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+    // app/Http/Controllers/OprecController.php
 
-        if ($request->hasFile('poster')) {
-            $path = $request->file('poster')->store('posters', 'public');
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'poster' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+    ]);
 
-            Oprec::create(['poster_path' => $path]);
+    // Simpan file baru
+    $path = $request->file('poster')->store('posters', 'public');
+    
+    // Buat record baru di database
+    Oprec::create(['poster_path' => $path]);
 
-            $maxPosters = 3;
+    // Tentukan batas maksimal poster
+    $maxPosters = 3;
+    $allPosters = Oprec::orderBy('created_at', 'desc')->get();
 
-            $currentPosterCount = Oprec::count();
+    // Jika jumlah poster melebihi batas
+    if ($allPosters->count() > $maxPosters) {
+        // Ambil semua poster kecuali 3 yang terbaru
+        $postersToDelete = $allPosters->slice($maxPosters);
 
-            if ($currentPosterCount > $maxPosters) {
-                $oldestPostersToDelete = Oprec::orderBy('created_at', 'asc')
-                    ->take($currentPosterCount - $maxPosters)
-                    ->get();
-
-                foreach ($oldestPostersToDelete as $oldPoster) {
-                    Storage::disk('public')->delete($oldPoster->poster_path);
-                    $oldPoster->delete();
-                }
-            }
-
-            return response()->json([
-                'message' => 'Poster berhasil diunggah',
-                'path' => Storage::url($path)
-            ], 201); 
+        foreach ($postersToDelete as $oldPoster) {
+            // Hapus file fisik dari storage
+            Storage::disk('public')->delete($oldPoster->poster_path);
+            // Hapus record dari database
+            $oldPoster->delete();
         }
-
-        return response()->json(['message' => 'Upload gagal.'], 400);
     }
+
+    return response()->json([
+        'message' => 'Poster berhasil diunggah',
+        'path' => Storage::url($path)
+    ], 201);
+}
 
     public function index()
     {

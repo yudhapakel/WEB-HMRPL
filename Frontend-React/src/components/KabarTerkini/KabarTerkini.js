@@ -66,7 +66,7 @@ const KabarTerkini = () => {
               </Link>
 
             </div>
-            <img src={item.imageUrl} alt={item.title} className="kabar-image" />
+            <img src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`} alt={item.title} className="kabar-image" />
           </div>
         </SwiperSlide>
       ))}

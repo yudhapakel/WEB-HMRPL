@@ -1,27 +1,26 @@
+// src/components/Awarding/Awarding.jsx
+
 import React, { useState, useEffect } from 'react';
 import './Awarding.css';
 import axiosInstance from '../../api/axiosInstance';
-
-
 
 const Awarding = () => {
   const [awards, setAwards] = useState([]);
   const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-    // Definisikan fungsi untuk mengambil data
+  useEffect(() => {
     const fetchAwards = async () => {
       setLoading(true);
       try {
         const response = await axiosInstance.get('/api/awarding');
-        
-        // Ubah objek dari backend menjadi array yang bisa di-map
+
+        // Olah data mentah dari backend
         const awardsData = [
-          { id: 1, imageUrl: response.data.staff, title: 'Staff Terbaik' },
-          { id: 2, imageUrl: response.data.divisi, title: 'Divisi Terbaik' },
-          { id: 3, imageUrl: response.data.departemen, title: 'Departemen Terbaik' },
-        ].filter(award => award.imageUrl); // Filter yang gambarnya ada saja
-        
+          { id: 1, image_path: response.data.staff_image_path, title: 'Staff Terbaik' },
+          { id: 2, image_path: response.data.divisi_image_path, title: 'Divisi Terbaik' },
+          { id: 3, image_path: response.data.departemen_image_path, title: 'Departemen Terbaik' },
+        ].filter(award => award.image_path);
+
         setAwards(awardsData);
       } catch (error) {
         console.error("Error fetching awards:", error);
@@ -29,11 +28,8 @@ const Awarding = () => {
         setLoading(false);
       }
     };
-
     fetchAwards();
-
   }, []);
-
 
   return (
     <section className="awarding-section">
@@ -42,23 +38,20 @@ const Awarding = () => {
         <p className="awarding-subtitle">
           Penghargaan untuk mereka yang telah memberikan yang terbaik.
         </p>
-
-        <div className="row mt-5">
+        <div className="row mt-5 justify-content-center">
           {loading ? (
-            
             <p>Memuat penghargaan...</p>
           ) : (
-           
             awards.map(award => (
               <div key={award.id} className="col-lg-4 col-md-6 mb-4">
-                <div 
-                  className="award-card" 
-                  style={{ backgroundImage: `url(${award.imageUrl})` }}
+                <div
+                  className="award-card"
+                  // 👇 SEKARANG KITA BANGUN URL-NYA SECARA MANUAL 👇
+                  style={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}/storage/${award.image_path})` }}
                 >
                   <div className="award-card-overlay">
                     <div className="award-card-text">
                       <h3>{award.title}</h3>
-                      <p>{award.subtitle}</p>
                     </div>
                   </div>
                 </div>

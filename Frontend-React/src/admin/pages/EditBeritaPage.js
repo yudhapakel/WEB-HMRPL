@@ -102,7 +102,7 @@ const handleSubmit = async (e) => {
         <div className="mb-4">
           <label htmlFor="image" className="form-label">Upload gambar headline baru (Opsional)</label>
           <input type="file" id="image" className="form-control" onChange={handleImageChange} />
-          {imagePreview && <img src={imagePreview} alt="Preview" style={{ maxWidth: '200px', marginTop: '15px' }} />}
+          {imagePreview && <img src={`${process.env.REACT_APP_API_URL}/storage/${imagePreview.image_path}`} alt="Preview" style={{ maxWidth: '200px', marginTop: '15px' }} />}
         </div>
 
         <div className="mb-4">

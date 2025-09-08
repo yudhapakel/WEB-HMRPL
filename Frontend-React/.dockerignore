@@ -1,0 +1,18 @@
+# Frontend-React/.dockerignore
+
+# Abaikan folder dependensi, akan di-install di dalam kontainer
+/node_modules
+
+# Abaikan folder build (jika ada)
+/build
+
+# Abaikan file environment lokal
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Abaikan file-file sistem operasi
+.DS_Store
+Thumbs.db

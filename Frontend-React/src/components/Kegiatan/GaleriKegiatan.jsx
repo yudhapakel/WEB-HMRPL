@@ -68,7 +68,7 @@ const GaleriKegiatan = () => {
                 >
                   <div className="galeri-kegiatan-card" onClick={() => handleImageClick(idx)}>
                     <img 
-                      src={image.imageUrl} 
+                      src={`${process.env.REACT_APP_API_URL}/storage/${image.image_path}`} 
                       alt={image.caption || `Galeri ${image.id}`} 
                       className="galeri-kegiatan-image" 
                     />
@@ -92,7 +92,7 @@ const GaleriKegiatan = () => {
       <Lightbox 
         open={open} 
         close={() => setOpen(false)} 
-        slides={images.map(img => ({ src: img.imageUrl }))} 
+        slides={images.map(img => ({ src: `${process.env.REACT_APP_API_URL}/storage/${img.image_path}` }))} 
         index={index}
       />
     </>

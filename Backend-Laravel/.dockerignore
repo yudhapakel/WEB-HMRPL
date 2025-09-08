@@ -1,0 +1,17 @@
+# Backend-Laravel/.dockerignore
+
+# Abaikan folder dependensi, akan di-install di dalam kontainer
+/vendor
+/node_modules
+
+# Abaikan file environment lokal
+.env
+.env.backup
+
+# Abaikan folder storage yang berat dan symlink
+/storage
+/public/storage
+
+# Abaikan file-file sistem operasi
+.DS_Store
+Thumbs.db

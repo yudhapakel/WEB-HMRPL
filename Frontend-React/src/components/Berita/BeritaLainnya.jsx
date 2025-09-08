@@ -10,7 +10,7 @@ const BeritaLainnya = ({ berita, currentPage, totalPages, onPageChange }) => {
         {berita.map(item => (
           <div key={item.id} className="col-lg-4 col-md-6 mb-4">
             <div className="berita-card">
-              <img src={item.imageUrl} alt={item.title} className="berita-image-lainnya" />
+              <img src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`} alt={item.title} className="berita-image-lainnya" />
               <div className="berita-card-body">
                 <h6>{item.title}</h6>
                 <p className="berita-date">{item.date}</p>

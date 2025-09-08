@@ -13,7 +13,7 @@ const BeritaList = ({ berita, currentPage, totalPages, onPageChange }) => {
   const beritaLainnya = berita.slice(1);
 
   return (
-    <>
+<>
   <div className="berita-utama-wrapper">
     <h2 className="section-title">Berita Utama</h2>
     <Link to={`/berita/${beritaUtama.slug}`} className="berita-card-link">
@@ -26,7 +26,7 @@ const BeritaList = ({ berita, currentPage, totalPages, onPageChange }) => {
             Selengkapnya <FaChevronRight size={12} />
           </div>
         </div>
-        <img src={beritaUtama.imageUrl} alt={beritaUtama.title} className="berita-image-utama" />
+        <img src={`${process.env.REACT_APP_API_URL}/storage/${beritaUtama.image_path}`} alt={beritaUtama.title} className="berita-image-utama" />
       </div>
     </Link>
   </div>
@@ -38,7 +38,7 @@ const BeritaList = ({ berita, currentPage, totalPages, onPageChange }) => {
         {beritaLainnya.map(item => (
           <Link to={`/berita/${item.slug}`} key={item.id} className="col-lg-4 col-md-6 mb-4 berita-card-link">
             <div className="berita-card">
-              <img src={item.imageUrl} alt={item.title} className="berita-image-lainnya" />
+              <img src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`} alt={item.title} className="berita-image-lainnya" />
               <div className="berita-card-body">
                 <h6>{item.title}</h6>
                 <p className="berita-date">{item.date}</p>

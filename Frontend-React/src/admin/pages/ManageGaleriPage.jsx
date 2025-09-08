@@ -57,7 +57,7 @@ const ManageGaleriPage = () => {
           {images.map((image) => (
             <div key={image.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
               <div className="card h-100">
-                <img src={image.imageUrl} className="card-img-top" alt={`Galeri ${image.id}`} style={{ height: '180px', objectFit: 'cover' }} />
+                <img src={`${process.env.REACT_APP_API_URL}/storage/${image.image_path}`} className="card-img-top" alt={`Galeri ${image.id}`} style={{ height: '180px', objectFit: 'cover' }} />
                 <div className="card-body text-center">
                   <button onClick={() => handleDelete(image.id)} className="btn btn-sm btn-danger">
                     <FaTrash className="me-1" /> Hapus

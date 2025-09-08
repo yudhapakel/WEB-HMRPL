@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Galeri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 
 class GaleriController extends Controller
 {
@@ -27,22 +27,29 @@ class GaleriController extends Controller
     }
 
     // MENYIMPAN GAMBAR BARU (ADMIN)
-    public function store(Request $request)
+ public function store(Request $request)
     {
         $validated = $request->validate([
-            'images' => 'required|array', 
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' 
+            'images' => 'required|array',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240' // Naikkan batas & tambah webp
         ]);
 
         $uploadedImages = [];
         if ($request->hasFile('images')) {
-            // Loop untuk setiap file yang diupload
             foreach ($request->file('images') as $file) {
-                $path = $file->store('galeri', 'public');
+                
+                // --- KITA TERAPKAN POLA YANG SAMA SEPERTI BERITA ---
+                // 1. Buat nama file unik sendiri
+                $namaFile = Str::random(40) . '.' . $file->getClientOriginalExtension();
 
+                // 2. Simpan dengan nama yang sudah kita buat
+                $file->storeAs('galeri', $namaFile, 'public');
+
+                // 3. Simpan path yang bersih ke database
                 $galeri = Galeri::create([
-                    'image_path' => $path
+                    'image_path' => 'galeri/' . $namaFile
                 ]);
+                // --------------------------------------------------
 
                 $uploadedImages[] = $galeri;
             }

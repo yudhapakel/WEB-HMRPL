@@ -13,3 +13,4 @@ frontend-react/build/
 # General
 .DS_Store
 Thumbs.db
+.env

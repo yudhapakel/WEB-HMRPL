@@ -39,7 +39,7 @@ const Galeri = () => {
                   onClick={() => handleImageClick(idx)}
                 >
                   <img 
-                    src={gambar.imageUrl} 
+                    src={`${process.env.REACT_APP_API_URL}/storage/${gambar.image_path}`} 
                     alt={gambar.caption || `Galeri HMRPL ${gambar.id}`} 
                     className="galeri-image" 
                   />
