@@ -5,10 +5,8 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-        'https://hmrpl.up.railway.app',
-        'https://web-hmrpl-production.up.railway.app',
-    ],
+    'allowed_origins' => explode(',', env('CORS_ALLOWED_ORIGINS', '')),
+
 
 
     'allowed_origins_patterns' => [],
