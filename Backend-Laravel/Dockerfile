@@ -3,12 +3,10 @@ FROM php:8.2-fpm-alpine AS base
 WORKDIR /var/www/html
 RUN apk add --no-cache nginx supervisor
 
-# Copy supervisord config
-COPY ./Backend-Laravel/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-# Copy nginx config
-COPY ./Backend-Laravel/docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+# Copy supervisor and nginx configs
+COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
-#test
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
