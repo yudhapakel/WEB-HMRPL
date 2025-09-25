@@ -13,7 +13,7 @@ RUN docker-php-ext-install pdo pdo_mysql
 FROM base AS vendor
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY ./database /var/www/html/database
-COPY ./composer.json ./Backend-Laravel/composer.lock /var/www/html/
+COPY ./composer.json ./composer.lock /var/www/html/
 RUN composer install --no-dev --no-interaction --optimize-autoloader
 
 # Stage 3: Final application image
