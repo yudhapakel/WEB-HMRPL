@@ -6,8 +6,10 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'http://localhost:3000', // <-- 2. KITA TULIS LANGSUNG, LEBIH AMAN UNTUK DEV
-    ], // Ganti ini sesuai FE lo
+        'https://hmrpl.up.railway.app',
+        'https://web-hmrpl-production.up.railway.app',
+    ],
+
 
     'allowed_origins_patterns' => [],
 
