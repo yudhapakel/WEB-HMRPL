@@ -6,6 +6,8 @@ RUN apk add --no-cache nginx supervisor
 COPY ./Backend-Laravel/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Copy nginx config
 COPY ./Backend-Laravel/docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
+
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
