@@ -1,12 +1,13 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'aspirasi'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => explode(',', env('CORS_ALLOWED_ORIGINS', '')),
-
+    'allowed_origins' => [
+        'http://localhost:3000',
+    ],
 
 
     'allowed_origins_patterns' => [],

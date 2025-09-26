@@ -1,32 +1,22 @@
-# Stage 1: Build base with PHP and dependencies
-FROM php:8.2-fpm-alpine AS base
-WORKDIR /var/www/html
-RUN apk add --no-cache nginx supervisor
+FROM php:8.2-fpm-alpine
 
-# Copy supervisor and nginx configs
-COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
+WORKDIR /var/www/html
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Stage 2: Final application image
-FROM base
-# Copy Composer executable
+# Copy Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy ALL application files first
+# Copy application files
 COPY . /var/www/html
 
-# Now run composer install
+# Composer install
 RUN composer install --no-dev --no-interaction --optimize-autoloader
 
 # Set correct permissions
-RUN mkdir -p /var/www/html/storage/framework/sessions /var/www/html/storage/framework/views /var/www/html/storage/framework/cache /var/www/html/storage/logs /var/www/html/bootstrap/cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache
+RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Expose port and start supervisord
-EXPOSE 8080
-ENV PORT=8080
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# PHP-FPM listen di 9000
+RUN sed -i 's/listen = .*/listen = 0.0.0.0:9000/' /usr/local/etc/php-fpm.d/www.conf
