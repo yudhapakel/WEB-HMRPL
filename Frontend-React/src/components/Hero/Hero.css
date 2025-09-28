@@ -8,9 +8,10 @@
 }
 
 .hero-title {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 700;
   margin-bottom: 15px;
+  text-align: justify;
 }
 
 .hero-subtitle {

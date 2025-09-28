@@ -52,14 +52,23 @@
   max-width: 400px;
 }
 
-.btn-login {
-  background-color: white;
-  color: #0689A0;
+.login-form-wrapper form .btn {
+  background-color: #0689A0;
+  color: white;
   font-weight: 600;
   padding: 12px;
   border: none;
+  transition: background-color 0.3s ease;
 }
 
+.login-form-wrapper form .btn:hover {
+  background-color: #056a7d;
+}
+
+
+.btn-login:hover {
+  background-color: #056a7d; 
+}
 .social-media-section {
   margin-top: 40px;
   text-align: center;

@@ -8,7 +8,7 @@ const Hero = () => {
   return (
     <section className="hero-section d-flex align-items-center justify-content-center">
       <div className="container">
-        <div className="row align-items-center text-center text-md-start">
+        <div className="row align-items-start text-center text-md-start">
           {/* Kiri: Logo HIMARPL */}
           <div className="col-md-4 mb-4 mb-md-0">
             <img src={LogoHima} alt="Logo HIMARPL" className="img-fluid hero-logo" />

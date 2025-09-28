@@ -16,8 +16,7 @@ const KabarTerkini = () => {
     const fetchLatestNews = async () => {
       setLoading(true);
       try {
-        // Endpoint dari backend 
-        const response = await axiosInstance.get('/api/berita/terbaru');
+        const response = await axiosInstance.get('/berita/terbaru'); // Path disesuaikan
         setLatestNews(response.data);
       } catch (error) {
         console.error("Gagal mengambil berita terbaru:", error);
@@ -39,41 +38,45 @@ const KabarTerkini = () => {
 
   return (
     <section className="kabar-section">
-  <div className="container">
-    <h2 className="kabar-title">Kabar Terkini</h2>
-    <p className="kabar-subtitle">
-      Informasi terkini mengenai himpunan mahasiswa rekayasa perangkat lunak
-    </p>
+      <div className="container">
+        <h2 className="kabar-title">Kabar Terkini</h2>
+        <p className="kabar-subtitle">
+          Informasi terkini mengenai himpunan mahasiswa rekayasa perangkat lunak
+        </p>
 
-    <Swiper
-      modules={[Pagination]}
-      slidesPerView={1}
-      pagination={{ clickable: true }}
-      className="kabar-swiper"
-    >
-      {latestNews.map((item) => (
-        <SwiperSlide key={item.id} className="kabar-slide">
-          <div className="kabar-card">
-            <div className="kabar-text">
-              <h5>{item.title}</h5>
-              <p className="kabar-date">{item.date}</p>
-              <p className="kabar-description">
-                {item.excerpt} 
-              </p>
-              
-              <Link to={`/berita/${item.slug}`} className="btn-selengkapnya">
-                Selengkapnya <FaChevronRight size={12} />
-              </Link>
+        <Swiper
+          modules={[Pagination, Autoplay]} 
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }} 
+          loop={true}
+          className="kabar-swiper"
+        >
+          {latestNews.map((item) => (
+            <SwiperSlide key={item.id} className="kabar-slide">
+              <div className="kabar-card">
+                <div className="kabar-text">
+                  <h5>{item.title}</h5>
+                  <p className="kabar-date">{item.date}</p>
+                  <p className="kabar-description">
+                    {item.excerpt} 
+                  </p>
+                  
+                  <Link to={`/berita/${item.slug}`} className="btn-selengkapnya">
+                    Selengkapnya <FaChevronRight size={12} />
+                  </Link>
 
-            </div>
-            <img src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`} alt={item.title} className="kabar-image" />
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
-</section>
+                </div>
+                {/* Pastikan backend Anda menyediakan base URL di .env */}
+                <img src={`${process.env.REACT_APP_API_BASE_URL}/storage/${item.image_path}`} alt={item.title} className="kabar-image" />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </section>
   );
 };
 
 export default KabarTerkini;
+
