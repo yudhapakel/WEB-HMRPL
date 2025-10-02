@@ -48,3 +48,31 @@
   background-color: green;
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 40px 0; /* Kurangi padding di mobile */
+  }
+
+  /* Ukuran font dikecilkan agar pas di layar mobile */
+  .hero-title {
+    font-size: 32px;
+    text-align: center; /* Teks di tengah di mobile */
+  }
+
+  .hero-subtitle,
+  .kabinet-subtitle {
+    font-size: 16px;
+    text-align: center; /* Teks di tengah di mobile */
+  }
+
+  .kabinet-title {
+    font-size: 35.2px;
+  }
+
+  /* Ukuran logo juga dikecilkan */
+  .hero-logo,
+  .kabinet-logo {
+    max-width: 250px;
+  }
+}

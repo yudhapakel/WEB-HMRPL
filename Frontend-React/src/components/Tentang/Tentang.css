@@ -257,3 +257,31 @@
 .anggota-info h5 {
   margin-bottom: 4px;
 }
+
+@media (max-width: 991px) {
+
+  /*  teks rata tengah di mobile */
+  .section-heading,
+  .text-muted,
+  .section-heading-purple {
+    text-align: center;
+  }
+
+  /*  ukuran judul di mobile */
+  .section-heading,
+  .section-heading-purple {
+    font-size: 28.8px; 
+  }
+
+  /*  ukuran paragraf di mobile */
+  .text-muted {
+    font-size: 16px;
+  }
+
+  /* Mengecilkan logo  jarak bawah */
+  .himpunan-logo,
+  .kabinet-logo-tentang {
+    margin-bottom: 30px; 
+    max-width: 280px; 
+  }
+  }

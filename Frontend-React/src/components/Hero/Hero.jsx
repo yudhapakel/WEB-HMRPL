@@ -8,13 +8,11 @@ const Hero = () => {
   return (
     <section className="hero-section d-flex align-items-center justify-content-center">
       <div className="container">
+        {/* Bagian Atas: Himpunan */}
         <div className="row align-items-start text-center text-md-start">
-          {/* Kiri: Logo HIMARPL */}
-          <div className="col-md-4 mb-4 mb-md-0">
+          <div className="col-md-4 mb-4 mb-md-0 d-flex justify-content-center">
             <img src={LogoHima} alt="Logo HIMARPL" className="img-fluid hero-logo" />
           </div>
-
-          {/* Kanan: Judul & Deskripsi */}
           <div className="col-md-8">
             <h1 className="hero-title">
               Himpunan Mahasiswa S1 Rekayasa Perangkat Lunak Universitas Telkom
@@ -24,10 +22,13 @@ const Hero = () => {
             </p>
           </div>
         </div>
-
-        <div className="row align-items-center mt-5 text-center text-md-start">
-          {/* Kiri: Judul kabinet dan deskripsi */}
-          <div className="col-md-8">
+   {/* Mobile kabinet nya */}
+        <div className="row align-items-center mt-5 pt-md-5 text-center text-md-start">
+          <div className="col-md-4 mt-4 mt-md-0 text-center order-md-2">
+            <img src={LogoKabinet} alt="Logo Kabinet" className="img-fluid kabinet-logo" />
+          </div>
+  {/* Web kabinet */}
+          <div className="col-md-8 order-md-1">
             <h2 className="kabinet-title">
               <span className="text-danger">KABINET </span>
               <span className="text-warning">SYVELTA</span>
@@ -35,14 +36,9 @@ const Hero = () => {
             <p className="kabinet-subtitle">
               Badan Pengurus Himpunan Mahasiswa Rekayasa Perangkat Lunak 2024/2025
             </p>
-           <Link to="/tentang" className="custom-tentang-btn mt-2">
+           <Link to="/tentang" className="custom-tentang-btn mt-3">
               Tentang Kami
-          </Link>
-          </div>
-
-          {/* Kanan: Logo Kabinet */}
-          <div className="col-md-4 mt-4 mt-md-0 text-md-end">
-            <img src={LogoKabinet} alt="Logo Kabinet" className="img-fluid kabinet-logo" />
+           </Link>
           </div>
         </div>
       </div>
@@ -51,3 +47,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
