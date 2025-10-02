@@ -10,6 +10,7 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./Backend-Laravel:/var/www/html
+      - ./Backend-Laravel/php-custom.ini:/usr/local/etc/php/conf.d/php-custom.ini
     networks:
       - hima-network
 
@@ -22,6 +23,7 @@ services:
     volumes:
       - ./Backend-Laravel:/var/www/html
       - ./Backend-Laravel/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+
     depends_on:
       - app
     networks:
@@ -36,8 +38,8 @@ services:
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      # MYSQL_USER: ${DB_USERNAME}
-      # MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - hima-db-data:/var/lib/mysql
     ports:

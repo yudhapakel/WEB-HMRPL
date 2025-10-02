@@ -16,7 +16,7 @@ const KabarTerkini = () => {
     const fetchLatestNews = async () => {
       setLoading(true);
       try {
-        const response = await axiosInstance.get('/berita/terbaru'); // Path disesuaikan
+        const response = await axiosInstance.get('/api/berita/terbaru'); // Path disesuaikan
         setLatestNews(response.data);
       } catch (error) {
         console.error("Gagal mengambil berita terbaru:", error);
@@ -68,7 +68,7 @@ const KabarTerkini = () => {
 
                 </div>
                 {/* Pastikan backend Anda menyediakan base URL di .env */}
-                <img src={`${process.env.REACT_APP_API_BASE_URL}/storage/${item.image_path}`} alt={item.title} className="kabar-image" />
+                <img src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`} alt={item.title} className="kabar-image" />
               </div>
             </SwiperSlide>
           ))}
