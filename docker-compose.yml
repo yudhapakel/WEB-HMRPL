@@ -19,7 +19,7 @@ services:
     image: nginx:alpine
     container_name: hima-nginx
     ports:
-      - "8080:80" # Akses backend dari browser via port 8080
+      - "8080:80" 
     volumes:
       - ./Backend-Laravel:/var/www/html
       - ./Backend-Laravel/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
@@ -43,7 +43,7 @@ services:
     volumes:
       - hima-db-data:/var/lib/mysql
     ports:
-      - "33061:3306" # Akses DB dari luar (opsional) via port 33061
+      - "33061:3306" 
     networks:
       - hima-network
 
@@ -57,7 +57,7 @@ services:
       - ./Frontend-React:/app
       - /app/node_modules
     ports:
-      - "3000:3000" # Akses frontend dari browser via port 3000
+      - "3000:3000" 
     networks:
       - hima-network
 

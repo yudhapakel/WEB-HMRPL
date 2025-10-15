@@ -14,7 +14,6 @@ const Awarding = () => {
       try {
         const response = await axiosInstance.get('/api/awarding');
 
-        // Olah data mentah dari backend
         const awardsData = [
           { id: 1, image_path: response.data.staff_image_path, title: 'Staff Terbaik' },
           { id: 2, image_path: response.data.divisi_image_path, title: 'Divisi Terbaik' },

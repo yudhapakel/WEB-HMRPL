@@ -26,46 +26,33 @@ const handleSubmit = async (e) => {
   setLoading(true);
   setError("");
 
-  console.log("--- MEMULAI PROSES LOGIN ---");
 
   try {
-    console.log("Langkah 1: Mengambil CSRF cookie...");
     await axiosInstance.get('/sanctum/csrf-cookie');
-    console.log("Langkah 1: CSRF Cookie berhasil didapat.");
 
-    console.log("Langkah 2: Mengirim data login ke /api/login...", { email: username, password: "Password sengaja disembunyikan" });
     const res = await axiosInstance.post('/api/login', {
       email: username,
       password: password
     }, { withCredentials: true });
 
-    console.log("Langkah 3: Menerima response dari Laravel. Isinya:", res);
-    console.log("Langkah 3.1: Data di dalam response (res.data):", res.data);
 
     const token = res.data.token;
-    console.log("Langkah 4: Mencoba mengambil token dari res.data.token. Isinya:", token);
 
     if (!token) {
-        console.error("!!! KESALAHAN KRITIS: Token tidak ditemukan di dalam response dari server. Cek 'Langkah 3.1' di atas, pastikan object 'data' memiliki properti 'token'.");
         setError("Gagal mendapatkan token dari server.");
         setLoading(false);
         return; 
     }
 
-    console.log("Langkah 5: Mencoba menyimpan token ke localStorage...");
     localStorage.setItem('token', token);
-    console.log("Langkah 5.1: Token SEHARUSNYA sudah tersimpan. Silakan cek tab Application > Local Storage sekarang.");
 
-    console.log("Langkah 6: Login berhasil, data user dan token akan disimpan ke context.");
     const userData = res.data.user;
     login(userData, token);
 
   } catch (err) {
-    console.error("!!! TERJADI ERROR DI BLOK CATCH !!!");
     console.error("Isi error (err):", err);
 
     if (err.response) {
-      console.error("Response error dari server (err.response):", err.response);
       setError(err.response?.data?.message || "Terjadi kesalahan pada server");
     } else {
       setError("Tidak bisa terhubung ke server.");
@@ -73,7 +60,6 @@ const handleSubmit = async (e) => {
 
   } finally {
     setLoading(false);
-    console.log("--- PROSES LOGIN SELESAI ---");
   }
 };
 

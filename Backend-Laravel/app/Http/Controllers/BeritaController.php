@@ -19,13 +19,10 @@ class BeritaController extends Controller
     {
         $beritaPaginated = Berita::latest()->paginate(7);
 
-        // Transformasi data sebelum dikirim
+        
         $beritaPaginated->getCollection()->transform(function ($berita) {
-            // Buat properti baru 'imageUrl' dengan URL lengkap
             $berita->imageUrl = Storage::url($berita->image_path);
-            // Buat excerpt sederhana
             $berita->excerpt = Str::limit(strip_tags(html_entity_decode($berita->content)), 150);
-            // Format tanggal
             $berita->date = $berita->created_at->translatedFormat('d F Y');
             return $berita;
         });
@@ -46,11 +43,10 @@ class BeritaController extends Controller
         ]);
 
         $path = $request->file('image')->store('berita', 'public');
-        // $db_path = str_replace('public/', '', $path);
 
         $berita = Berita::create([
             'title' => $validated['title'],
-            'slug' => Str::slug($validated['title']), // Otomatis buat slug
+            'slug' => Str::slug($validated['title']),
             'content' => $validated['content'],
             'image_path' => $path,
         ]);
@@ -71,39 +67,31 @@ class BeritaController extends Controller
      * Update the specified resource in storage.
      */
     // memperbarui berita (admin)
-// app/Http/Controllers/BeritaController.php
 
 public function update(Request $request, Berita $berita)
 {
-    // 1. Validasi input yang masuk
     $validated = $request->validate([
         'title' => 'sometimes|required|string|max:255',
         'content' => 'sometimes|required|string',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
     ]);
 
-    // 2. Siapkan data yang akan diupdate dari input teks
-    //    Gunakan only() untuk mengambil data hanya jika ada di request
+
     $updateData = $request->only(['title', 'content']);
 
-    // 3. Jika ada judul baru, buat slug baru
     if ($request->has('title')) {
         $updateData['slug'] = Str::slug($request->title);
     }
 
-    // 4. Proses gambar jika ada file baru yang diupload
     if ($request->hasFile('image')) {
-        // Hapus gambar lama dari storage jika ada
         if ($berita->image_path) {
             Storage::disk('public')->delete($berita->image_path);
         }
 
-        // Simpan gambar baru dan tambahkan path-nya ke data yang akan diupdate
         $path = $request->file('image')->store('berita', 'public');
         $updateData['image_path'] = $path;
     }
 
-    // 5. Jalankan update ke database dengan data yang sudah siap
     $berita->update($updateData);
 
     return response()->json($berita);
@@ -114,10 +102,8 @@ public function update(Request $request, Berita $berita)
     // menghapus berita (admin) 
     public function destroy(Berita $berita)
     {
-        // Hapus file gambar dari disk 'public'
         Storage::disk('public')->delete($berita->image_path);
 
-        // Hapus record dari database
         $berita->delete();
 
         return response()->json(['message' => 'Berita berhasil dihapus']);

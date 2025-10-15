@@ -26,7 +26,6 @@ export const checkAdminLoginStatus = () => {
       return true;
     }
   }
-  // Jika tidak valid, langsung hapus tiketnya
   localStorage.removeItem("adminLoginInfo");
   return false;
 }

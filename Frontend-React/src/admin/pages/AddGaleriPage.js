@@ -10,11 +10,9 @@ const AddGaleriPage = () => {
   const [status, setStatus] = useState('');
 
   const handleFileChange = (e) => {
-    // e.target.files adalah FileList, kita ubah menjadi array
     const selectedFiles = Array.from(e.target.files);
     setFiles(selectedFiles);
 
-    // Buat URL preview untuk setiap gambar yang dipilih
     const previewUrls = selectedFiles.map(file => URL.createObjectURL(file));
     setPreviews(previewUrls);
   };

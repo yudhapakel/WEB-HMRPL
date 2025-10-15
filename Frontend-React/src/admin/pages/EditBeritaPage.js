@@ -23,11 +23,9 @@ const EditBeritaPage = () => {
     const fetchBerita = async () => {
       setLoading(true);
       try {
-        // --- KODE ASLI NANTI ---
         const response = await axiosInstance.get(`/api/admin/berita/${id}`);
       setTitle(response.data.title);
       setContent(response.data.content);
-      // Bangun URL gambar lengkap
       setImagePreview(`${process.env.REACT_APP_API_URL}/storage/${response.data.image_path}`);
       } catch (error) {
         console.error("Gagal mengambil data berita:", error);
@@ -58,26 +56,22 @@ const handleSubmit = async (e) => {
   if (image) {
     formData.append('image', image);
   }
-  // formData.append('_method', 'PUT');
+
 
   try {
-    // 1. Kirim data ke backend (ini sudah benar)
     const response = await axiosInstance.post(`/api/admin/berita/${id}`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
     
     console.log('Update berhasil, response dari server:', response.data);
 
-    // 2. Langsung tampilkan pesan sukses, cukup sekali
     setStatus('Berita berhasil diperbarui!');
 
-    // 3. Atur timer untuk redirect setelah 2 detik, cukup sekali
     setTimeout(() => navigate('/admin/berita'), 2000);
 
   } catch (error) {
     console.error('Gagal memperbarui berita:', error);
     
-    // Ambil pesan error dari backend jika ada, agar lebih informatif
     const errorMessage = error.response?.data?.message || 'Gagal memperbarui berita. Coba lagi.';
     setStatus(errorMessage);
 

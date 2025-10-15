@@ -16,25 +16,18 @@ public function store(Request $request)
         'poster' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
     ]);
 
-    // Simpan file baru
     $path = $request->file('poster')->store('posters', 'public');
     
-    // Buat record baru di database
     Oprec::create(['poster_path' => $path]);
 
-    // Tentukan batas maksimal poster
     $maxPosters = 3;
     $allPosters = Oprec::orderBy('created_at', 'desc')->get();
 
-    // Jika jumlah poster melebihi batas
     if ($allPosters->count() > $maxPosters) {
-        // Ambil semua poster kecuali 3 yang terbaru
         $postersToDelete = $allPosters->slice($maxPosters);
 
         foreach ($postersToDelete as $oldPoster) {
-            // Hapus file fisik dari storage
             Storage::disk('public')->delete($oldPoster->poster_path);
-            // Hapus record dari database
             $oldPoster->delete();
         }
     }

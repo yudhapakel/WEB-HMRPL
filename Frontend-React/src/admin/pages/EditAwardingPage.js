@@ -9,7 +9,6 @@ const EditAwardingPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState('');
 
-  // Ambil data gambar yang sekarang saat halaman dimuat
   useEffect(() => {
     const fetchCurrentAwards = async () => {
       try {

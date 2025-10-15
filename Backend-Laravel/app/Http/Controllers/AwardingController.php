@@ -31,7 +31,7 @@ class AwardingController extends Controller
     }
 
     // FUNGSI UNTUK MENG-UPDATE GAMBAR (KHUSUS ADMIN)
-// app/Http/Controllers/AwardingController.php
+
 
 public function update(Request $request)
 {
@@ -51,11 +51,9 @@ public function update(Request $request)
         $dbColumn = $category . '_image_path';
 
         if ($request->hasFile($fileKey)) {
-            // Hapus file lama jika ada
             if ($awards->$dbColumn) {
                 Storage::disk('public')->delete($awards->$dbColumn);
             }
-            // Simpan file baru dan siapkan path untuk diupdate
             $path = $request->file($fileKey)->store('awarding', 'public');
             $updateData[$dbColumn] = $path;
         }

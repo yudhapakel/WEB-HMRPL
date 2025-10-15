@@ -11,9 +11,8 @@ const ManageBeritaPage = () => {
     const fetchBerita = async () => {
       setLoading(true);
       try {
-      // Sesuaikan dengan endpoint admin jika berbeda, atau pakai yg publik
       const response = await axiosInstance.get('/api/berita');
-      setBerita(response.data.data); // Ambil dari .data karena ada paginasi
+      setBerita(response.data.data); 
       } catch (error) {
         console.error("Gagal mengambil data berita:", error);
       } finally {
