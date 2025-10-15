@@ -43,23 +43,19 @@ export const AuthProvider = ({ children }) => {
       console.error("Logout gagal di server", error);
     } finally {
       setUser(null);
-      localStorage.removeItem('token'); // Hapus token jika masih pakai
-      localStorage.removeItem('adminLoginInfo'); // Hapus "tiket"
+      localStorage.removeItem('token'); 
+      localStorage.removeItem('adminLoginInfo');
       navigate('/login');
     }
   }, [navigate]);
 
-  // --- useEffect #1: Mengecek sesi saat aplikasi pertama kali dimuat ---
-  useEffect(() => {
-    // Cek dulu tiket di sisi klien
+  useEffect(() => {n
     if (checkAdminLoginStatus()) {
-      // Jika tiket valid, baru cek ke server
       axiosInstance.get('/api/me')
         .then(response => {
           setUser(response.data);
         })
         .catch(() => {
-          // Jika server tidak valid, paksa logout
           console.log("Sesi server tidak valid, paksa logout.");
           logout();
         })
@@ -67,12 +63,10 @@ export const AuthProvider = ({ children }) => {
           setLoading(false);
         });
     } else {
-      // Jika tiket klien tidak ada/tidak valid, langsung selesai loading
       setLoading(false);
     }
   }, [logout]);
 
-  // --- useEffect #2: Menjalankan "petugas pengecek tiket" berkala ---
   useEffect(() => {
     const checkSession = () => {
       if (user && !checkAdminLoginStatus()) {
@@ -80,9 +74,7 @@ export const AuthProvider = ({ children }) => {
         logout();
       }
     };
-    // Cek setiap 30 detik
     const timer = setInterval(checkSession, 30000);
-    // Hentikan timer saat komponen tidak lagi digunakan
     return () => clearInterval(timer);
   }, [user, logout]);
 
@@ -90,9 +82,8 @@ export const AuthProvider = ({ children }) => {
   const login = (userData) => {
     setUser(userData);
     
-    // Buat "tiket" baru saat login
     const computerId = getOrCreateComputerId();
-    const expirationTime = Date.now() + 30 * 60 * 1000; // 30 menit dari sekarang
+    const expirationTime = Date.now() + 30 * 60 * 1000; 
     localStorage.setItem("adminLoginInfo", JSON.stringify({
         computerId,
         expirationTime    
