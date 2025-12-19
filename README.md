@@ -53,7 +53,6 @@ Proyek ini dibangun menggunakan arsitektur **Monorepo** yang memisahkan Backend 
 
 ## 📂 Struktur Proyek
 
-```bash
 ├── Backend-Laravel/      # Source code backend (API)
 │   ├── app/              # Controllers, Models (Aspirasi, Berita, dll)
 │   ├── database/         # Migrations & Seeders
