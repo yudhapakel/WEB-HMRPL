@@ -68,3 +68,115 @@ Proyek ini dibangun menggunakan arsitektur **Monorepo** yang memisahkan Backend 
 │   └── ...
 ├── docker-compose.yml    # Orkestrasi container Docker
 └── README.md
+
+## ⚙ Prasyarat
+
+Sebelum memulai instalasi, pastikan perangkat Anda telah terinstal software berikut:
+
+* [Git](https://git-scm.com/) - Untuk manajemen versi.
+* [Docker Desktop](https://www.docker.com/products/docker-desktop) - **Sangat disarankan** untuk kemudahan instalasi environment.
+* **Opsional (Jika instalasi manual tanpa Docker):**
+    * [PHP](https://www.php.net/) (Versi 8.2 atau lebih baru)
+    * [Composer](https://getcomposer.org/)
+    * [Node.js](https://nodejs.org/) (LTS Version) & NPM
+    * MySQL Server
+
+---
+
+## 🚀 Instalasi dan Menjalankan Project
+
+### Opsi 1: Menggunakan Docker (Direkomendasikan)
+
+Metode ini akan menjalankan Backend (Laravel), Frontend (React), dan Database (MySQL) secara otomatis dalam container.
+
+1.  **Clone Repository**
+    ```bash
+    git clone [https://github.com/username/web-hmrpl.git](https://github.com/username/web-hmrpl.git)
+    cd web-hmrpl
+    ```
+
+2.  **Setup Environment Backend**
+    Salin file konfigurasi lingkungan untuk backend.
+    ```bash
+    cp Backend-Laravel/.env.example Backend-Laravel/.env
+    ```
+    *Catatan: Pastikan `DB_HOST` di dalam `.env` diatur ke `mysql` (sesuai nama service di docker-compose).*
+
+3.  **Jalankan Container**
+    ```bash
+    docker-compose up -d --build
+    ```
+
+4.  **Setup Database & Dependencies**
+    Masuk ke dalam container backend untuk melakukan instalasi dependensi PHP dan migrasi database.
+    ```bash
+    docker-compose exec app bash
+    ```
+    
+    Setelah masuk ke terminal container (`root@...:/var/www`), jalankan perintah berikut:
+    ```bash
+    composer install
+    php artisan key:generate
+    php artisan migrate --seed
+    php artisan storage:link
+    exit
+    ```
+
+5.  **Akses Aplikasi**
+    * 🏠 **Frontend:** [http://localhost:3000](http://localhost:3000)
+    * 📡 **Backend API:** [http://localhost:8000](http://localhost:8000)
+
+### Opsi 2: Instalasi Manual (Tanpa Docker)
+
+Jika Anda ingin menjalankan service satu per satu di host machine Anda.
+
+#### 1. Setup Backend (Laravel)
+```bash
+cd Backend-Laravel
+cp .env.example .env
+# Edit .env: Pastikan DB_HOST=127.0.0.1 dan DB_DATABASE sudah dibuat di MySQL lokal Anda.
+
+composer install
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link
+php artisan serve
+
+#### 2. Setup Frontend (React)
+```bash
+cd Frontend-React
+npm install
+npm start
+Frontend berjalan di port 3000.
+
+## 🤝 Kontribusi
+
+Kami sangat terbuka untuk kontribusi dari anggota HMRPL! Silakan ikuti langkah-langkah berikut:
+
+1.  **Fork** repository ini.
+2.  Buat branch fitur baru:
+    ```bash
+    git checkout -b fitur/nama-fitur-keren
+    ```
+3.  Commit perubahan Anda:
+    ```bash
+    git commit -m 'Menambahkan fitur X'
+    ```
+4.  Push ke branch:
+    ```bash
+    git push origin fitur/nama-fitur-keren
+    ```
+5.  Buat **Pull Request** baru di GitHub.
+
+---
+
+## 📝 Lisensi
+
+Proyek ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
+
+---
+
+<center>
+  <p>Dibuat dengan 💻, ☕, dan ❤️ oleh <b>Tim Developer HMRPL</b></p>
+</center>
+
