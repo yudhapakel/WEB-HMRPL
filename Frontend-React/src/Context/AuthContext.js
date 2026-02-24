@@ -4,111 +4,74 @@ import axiosInstance from '../api/axiosInstance';
 
 const AuthContext = createContext(null);
 
-export const generateSimpleId = () => {
-  return Math.random().toString(36).substr(2, 9);
+async function ensureCsrf() {
+  // Ambil cookie XSRF dulu (aman dipanggil berkali-kali)
+  await axiosInstance.get('/sanctum/csrf-cookie');
 }
 
-export const getOrCreateComputerId = () => {
-  let computerId = localStorage.getItem('computerId');
-  if (!computerId) {
-    computerId = generateSimpleId();
-    localStorage.setItem("computerId", computerId);
-  }
-  return computerId;
+async function getMe() {
+  return axiosInstance.get('/api/me').then(r => r.data);
 }
-
-export const checkAdminLoginStatus = () => {
-  const loginInfoString = localStorage.getItem("adminLoginInfo");
-  if (loginInfoString) {
-    const loginInfo = JSON.parse(loginInfoString);
-    const currentComputerId = getOrCreateComputerId();
-    if (loginInfo.computerId === currentComputerId && loginInfo.expirationTime > Date.now()) {
-      return true;
-    }
-  }
-  localStorage.removeItem("adminLoginInfo");
-  return false;
-}
-
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  // -------- Logout (perbaikan: /logout, bukan /api/logout)
   const logout = useCallback(async () => {
     try {
-      await axiosInstance.post('/api/logout');
-    } catch (error) {
-      console.error("Logout gagal di server", error);
+      await ensureCsrf();
+      await axiosInstance.post('/logout');  // <— di web middleware
+    } catch (e) {
+      console.error('Logout gagal:', e?.response?.data || e.message);
     } finally {
       setUser(null);
-      localStorage.removeItem('token'); 
-      localStorage.removeItem('adminLoginInfo');
       navigate('/login');
     }
   }, [navigate]);
 
-  useEffect(() => {n
-    if (checkAdminLoginStatus()) {
-      axiosInstance.get('/api/me')
-        .then(response => {
-          setUser(response.data);
-        })
-        .catch(() => {
-          console.log("Sesi server tidak valid, paksa logout.");
-          logout();
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
-  }, [logout]);
-
+  // -------- Cek sesi saat app load
   useEffect(() => {
-    const checkSession = () => {
-      if (user && !checkAdminLoginStatus()) {
-        console.log("Sesi klien kedaluwarsa, logout otomatis.");
-        logout();
+    (async () => {
+      try {
+        await ensureCsrf();
+        const me = await getMe();
+        setUser(me);
+      } catch {
+        setUser(null);
+      } finally {
+        setLoading(false);
       }
-    };
-    const timer = setInterval(checkSession, 30000);
-    return () => clearInterval(timer);
-  }, [user, logout]);
+    })();
+  }, []);
 
+  // -------- Dipanggil dari halaman login
+  //   - Lakukan POST /login di halaman login
+  //   - Setelah sukses, panggil auth.login() ini agar state sinkron
+  const login = useCallback(async () => {
+    try {
+      await ensureCsrf();
+      const me = await getMe();   // sinkronkan user setelah login sukses
+      setUser(me);
+      navigate('/admin');
+    } catch (e) {
+      setUser(null);
+      throw e; // biar halaman login bisa nampilin error
+    }
+  }, [navigate]);
 
-  const login = (userData) => {
-    setUser(userData);
-    
-    const computerId = getOrCreateComputerId();
-    const expirationTime = Date.now() + 30 * 60 * 1000; 
-    localStorage.setItem("adminLoginInfo", JSON.stringify({
-        computerId,
-        expirationTime    
-    }));
-
-    navigate('/admin');
-  };
-  
   const value = { user, login, logout, loading };
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div style={{ display:'flex', alignItems:'center', justifyContent:'center', height:'100vh' }}>
         <p>Loading Aplikasi...</p>
       </div>
     );
   }
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

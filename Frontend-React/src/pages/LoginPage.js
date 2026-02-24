@@ -26,33 +26,31 @@ const handleSubmit = async (e) => {
   setLoading(true);
   setError("");
 
-
   try {
+    // 1. Dapatkan CSRF cookie (Ini sudah benar)
     await axiosInstance.get('/sanctum/csrf-cookie');
 
-    const res = await axiosInstance.post('/api/login', {
+    // 2. Kirim request login (Ini sudah benar)
+    const res = await axiosInstance.post('/login', {
       email: username,
       password: password
-    }, { withCredentials: true });
+    });
 
+    // --- INI BAGIAN YANG DIUBAH ---
 
-    const token = res.data.token;
+    // 3. Ambil data user dari respons
+    // Kita TIDAK butuh token.
+    const userData = res.data.user; // (Pastikan backend-mu mengirim 'user')
 
-    if (!token) {
-        setError("Gagal mendapatkan token dari server.");
-        setLoading(false);
-        return; 
-    }
-
-    localStorage.setItem('token', token);
-
-    const userData = res.data.user;
-    login(userData, token);
+    // 4. Panggil fungsi login dari Context HANYA dengan data user
+    // Cookie session sudah otomatis disimpan oleh browser.
+    login(userData);
 
   } catch (err) {
     console.error("Isi error (err):", err);
 
     if (err.response) {
+      // Tampilkan pesan error dari server (cth: "Email atau password salah")
       setError(err.response?.data?.message || "Terjadi kesalahan pada server");
     } else {
       setError("Tidak bisa terhubung ke server.");
