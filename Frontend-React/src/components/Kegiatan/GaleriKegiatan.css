@@ -5,38 +5,92 @@
 .galeri-kegiatan-card {
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 10px 24px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+}
+
+.galeri-kegiatan-card::after {
+  content: '🔍';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(6, 137, 160, 0.7), rgba(0, 123, 255, 0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 2;
+  border-radius: 16px;
 }
 
 .galeri-kegiatan-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.galeri-kegiatan-card:hover::after {
+  opacity: 1;
 }
 
 .galeri-kegiatan-image {
   width: 100%;
-  height: 250px;
+  height: 260px;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
 }
 
+.galeri-kegiatan-card:hover .galeri-kegiatan-image {
+  transform: scale(1.08);
+}
 
 .btn-galeri {
   background-color: white;
-  border-color: #0689A0;
-  color: black;
+  border: 1.5px solid #0689A0;
+  color: #0689A0;
   padding: 10px 30px;
   border-radius: 50px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .btn-galeri:hover {
-  background-color: #0689A0; 
-  border-color: #056a7d;
+  background: linear-gradient(135deg, #0689A0, #057a8f);
+  border-color: #0689A0;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 16px rgba(6, 137, 160, 0.3);
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .galeri-kegiatan-section {
+    padding: 50px 0;
+  }
+
+  .galeri-kegiatan-image {
+    height: 200px;
+  }
+
+  .btn-galeri {
+    padding: 8px 24px;
+    font-size: 0.9rem;
+  }
+
+  .galeri-kegiatan-card::after {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .galeri-kegiatan-section {
+    padding: 40px 0;
+  }
+
+  .galeri-kegiatan-image {
+    height: 180px;
+  }
 }

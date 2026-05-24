@@ -1,28 +1,81 @@
 .kalender-section {
-  padding: 80px 0;
+  padding: 90px 0;
   text-align: center;
+  background: #fff;
 }
 
 .kalender-title {
   font-weight: 800;
   font-size: 2.2rem;
-  color: #333;
+  color: #1a202c;
+  letter-spacing: -0.02em;
 }
 
 .kalender-subtitle {
-  color: #6c757d;
+  color: #64748b;
   max-width: 600px;
   margin: 10px auto 0;
+  font-size: 1.05rem;
 }
 
 .kalender-container {
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 12px 28px rgba(0, 0, 0, 0.08);
   max-width: 1300px;
-  margin: 0 auto; 
+  margin: 0 auto;
+  position: relative;
+}
+
+.kalender-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0689A0, #007bff, #9B328D);
+  z-index: 1;
 }
 
 .google-calendar-iframe {
-  border: none; 
+  border: none;
+  width: 100%;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .kalender-section {
+    padding: 50px 0;
+  }
+
+  .kalender-title {
+    font-size: 1.5rem;
+  }
+
+  .kalender-subtitle {
+    font-size: 0.88rem;
+  }
+
+  .kalender-container {
+    border-radius: 14px;
+  }
+
+  .google-calendar-iframe {
+    height: 380px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .kalender-section {
+    padding: 40px 16px;
+  }
+
+  .kalender-container {
+    border-radius: 12px;
+  }
+
+  .google-calendar-iframe {
+    height: 320px !important;
+  }
 }

@@ -14,10 +14,9 @@ const TentangKabinet = () => {
             <img src={LogoKabinet} alt="Logo Kabinet" className="img-fluid kabinet-logo-tentang" />
           </div>
           <div className="col-lg-7">
-            <h3 className="section-heading-purple">KABINET SYVELTA</h3>
+            <h3 className="section-heading-purple">KABINET FRATERNA</h3>
             <p className="text-muted">
-              <b>SYVELTA</b> berasal dari gabungan kata <b>Synergie</b> (bahasa Prancis) yang berarti sinergi, dan <b>Velta</b> (bahasa Islandia) yang berarti perubahan menuju lebih baik. Nama ini merepresentasikan semangat kolaboratif dalam menciptakan perubahan yang progresif dan berdampak. Dengan mengusung tagline <b>"Sync for Change!"</b>, Kabinet SYVELTA hadir sebagai wujud gerakan bersama yang selaras untuk mewujudkan transformasi nyata
-            </p>
+              <b>Fraterna</b> menjunjung tinggi <b>kebersamaan, solidaritas</b> dan rasa <b>saling memiliki</b>dalam setiap langkah organisasi. Melalui <b> semangat kolaborasi</b> dan <b>komunikasi yang sehat</b>,Kabinet Fraterna dapat menjadi wadah untuk bertumbuh dan <b>mencapai tujuan bersama</b>.</p>
           </div>
         </div>
       </div>

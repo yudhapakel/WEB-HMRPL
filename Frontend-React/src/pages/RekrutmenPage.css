@@ -9,7 +9,9 @@
   font-size: 2.2rem;
   position: relative;
   display: inline-block;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
+  color: #1a202c;
+  letter-spacing: -0.02em;
 }
 
 .rekrutmen-title::after {
@@ -18,12 +20,49 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 250px;
+  width: 200px;
   height: 4px;
-  background-color: #007bff;
+  background: linear-gradient(90deg, #0689A0, #007bff);
+  border-radius: 2px;
 }
 
 .rekrutmen-subtitle {
-  color: #6c757d;
+  color: #64748b;
   margin-top: 10px;
+  font-size: 1.05rem;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .rekrutmen-page-container {
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .rekrutmen-title {
+    font-size: 1.6rem;
+  }
+
+  .rekrutmen-title::after {
+    width: 120px;
+  }
+
+  .rekrutmen-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .rekrutmen-page-container {
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  .rekrutmen-title {
+    font-size: 1.4rem;
+  }
+
+  .rekrutmen-title::after {
+    width: 80px;
+  }
 }

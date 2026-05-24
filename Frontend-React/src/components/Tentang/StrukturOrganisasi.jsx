@@ -10,9 +10,10 @@ const StrukturOrganisasi = () => {
           <h2 className="section-title-dark with-line">Struktur Organisasi BPH HMRPL 2025</h2>
         </div>
         
-        <div className="text-center">
-          <img src={StrukturImage} alt="Struktur Organisasi HMRPL 2025" className="img-fluid" />
+        <div className="struktur-org-wrapper">
+          <img src={StrukturImage} alt="Struktur Organisasi HMRPL 2025" className="struktur-org-image" />
         </div>
+        <p className="struktur-hint d-md-none">← Geser untuk melihat selengkapnya →</p>
       </div>
     </section>
   );

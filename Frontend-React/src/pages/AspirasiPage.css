@@ -3,22 +3,54 @@
   max-width: 800px;
   margin: 40px auto;
   padding: 40px;
-  background-color: #f7f9fc; 
-  border-radius: 12px;
+  background: linear-gradient(135deg, #f8fafb 0%, #f0f4f8 100%);
+  border-radius: 16px;
 }
 
 .aspirasi-title {
   font-weight: 800;
   font-size: 2.5rem;
-  background: linear-gradient(45deg, black);
+  background: linear-gradient(135deg, #1a202c, #4a5568);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;
+  letter-spacing: -0.02em;
 }
 
 .aspirasi-subtitle {
-  color: #6c757d;
+  color: #64748b;
   margin-top: 10px;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .aspirasi-page-container {
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .aspirasi-title {
+    font-size: 1.8rem;
+  }
+
+  .aspirasi-subtitle {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .aspirasi-page-container {
+    margin: 10px;
+    padding: 15px;
+    border-radius: 12px;
+  }
+
+  .aspirasi-title {
+    font-size: 1.5rem;
+  }
+
+  .aspirasi-subtitle {
+    font-size: 0.9rem;
+  }
 }

@@ -1,13 +1,32 @@
 .footer-section {
-  background-color: #f8f9fa;
+  background: linear-gradient(180deg, #f0f4f8 0%, #e8ecf1 100%);
   padding: 60px 0 30px 0;
-  color: #333;
+  color: #4a5568;
+  position: relative;
+}
+
+.footer-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0689A0, #007bff, #9B328D, #0689A0);
+  background-size: 200% 100%;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .footer-section h5 {
   font-weight: 700;
   margin-bottom: 20px;
-  color: #000;
+  color: #1a202c;
+  font-size: 1.1rem;
 }
 
 .footer-links li {
@@ -15,40 +34,91 @@
 }
 
 .footer-links a {
-  color: #555;
+  color: #64748b;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .footer-links a:hover {
-  color: #007bff; 
-  text-decoration: underline;
+  color: #0689A0; 
+  padding-left: 4px;
 }
 
 .connect-us {
   font-weight: 600;
   margin-top: 20px;
   margin-bottom: 10px;
+  color: #4a5568;
 }
 
 .social-icons a {
-  color: #555;
-  font-size: 1.5rem; 
-  margin-right: 20px;
-  transition: color 0.3s ease;
+  color: #94a3b8;
+  font-size: 1.4rem; 
+  margin-right: 16px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  margin-right: 10px;
 }
 
 .social-icons a:hover {
-  color: #000;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.social-icons a:nth-child(1):hover {
+  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.social-icons a:nth-child(2):hover {
+  background: #FF0000;
+}
+
+.social-icons a:nth-child(3):hover {
+  background: #0A66C2;
 }
 
 .footer-divider {
   margin-top: 40px;
-  border-color: #e0e0e0;
+  border-color: #d0d5dd;
 }
 
 .copyright-text {
   padding-top: 20px;
-  font-size: 0.9rem;
-  color: #6c757d;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .footer-section {
+    padding: 40px 0 20px 0;
+    text-align: center;
+  }
+
+  .footer-logo {
+    justify-content: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .social-icons a {
+    margin: 0 6px;
+  }
+
+  .footer-divider {
+    margin-top: 25px;
+  }
+
+  .copyright-text {
+    font-size: 0.8rem;
+  }
 }

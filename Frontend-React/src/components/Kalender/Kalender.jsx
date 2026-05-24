@@ -2,7 +2,7 @@ import React from 'react';
 import './Kalender.css';
 
 const Kalender = () => {
-  const googleCalendarUrl = "https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FJakarta&showPrint=0&src=bmEwODc5ODQzQGdtYWlsLmNvbQ&src=ZGUuaW5kb25lc2lhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=ZW4uZ2VybWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039be5&color=%230b8043&color=%230b8043";
+  const googleCalendarUrl = "https://calendar.google.com/calendar/embed?src=akreshmrpl%40gmail.com&ctz=Asia%2FJakarta";
 
   return (
     <section className="kalender-section">

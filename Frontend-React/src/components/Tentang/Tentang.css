@@ -2,14 +2,18 @@
 .page-header-container {
   text-align: center;
   padding: 60px 0 40px 0;
+  background: linear-gradient(135deg, #f0fafb 0%, #ffffff 50%, #f5f0ff 100%);
+  position: relative;
 }
 
 .page-title {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 800;
   position: relative;
   display: inline-block;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
+  color: #1a202c;
+  letter-spacing: -0.02em;
 }
 
 .page-title::after {
@@ -18,61 +22,80 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 250px;
+  width: 200px;
   height: 4px;
-  background-color: #007bff; 
+  background: linear-gradient(90deg, #0689A0, #007bff);
+  border-radius: 2px;
 }
 
 /* Section Umum */
 .tentang-section {
-  padding: 60px 0;
+  padding: 70px 0;
 }
 
 .bg-light {
-  background-color: #f8f9fa;
+  background-color: #f8fafb;
 }
 
 .section-heading {
-  font-size: 2.1rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 700;
   margin-bottom: 20px;
-  text-align: justify;
+  text-align: left;
+  color: #1a202c;
+  letter-spacing: -0.02em;
 }
 
 .section-heading-purple {
   font-size: 2rem;
-  font-weight: 700;
-  color: #9B328D; 
+  font-weight: 800;
+  background: linear-gradient(135deg, #6A7D75, #6A7D75);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 20px;
 }
 
 .section-title-dark {
   font-size: 2.2rem;
-  font-weight: 700;
-  color: #343a40;
+  font-weight: 800;
+  color: #1a202c;
+  letter-spacing: -0.02em;
 }
 
-.text-muted {
-  color: #6c757d;
+.tentang-section .text-muted {
+  color: #64748b;
+  font-size: 1.05rem;
   text-align: justify;
-  font-size: 1.6rem;
-  text-align: justify;
+  line-height: 1.8;
 }
 
 /* Logo */
 .himpunan-logo {
   max-width: 550px;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.06));
+  transition: transform 0.5s ease;
+}
+
+.himpunan-logo:hover {
+  transform: scale(1.03);
 }
 
 .kabinet-logo-tentang {
   max-width: 550px;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.06));
+  transition: transform 0.5s ease;
+}
+
+.kabinet-logo-tentang:hover {
+  transform: scale(1.03);
 }
 
 /* Style untuk judul dengan garis bawah */
 .section-title-dark.with-line {
   position: relative;
   display: inline-block;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
 }
 
 .section-title-dark.with-line::after {
@@ -81,24 +104,28 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 250px;
+  width: 200px;
   height: 4px;
-  background-color: #007bff;
+  background: linear-gradient(90deg, #0689A0, #007bff);
+  border-radius: 2px;
 }
 
 /* Style untuk Visi */
 .visi-text {
-  font-size: 1.25rem;
-  color: #555;
+  font-size: 1.2rem;
+  color: #4a5568;
   max-width: 800px;
   margin: 0 auto;
-  line-height: 1.8;
-  font-weight: 900;
+  line-height: 1.9;
+  font-weight: 600;
 }
 
 .highlight-blue {
-  color: #007bff;
-  font-weight: 900;
+  background: linear-gradient(135deg, #0689A0, #007bff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
 }
 
 /* Container untuk Misi */
@@ -106,86 +133,147 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 /* Style untuk setiap item Misi */
 .misi-item {
   width: 100%;
   max-width: 850px;
-  padding: 20px 30px;
-  border-radius: 50px; 
-  border: 2px solid;
-  font-size: 1.1rem;
+  padding: 18px 30px;
+  border-radius: 14px;
+  border: none;
+  font-size: 1.05rem;
   font-weight: 500;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.misi-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 2px;
+  transition: width 0.3s ease;
 }
 
 /* Efek Hover */
 .misi-item:hover {
   color: #fff;
-  transform: scale(1.03); 
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.misi-item:hover::before {
+  width: 100%;
+  border-radius: 14px;
+  z-index: -1;
 }
 
 /* Warna border dan background hover */
-.misi-border-red { border-color: #dc3545; }
-.misi-border-red:hover { background-color: #dc3545; }
+.misi-border-red::before {
+  background: linear-gradient(135deg, #dc3545, #e74c3c);
+}
 
-.misi-border-orange { border-color: #fd7e14; }
-.misi-border-orange:hover { background-color: #fd7e14; }
+.misi-border-red {
+  border-left: 4px solid #dc3545;
+}
 
-.misi-border-blue { border-color: #0d6efd; }
-.misi-border-blue:hover { background-color: #0d6efd; }
+.misi-border-red:hover {
+  background: linear-gradient(135deg, #dc3545, #e74c3c);
+}
 
-.misi-border-green { border-color: #198754; }
-.misi-border-green:hover { background-color: #198754; }
+.misi-border-orange::before {
+  background: linear-gradient(135deg, #fd7e14, #f0ad4e);
+}
 
+.misi-border-orange {
+  border-left: 4px solid #fd7e14;
+}
+
+.misi-border-orange:hover {
+  background: linear-gradient(135deg, #fd7e14, #f0ad4e);
+}
+
+.misi-border-blue::before {
+  background: linear-gradient(135deg, #0d6efd, #3b82f6);
+}
+
+.misi-border-blue {
+  border-left: 4px solid #0d6efd;
+}
+
+.misi-border-blue:hover {
+  background: linear-gradient(135deg, #0d6efd, #3b82f6);
+}
+
+.misi-border-green::before {
+  background: linear-gradient(135deg, #198754, #22c55e);
+}
+
+.misi-border-green {
+  border-left: 4px solid #198754;
+}
+
+.misi-border-green:hover {
+  background: linear-gradient(135deg, #198754, #22c55e);
+}
 
 
 /* Navigasi Tab Anggota */
 .anggota-nav {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .anggota-tab {
-  padding: 10px 25px;
-  border-radius: 8px;
+  padding: 10px 24px;
+  border-radius: 50px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   background-color: #fff;
-  border: 2px solid #ddd;
-  color: #555;
+  border: 1.5px solid #e2e8f0;
+  color: #64748b;
+  font-size: 0.9rem;
 }
 
 .anggota-tab.active {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #0689A0, #007bff);
   color: #fff;
-  border-color: #007bff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(6, 137, 160, 0.3);
 }
 
 .anggota-tab:not(.active):hover {
-  background-color: #f0f0f0;
-  border-color: #ccc;
+  background-color: #f0fafb;
+  border-color: #0689A0;
+  color: #0689A0;
 }
 
 /* Kartu Anggota */
 .anggota-card {
   position: relative;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
+
 .anggota-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
 .anggota-image {
@@ -193,8 +281,12 @@
   aspect-ratio: 3 / 4;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
 }
 
+.anggota-card:hover .anggota-image {
+  transform: scale(1.05);
+}
 
 .anggota-nama {
   font-weight: 700;
@@ -207,33 +299,36 @@
   opacity: 0.9;
   margin: 0;
 }
+
 /* Navigasi Sub-Tab Anggota */
 .sub-anggota-nav {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .sub-anggota-tab {
   padding: 8px 20px;
-  border-radius: 8px;
+  border-radius: 50px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   background-color: #fff;
-  border: 2px solid #ddd;
-  color: #555;
+  border: 1.5px solid #e2e8f0;
+  color: #64748b;
+  font-size: 0.85rem;
 }
 
 .sub-anggota-tab.active {
-  background-color: #1abc9c; 
+  background: linear-gradient(135deg, #1abc9c, #16a085);
   color: #fff;
-  border-color: #1abc9c;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(26, 188, 156, 0.3);
 }
 
 .sub-anggota-tab:not(.active):hover {
-  background-color: #f0f8f6;
+  background-color: #f0faf8;
   border-color: #1abc9c;
   color: #1abc9c;
 }
@@ -244,13 +339,15 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 20px;;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
 }
 
 
 .anggota-info h5,
 .anggota-info p {
   margin-bottom: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -258,30 +355,188 @@
   margin-bottom: 4px;
 }
 
+/* === Tablet Responsive === */
 @media (max-width: 991px) {
+  .page-header-container {
+    padding: 40px 0 25px 0;
+  }
 
-  /*  teks rata tengah di mobile */
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .page-title::after {
+    width: 150px;
+  }
+
+  .tentang-section {
+    padding: 45px 0;
+  }
+
   .section-heading,
-  .text-muted,
+  .tentang-section .text-muted,
   .section-heading-purple {
     text-align: center;
   }
 
-  /*  ukuran judul di mobile */
   .section-heading,
   .section-heading-purple {
-    font-size: 28.8px; 
+    font-size: 1.6rem;
   }
 
-  /*  ukuran paragraf di mobile */
-  .text-muted {
-    font-size: 16px;
+  .tentang-section .text-muted {
+    font-size: 0.95rem;
   }
 
-  /* Mengecilkan logo  jarak bawah */
   .himpunan-logo,
   .kabinet-logo-tentang {
-    margin-bottom: 30px; 
-    max-width: 280px; 
+    margin-bottom: 30px;
+    max-width: 280px;
   }
+
+  .section-title-dark {
+    font-size: 1.8rem;
   }
+
+  .visi-text {
+    font-size: 1.05rem;
+  }
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 576px) {
+  .page-header-container {
+    padding: 28px 16px 18px 16px;
+  }
+
+  .page-title {
+    font-size: 1.4rem;
+  }
+
+  .page-title::after {
+    width: 80px;
+    height: 3px;
+  }
+
+  .tentang-section {
+    padding: 32px 16px;
+  }
+
+  .section-heading {
+    font-size: 1.2rem;
+  }
+
+  .section-heading-purple {
+    font-size: 1.2rem;
+  }
+
+  .tentang-section .text-muted {
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .himpunan-logo,
+  .kabinet-logo-tentang {
+    max-width: 180px;
+    margin-bottom: 16px;
+  }
+
+  .section-title-dark {
+    font-size: 1.3rem;
+  }
+
+  .section-title-dark.with-line::after {
+    width: 80px;
+    height: 3px;
+  }
+
+  .visi-text {
+    font-size: 0.88rem;
+    padding: 0 8px;
+    line-height: 1.7;
+  }
+
+  .misi-item {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    border-radius: 10px;
+    text-align: left;
+  }
+
+  .misi-container {
+    gap: 10px;
+  }
+
+  .anggota-tab {
+    padding: 7px 14px;
+    font-size: 0.78rem;
+  }
+
+  .sub-anggota-tab {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
+  .anggota-nav {
+    gap: 6px;
+  }
+
+  .sub-anggota-nav {
+    gap: 6px;
+  }
+
+  .anggota-nama {
+    font-size: 0.95rem;
+  }
+
+  .anggota-jabatan {
+    font-size: 0.78rem;
+  }
+
+  .anggota-info {
+    padding: 12px;
+  }
+
+  .anggota-card {
+    border-radius: 14px;
+  }
+}
+
+
+/* === Struktur Organisasi Scrollable on Mobile === */
+.struktur-org-wrapper {
+  text-align: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.struktur-org-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.struktur-hint {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .struktur-org-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 15px;
+    padding-bottom: 10px;
+    border-radius: 12px;
+  }
+
+  .struktur-org-image {
+    max-width: none;
+    width: 700px;
+    height: auto;
+  }
+}

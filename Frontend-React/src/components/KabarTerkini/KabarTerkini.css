@@ -1,21 +1,25 @@
 .kabar-section {
   text-align: center;
-  padding: 80px 0;
-  background-color: #f8f9fa;
+  padding: 90px 0;
+  background: linear-gradient(180deg, #f8fafb 0%, #f0f4f8 100%);
+  position: relative;
 }
 
 .kabar-title {
-  font-weight: bold;
-  font-size: 2rem;
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: #1a202c;
+  letter-spacing: -0.02em;
 }
 
 .kabar-subtitle {
-  color: #6c757d;
+  color: #64748b;
   margin-bottom: 40px;
+  font-size: 1.05rem;
 }
 
 .kabar-swiper {
-  max-width: 900px;
+  max-width: 920px;
   width: 100%;
   margin: 0 auto;
   padding-bottom: 60px !important;
@@ -26,107 +30,189 @@
   display: flex;
 }
 
-/* === KUNCI PERBAIKAN UTAMA ADA DI SINI === */
-
 .kabar-card {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 2.5rem; /* Sedikit memperbesar jarak */
-  padding: 24px;
+  gap: 2.5rem;
+  padding: 28px;
   background-color: #fff;
-  border-radius: 16px;
-  border: 2px solid #00a5cf;
+  border-radius: 20px;
+  border: 1px solid rgba(6, 137, 160, 0.15);
   width: 100%;
-
-  /* 1. Beri tinggi yang pasti untuk semua kartu */
-  height: 320px; 
-  
-  /* 2. Jadikan kartu sebagai acuan untuk posisi tombol */
+  height: 320px;
   position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 12px 28px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.kabar-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04), 0 20px 40px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
 }
 
 .kabar-text {
   flex: 1;
   text-align: left;
-  height: 100%; /* Pastikan kolom teks mengisi tinggi kartu */
+  height: 100%;
 }
 
 .kabar-text h5 {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.25rem;
+  color: #1a202c;
 }
 
 .kabar-date {
-  color: #00a5cf;
-  font-size: 0.9rem;
+  color: #0689A0;
+  font-size: 0.85rem;
   margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 .kabar-description {
-  color: #6c757d;
+  color: #64748b;
   font-size: 0.95rem;
-
-  /* 3. Batasi teks agar tidak melebihi kartu */
+  line-height: 1.7;
   display: -webkit-box;
-  -webkit-line-clamp: 6; /* Batasi teks hingga 6 baris */
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .btn-selengkapnya {
-  /* Posisi absolut di dasar kartu */
   position: absolute;
-  bottom: 24px;
-  left: 24px;
-  
-  /* Style warna yang Anda kirim sebelumnya */
+  bottom: 28px;
+  left: 28px;
   background-color: white;
-  border: 1px solid #00a5cf;
-  color: #00a5cf !important; /* Tambahkan !important untuk memastikan warna teks diterapkan */
-
-  /* Properti lainnya */
-  padding: 8px 16px;
-  border-radius: 20px;
+  border: 1.5px solid #0689A0;
+  color: #0689A0 !important;
+  padding: 8px 18px;
+  border-radius: 50px;
   font-weight: 600;
+  font-size: 0.9rem;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   text-decoration: none;
 }
 
 .btn-selengkapnya:hover {
-  background-color: #00a5cf;
-  color: white !important; /* Tambahkan !important juga di sini */
+  background: linear-gradient(135deg, #0689A0, #057a8f);
+  color: white !important;
+  border-color: #0689A0;
   transform: translateY(-2px);
-}
-
-.btn-selengkapnya:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(6, 137, 160, 0.3);
 }
 
 .kabar-image {
   width: 40%;
   height: auto;
-  max-height: 100%; /* Pastikan gambar tidak lebih tinggi dari kartu */
-  object-fit: contain; /* 'Contain' agar gambar terlihat penuh */
-  border-radius: 12px;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
   align-self: center;
+  transition: transform 0.5s ease;
 }
 
-/* Style Pagination (tidak berubah) */
+.kabar-card:hover .kabar-image {
+  transform: scale(1.03);
+}
+
+/* Style Pagination */
 .swiper-pagination {
   bottom: 0px !important;
 }
 .swiper-pagination-bullet {
-  background-color: #ccc;
+  background-color: #d0d5dd;
   opacity: 1;
   width: 10px;
   height: 10px;
-  margin: 0 6px !important;
+  margin: 0 5px !important;
+  transition: all 0.3s ease;
 }
 .swiper-pagination-bullet-active {
-  background-color: #00a5cf;
+  background: linear-gradient(135deg, #0689A0, #007bff);
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .kabar-section {
+    padding: 50px 0;
+  }
+
+  .kabar-title {
+    font-size: 1.5rem;
+  }
+
+  .kabar-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+  }
+
+  .kabar-card {
+    flex-direction: column;
+    height: auto;
+    gap: 0.8rem;
+    padding: 16px;
+    padding-bottom: 64px;
+    border-radius: 16px;
+  }
+
+  .kabar-image {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    order: -1;
+    border-radius: 12px;
+  }
+
+  .kabar-text {
+    height: auto;
+  }
+
+  .kabar-text h5 {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+  }
+
+  .kabar-date {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+  }
+
+  .kabar-description {
+    -webkit-line-clamp: 3;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .btn-selengkapnya {
+    bottom: 16px;
+    left: 16px;
+    font-size: 0.82rem;
+    padding: 6px 14px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 22px;
+  }
+}
+
+@media (max-width: 576px) {
+  .kabar-section {
+    padding: 40px 16px;
+  }
+
+  .kabar-swiper {
+    padding-bottom: 50px !important;
+  }
 }

@@ -3,5 +3,41 @@
   margin: 40px auto;
   padding: 20px;
 }
-.berita-title { font-weight: 800; }
-.berita-subtitle { color: #6c757d; }
+
+.berita-title { 
+  font-weight: 800; 
+  color: #1a202c;
+  letter-spacing: -0.02em;
+}
+
+.berita-subtitle { 
+  color: #64748b;
+  font-size: 1.05rem; 
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .berita-page-container {
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .berita-title {
+    font-size: 1.6rem;
+  }
+
+  .berita-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .berita-page-container {
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  .berita-title {
+    font-size: 1.4rem;
+  }
+}

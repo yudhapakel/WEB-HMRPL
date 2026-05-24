@@ -1,37 +1,101 @@
 .galeri-section {
-  padding: 80px 0;
+  padding: 90px 0;
   text-align: center;
-  background-color: #f8f9fa;
+  background: linear-gradient(180deg, #f0f4f8 0%, #f8fafb 100%);
 }
 
 .galeri-title {
   font-weight: 800;
   font-size: 2.2rem;
-  color: #333;
+  color: #1a202c;
+  letter-spacing: -0.02em;
 }
 
 .galeri-subtitle {
-  color: #6c757d;
+  color: #64748b;
   max-width: 500px;
   margin: 10px auto 0;
+  font-size: 1.05rem;
 }
 
 .galeri-card {
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 10px 24px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+}
+
+.galeri-card::after {
+  content: '🔍';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(6, 137, 160, 0.7), rgba(0, 123, 255, 0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 2;
+  border-radius: 16px;
 }
 
 .galeri-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.galeri-card:hover::after {
+  opacity: 1;
 }
 
 .galeri-image {
   width: 100%;
-  height: 250px; 
+  height: 260px; 
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
+}
+
+.galeri-card:hover .galeri-image {
+  transform: scale(1.08);
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .galeri-section {
+    padding: 50px 0;
+  }
+
+  .galeri-title {
+    font-size: 1.5rem;
+  }
+
+  .galeri-subtitle {
+    font-size: 0.88rem;
+  }
+
+  .galeri-image {
+    height: 200px;
+  }
+
+  .galeri-card::after {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .galeri-section {
+    padding: 40px 16px;
+  }
+
+  .galeri-image {
+    height: 180px;
+  }
+
+  .galeri-card {
+    border-radius: 14px;
+  }
 }

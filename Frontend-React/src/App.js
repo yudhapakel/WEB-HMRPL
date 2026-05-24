@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+// Utilities
+import ScrollToTop from './components/ScrollToTop';
+
 // Layouts
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './admin/layouts/AdminLayout';
@@ -39,6 +42,7 @@ import ManageGaleriPage from './admin/pages/ManageGaleriPage';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <AuthProvider>
         <GaleriProvider>
           <Routes>
