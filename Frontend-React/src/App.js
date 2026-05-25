@@ -37,6 +37,9 @@ import LihatRespondenPage from './admin/pages/LihatRespondenPage';
 import AddGaleriPage from './admin/pages/AddGaleriPage';
 import AddOprecPage from './admin/pages/AddOprecPage';
 import ManageGaleriPage from './admin/pages/ManageGaleriPage';
+import ManageAnggotaPage from './admin/pages/ManageAnggotaPage';
+import AddAnggotaPage from './admin/pages/AddAnggotaPage';
+import EditAnggotaPage from './admin/pages/EditAnggotaPage';
 
 
 function App() {
@@ -81,6 +84,9 @@ function App() {
                 <Route path="galeri" element={<ManageGaleriPage />} />
                 <Route path="galeri/tambah" element={<AddGaleriPage />} />
                 <Route path="oprec/tambah" element={<AddOprecPage />} />
+                <Route path="anggota" element={<ManageAnggotaPage />} />
+                <Route path="anggota/tambah" element={<AddAnggotaPage />} />
+                <Route path="anggota/edit/:id" element={<EditAnggotaPage />} />
               </Route>
             </Route>
             

@@ -1,0 +1,113 @@
+/* ============================================
+   MANAGE ANGGOTA PAGE
+   ============================================ */
+
+.anggota-admin-thumbnail {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.anggota-admin-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.anggota-admin-filter .btn {
+  border-radius: 50px;
+  font-size: 0.85rem;
+  padding: 6px 18px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.anggota-admin-filter .btn-outline-secondary.active,
+.anggota-admin-filter .btn-outline-secondary:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
+}
+
+/* Badge departemen di tabel */
+.badge-departemen {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge-inti {
+  background-color: rgba(6, 137, 160, 0.1);
+  color: #0689A0;
+}
+
+.badge-internal {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.badge-eksternal {
+  background-color: rgba(255, 140, 0, 0.1);
+  color: #ff8c00;
+}
+
+.badge-mediakreatif {
+  background-color: rgba(111, 66, 193, 0.1);
+  color: #6f42c1;
+}
+
+/* Kadep star icon */
+.kadep-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #f0ad4e, #ff8c00);
+  color: #fff;
+}
+
+/* Form styling */
+.anggota-form-preview {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.anggota-form-preview-placeholder {
+  width: 150px;
+  height: 200px;
+  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  background: #f8fafc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .anggota-admin-thumbnail {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  .anggota-admin-filter .btn {
+    font-size: 0.78rem;
+    padding: 5px 14px;
+  }
+}

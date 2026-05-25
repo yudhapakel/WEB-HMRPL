@@ -1,146 +1,133 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import axiosInstance from '../../api/axiosInstance';
 import './Tentang.css';
 
-// Gambar untuk anggota inti
-import ketuaImage from '../../assets/Ketua.jpg';
-import wakilImage from '../../assets/WakilKetua.jpg';
-import sekre1Image from '../../assets/Sekre1.jpg';
-import sekre2Image from '../../assets/Sekre2.jpg';
-import bend1Image from '../../assets/Bend1.jpg';
-import bend2Image from '../../assets/Bend2.jpg';
-import kepalaMnoImage from '../../assets/kepalamno.jpg';
-import wakilMnoImage from '../../assets/wakilmno.jpg';
-import wakilMnoImage2 from '../../assets/wakilmno2.jpg';
-// Gambar untuk internal
-import kadepInternalImage from '../../assets/kadeptInternal.jpg';
-
-import kepalakaderisasiImage from '../../assets/kepalakaderisasi.jpg';
-import staffKaderisasiImage from '../../assets/staffkaderisasi.jpg';
-import staffKaderisasiImage2 from '../../assets/staffkaderisasi2.jpg';
-import staffKaderisasiImage3 from '../../assets/staffkaderisasi3.jpg';
-
-import kepalapsdmImage from '../../assets/kepalapsdm.jpg';
-import staffpsdmImage from '../../assets/staffpsdm.jpg';
-import staff2psdmImage from '../../assets/staffpsdm2.jpg';
-import kepalaakademikImage from '../../assets/kepalaakademikriset.jpg';
-import staffakademikImage from '../../assets/staffakademikriset.jpg';
-
-// Gambar untuk eksternal
-import kadepEksternalImage from '../../assets/kadeptEksternal.jpg';
-import kepalarelasiImage from '../../assets/kepalarelasi.jpg';
-import staffrelasiImage from '../../assets/staffrelasi.jpg';
-import staff2relasiImage from '../../assets/staffrelasi2.jpg'
-import kepalaKerjasamaImage from '../../assets/kepalakerjasama.jpg';
-import staffKerjasamaImage from '../../assets/staffkerjasama.jpg';
-
-// Gambar untuk media kreatif
-import kadepMediaImage from '../../assets/kadeptMedKraf.jpg';
-import kepalakominfoImage from '../../assets/kepalakominfo.jpg';
-import staffkominfoImage from '../../assets/staffkominfo.jpg';
-
-const anggotaData = {
-  inti: {
-    label: 'Inti',
-    divisi: [],
-    anggota: [
-      { id: 'inti-1', nama: 'Benaya Giuseppe L.S', jabatan: 'Ketua Umum', image: ketuaImage },
-      { id: 'inti-2', nama: 'Tio Funny Tinambunan', jabatan: 'Wakil Ketua', image: wakilImage },
-      { id: 'inti-3', nama: 'Putri Afni Azkiya', jabatan: 'Sekretaris I', image: sekre1Image },
-      { id: 'inti-4', nama: 'Ade Fatria Nuraeni', jabatan: 'Sekretaris II', image: sekre2Image },
-      { id: 'inti-5', nama: 'Avriela Nada Amara Putri', jabatan: 'Bendahara I', image: bend1Image },
-      { id: 'inti-6', nama: 'Nashbilla Nurfazza', jabatan: 'Bendahara II', image: bend2Image },
-      { id: 'inti-7', nama: 'Khansa Aulia Fauziah', jabatan: 'Kepala Manajerial', image: kepalaMnoImage },
-      { id: 'inti-8', nama: 'Raihan Ananda Putra', jabatan: 'Staff Manajerial', image: wakilMnoImage },
-      { id: 'inti-9', nama: 'Abizar Tsaqif Abrar', jabatan: 'Staff Manajerial', image: wakilMnoImage2 },
-    ]
-  },
+// Konfigurasi departemen & divisi (statis — jarang berubah)
+const DEPARTEMEN_CONFIG = {
+  inti: { label: 'Inti', divisi: [] },
   internal: {
     label: 'Internal',
-    kepalaDepartemen: {
-      id: 'kadep-int',
-      nama: 'Gusti Agung Raka Darma',
-      jabatan: 'Kepala Dept. Internal',
-      image: kadepInternalImage
-    },
     divisi: [
       { id: 'kaderisasi', nama: 'Kaderisasi' },
       { id: 'psdm', nama: 'Pengembangan SDM' },
-      { id: 'akademik-riset', nama: 'Akademik & Riset' }
-    ],
-    anggota: {
-      kaderisasi: [
-        { id: 'int-k-1', nama: 'Toni', jabatan: 'Kepala Kaderisasi', image: kepalakaderisasiImage },
-        { id: 'int-k-2', nama: 'Anggota Kaderisasi 2', jabatan: 'Anggota Kaderisasi', image: staffKaderisasiImage },
-        { id: 'int-k-3', nama: 'Anggota Kaderisasi 3', jabatan: 'Anggota Kaderisasi', image: staffKaderisasiImage2 },
-        { id: 'int-k-4', nama: 'Anggota Kaderisasi 4', jabatan: 'Anggota Kaderisasi', image: staffKaderisasiImage3 },
-      ],
-      psdm: [
-        { id: 'int-p-1', nama: 'Anggota PSDM 1', jabatan: 'Jabatan', image: kepalapsdmImage },
-        { id: 'int-p-2', nama: 'Anggota PSDM 2', jabatan: 'Jabatan', image: staffpsdmImage },
-        { id: 'int-p-3', nama: 'Anggota PSDM 3', jabatan: 'Jabatan', image: staff2psdmImage },
-      ],
-      'akademik-riset': [
-        { id: 'int-ar-1', nama: 'Ahmad Naufal', jabatan: 'Kepala divisi Akademik & Riset', image: kepalaakademikImage },
-        { id: 'int-ar-2', nama: 'Muhammad Radhi Haidar Rrafi', jabatan: 'Anggota Akademik & Riset', image: staffakademikImage }
-      ]
-    }
+      { id: 'akademik-riset', nama: 'Akademik & Riset' },
+    ]
   },
   eksternal: {
     label: 'Eksternal',
-    kepalaDepartemen: {
-      id: 'kadep-eks',
-      nama: 'Abdul Aziz Saepurohmat',
-      jabatan: 'Kepala Dept. Eksternal',
-      image: kadepEksternalImage
-    },
     divisi: [
       { id: 'relasi-eksternal', nama: 'Relasi Eksternal' },
-      { id: 'kerjasama', nama: 'Kerjasama & Kewirausahaan' }
-    ],
-    anggota: {
-      'relasi-eksternal': [
-        { id: 'eks-re-1', nama: 'Anggota Relasi 1', jabatan: 'Jabatan', image: kepalarelasiImage },
-        { id: 'eks-re-2', nama: 'Anggota Relasi 2', jabatan: 'Jabatan', image: staffrelasiImage },
-        { id: 'eks-re-3', nama: 'Anggota Relasi 3', jabatan: 'Jabatan', image: staff2relasiImage }
-      ],
-      kerjasama: [
-        { id: 'eks-k-1', nama: 'Anggota Kerjasama 1', jabatan: 'Jabatan', image: kepalaKerjasamaImage },
-        { id: 'eks-k-2', nama: 'Anggota Kerjasama 2', jabatan: 'Jabatan', image: staffKerjasamaImage }
-      ]
-    }
+      { id: 'kerjasama', nama: 'Kerjasama & Kewirausahaan' },
+    ]
   },
   mediakreatif: {
     label: 'Media Kreatif',
-    kepalaDepartemen: {
-      id: 'kadep-medkraf',
-      nama: 'Nur Ahmadi Aditya Nanda',
-      jabatan: 'Kepala Dept. Media Kreatif',
-      image: kadepMediaImage
-    },
     divisi: [
-      { id: 'komunikasiInformasi', nama: 'Komunikasi & Informasi' }
-    ],
-    anggota: {
-      komunikasiInformasi: [
-        { id: 'med-1', nama: 'Anggota Medkraf 1', jabatan: 'Jabatan', image: kepalakominfoImage },
-        { id: 'med-2', nama: 'Anggota Medkraf 2', jabatan: 'Jabatan', image: staffkominfoImage }
-      ]
-    }
-  }
+      { id: 'komunikasiInformasi', nama: 'Komunikasi & Informasi' },
+    ]
+  },
 };
 
-const tabKeys = ['inti', 'internal', 'eksternal', 'mediakreatif'];
+const tabKeys = Object.keys(DEPARTEMEN_CONFIG);
 
 const DaftarAnggota = () => {
   const [activeTab, setActiveTab] = useState('inti');
   const [activeSubTab, setActiveSubTab] = useState(null);
   const [selectedAnggota, setSelectedAnggota] = useState(null);
+  const [anggotaByDept, setAnggotaByDept] = useState({});
+  const [kepalaDeptMap, setKepalaDeptMap] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // Fetch data anggota dari API
   useEffect(() => {
-    const currentDivisi = anggotaData[activeTab].divisi;
-    if (currentDivisi && currentDivisi.length > 0) {
-      setActiveSubTab(currentDivisi[0].id);
+    const fetchAnggota = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axiosInstance.get('/api/anggota');
+        const data = response.data.data;
+
+        // Group anggota berdasarkan departemen & divisi
+        const grouped = {};
+        const kadepMap = {};
+
+        // Inisialisasi semua departemen
+        for (const deptKey of tabKeys) {
+          const config = DEPARTEMEN_CONFIG[deptKey];
+          if (config.divisi.length > 0) {
+            grouped[deptKey] = {};
+            config.divisi.forEach(div => {
+              grouped[deptKey][div.id] = [];
+            });
+          } else {
+            grouped[deptKey] = [];
+          }
+          kadepMap[deptKey] = null;
+        }
+
+        // Distribusi anggota ke grup yang sesuai
+        data.forEach(anggota => {
+          const dept = anggota.departemen;
+          const imageUrl = anggota.image_path
+            ? `${process.env.REACT_APP_API_URL}/storage/${anggota.image_path}`
+            : null;
+          
+          const anggotaFormatted = {
+            id: anggota.id,
+            nama: anggota.nama,
+            jabatan: anggota.jabatan,
+            image: imageUrl,
+          };
+
+          // Cek apakah kadep
+          if (anggota.is_kepala_departemen && dept !== 'inti') {
+            kadepMap[dept] = anggotaFormatted;
+            return;
+          }
+
+          // Masukkan ke grup
+          if (DEPARTEMEN_CONFIG[dept]?.divisi.length > 0) {
+            const divKey = anggota.divisi;
+            if (divKey && grouped[dept]?.[divKey]) {
+              grouped[dept][divKey].push(anggotaFormatted);
+            }
+          } else {
+            if (Array.isArray(grouped[dept])) {
+              grouped[dept].push(anggotaFormatted);
+            }
+          }
+        });
+
+        // Sort by urutan (API sudah bisa sort, tapi jaga-jaga)
+        for (const deptKey of tabKeys) {
+          if (Array.isArray(grouped[deptKey])) {
+            grouped[deptKey].sort((a, b) => (a.urutan || 0) - (b.urutan || 0));
+          } else {
+            for (const divKey of Object.keys(grouped[deptKey])) {
+              grouped[deptKey][divKey].sort((a, b) => (a.urutan || 0) - (b.urutan || 0));
+            }
+          }
+        }
+
+        setAnggotaByDept(grouped);
+        setKepalaDeptMap(kadepMap);
+      } catch (err) {
+        console.error('Gagal mengambil data anggota:', err);
+        setError('Gagal memuat data anggota.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAnggota();
+  }, []);
+
+  // Set sub-tab pertama saat tab departemen berubah
+  useEffect(() => {
+    const config = DEPARTEMEN_CONFIG[activeTab];
+    if (config.divisi.length > 0) {
+      setActiveSubTab(config.divisi[0].id);
     } else {
       setActiveSubTab(null);
     }
@@ -175,17 +162,19 @@ const DaftarAnggota = () => {
   );
 
   const renderAnggota = () => {
-    const data = anggotaData[activeTab];
-    if (!data) return null;
+    const deptData = anggotaByDept[activeTab];
+    if (!deptData) return null;
 
     let anggotaToShow = [];
 
-    if (data.divisi && data.divisi.length > 0) {
-      if (activeSubTab && data.anggota[activeSubTab]) {
-        anggotaToShow = data.anggota[activeSubTab];
-      }
+    if (Array.isArray(deptData)) {
+      // Departemen tanpa divisi (inti)
+      anggotaToShow = deptData;
     } else {
-      anggotaToShow = data.anggota;
+      // Departemen dengan divisi
+      if (activeSubTab && deptData[activeSubTab]) {
+        anggotaToShow = deptData[activeSubTab];
+      }
     }
 
     if (!anggotaToShow || anggotaToShow.length === 0) {
@@ -199,7 +188,28 @@ const DaftarAnggota = () => {
     ));
   };
 
-  const currentData = anggotaData[activeTab];
+  const currentConfig = DEPARTEMEN_CONFIG[activeTab];
+  const currentKadep = kepalaDeptMap[activeTab];
+
+  if (loading) {
+    return (
+      <section className="tentang-section bg-light">
+        <div className="container text-center">
+          <p className="text-muted">Memuat data anggota...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="tentang-section bg-light">
+        <div className="container text-center">
+          <p className="text-danger">{error}</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="tentang-section bg-light">
@@ -217,26 +227,26 @@ const DaftarAnggota = () => {
                 className={`anggota-tab ${activeTab === key ? 'active' : ''}`}
                 onClick={() => setActiveTab(key)}
               >
-                {anggotaData[key].label}
+                {DEPARTEMEN_CONFIG[key].label}
               </button>
             ))}
           </div>
         </div>
 
         {/* Kepala Departemen */}
-        {currentData && currentData.kepalaDepartemen && (
+        {currentKadep && (
           <div className="row justify-content-center mt-4">
             <div className="col-6 col-md-4 col-lg-3">
-              {renderAnggotaCard(currentData.kepalaDepartemen, true)}
+              {renderAnggotaCard(currentKadep, true)}
             </div>
           </div>
         )}
 
         {/* Sub-divisi tabs */}
-        {currentData && currentData.divisi.length > 0 && (
+        {currentConfig.divisi.length > 0 && (
           <div className="sub-nav-scroll mt-4">
             <div className="sub-anggota-nav">
-              {currentData.divisi.map(divisi => (
+              {currentConfig.divisi.map(divisi => (
                 <button
                   key={divisi.id}
                   className={`sub-anggota-tab ${activeSubTab === divisi.id ? 'active' : ''}`}
