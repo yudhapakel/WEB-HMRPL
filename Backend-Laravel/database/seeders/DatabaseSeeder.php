@@ -15,11 +15,22 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $admin = User::where('email', 'akreshmrpl@gmail.com')->first();
+
+        if (! $admin) {
+            User::factory()->create([
+                'name' => 'Admin HMRPL',
+                'email' => 'akreshmrpl@gmail.com',
+                'password' => bcrypt('Akres@2025HMRPL'),
+                'role' => 'admin',
+            ]);
+
+            return;
+        }
+
+        $admin->forceFill([
             'name' => 'Admin HMRPL',
-            'email' => 'akreshmrpl@gmail.com',
-            'password' => bcrypt('Akres@2025HMRPL'),
             'role' => 'admin',
-        ]);
+        ])->save();
     }
 }

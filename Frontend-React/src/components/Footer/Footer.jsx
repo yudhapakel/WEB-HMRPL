@@ -60,7 +60,7 @@ const Footer = () => {
         </div>
         <hr className="footer-divider" />
         <div className="copyright-text text-center">
-          Copyright © HMRPL TELKOM UNIVERSITY 2025 | KABINET SYVELTA
+          Copyright © HMRPL TELKOM UNIVERSITY 2025 | KABINET FRATERNA
         </div>
       </div>
     </footer>

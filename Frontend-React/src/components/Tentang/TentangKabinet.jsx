@@ -16,7 +16,8 @@ const TentangKabinet = () => {
           <div className="col-lg-7">
             <h3 className="section-heading-purple">KABINET FRATERNA</h3>
             <p className="text-muted">
-              <b>Fraterna</b> menjunjung tinggi <b>kebersamaan, solidaritas</b> dan rasa <b>saling memiliki</b>dalam setiap langkah organisasi. Melalui <b> semangat kolaborasi</b> dan <b>komunikasi yang sehat</b>,Kabinet Fraterna dapat menjadi wadah untuk bertumbuh dan <b>mencapai tujuan bersama</b>.</p>
+              <b>Fraterna</b> menjunjung tinggi <b>kebersamaan, solidaritas</b>, dan rasa <b>saling memiliki</b> dalam setiap langkah organisasi. Melalui <b>semangat kolaborasi</b> dan <b>komunikasi yang sehat</b>, Kabinet Fraterna dapat menjadi wadah untuk bertumbuh dan <b>mencapai tujuan bersama</b>.
+            </p>
           </div>
         </div>
       </div>
