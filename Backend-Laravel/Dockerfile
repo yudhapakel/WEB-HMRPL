@@ -15,7 +15,7 @@ COPY . /var/www/html
 RUN composer install --no-dev --no-interaction --optimize-autoloader
 
 # Set correct permissions
-RUN mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache/data storage/logs bootstrap/cache
+RUN mkdir -p storage/app/public storage/app/private storage/framework/sessions storage/framework/views storage/framework/cache/data storage/logs bootstrap/cache
 RUN chown -R www-data:www-data storage bootstrap/cache
 
 # PHP-FPM listen di 9000
