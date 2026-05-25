@@ -120,14 +120,16 @@
 
   .award-card {
     aspect-ratio: 3 / 4;
-    border-radius: 14px;
+    border-radius: 16px;
+    max-width: 310px;
+    margin: 0 auto;
   }
 
   .award-card-text {
-    padding: 14px;
+    padding: 18px;
   }
 
   .award-card-text h3 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 }

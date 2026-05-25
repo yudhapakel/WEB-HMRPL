@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   const logout = useCallback(async () => {
     try {
       await ensureCsrf();
-      await axiosInstance.post('/logout');  // <— di web middleware
+      await axiosInstance.post('/api/logout');  // <— di web middleware
     } catch (e) {
       console.error('Logout gagal:', e?.response?.data || e.message);
     } finally {

@@ -31,7 +31,7 @@ const handleSubmit = async (e) => {
     await axiosInstance.get('/sanctum/csrf-cookie');
 
     // 2. Kirim request login (Ini sudah benar)
-    const res = await axiosInstance.post('/login', {
+    const res = await axiosInstance.post('/api/login', {
       email: username,
       password: password
     });

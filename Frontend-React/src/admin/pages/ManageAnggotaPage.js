@@ -95,7 +95,7 @@ const ManageAnggotaPage = () => {
                   <th scope="row">{index + 1}</th>
                   <td>
                     <img
-                      src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`}
+                      src={`${process.env.REACT_APP_API_URL || ''}/storage/${item.image_path}`}
                       alt={item.nama}
                       className="anggota-admin-thumbnail"
                     />

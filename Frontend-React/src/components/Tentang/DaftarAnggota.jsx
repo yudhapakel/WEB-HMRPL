@@ -71,7 +71,7 @@ const DaftarAnggota = () => {
         data.forEach(anggota => {
           const dept = anggota.departemen;
           const imageUrl = anggota.image_path
-            ? `${process.env.REACT_APP_API_URL}/storage/${anggota.image_path}`
+            ? `${process.env.REACT_APP_API_URL || ''}/storage/${anggota.image_path}`
             : null;
           
           const anggotaFormatted = {

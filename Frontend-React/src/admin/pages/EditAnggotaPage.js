@@ -130,7 +130,7 @@ const EditAnggotaPage = () => {
 
   // Tentukan gambar preview: file baru > existing dari server
   const displayImage = preview
-    || (existingImage ? `${process.env.REACT_APP_API_URL}/storage/${existingImage}` : null);
+    || (existingImage ? `${process.env.REACT_APP_API_URL || ''}/storage/${existingImage}` : null);
 
   return (
     <div className="p-4 bg-white rounded shadow-sm">

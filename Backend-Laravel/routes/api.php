@@ -8,6 +8,7 @@ use App\Http\Controllers\AspirasiController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\AwardingController;
+use App\Http\Controllers\AnggotaController;
 
 // Login + Logout routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -65,6 +66,16 @@ Route::get('/awarding', [AwardingController::class, 'show']);
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/admin/awarding', [AwardingController::class, 'update']);
+});
+
+// RUTE PUBLIK anggota
+Route::get('/anggota', [AnggotaController::class, 'index']);
+
+// RUTE ADMIN anggota (WAJIB LOGIN)
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/admin/anggota', [AnggotaController::class, 'store']);
+    Route::post('/admin/anggota/{id}', [AnggotaController::class, 'update']);
+    Route::delete('/admin/anggota/{id}', [AnggotaController::class, 'destroy']);
 });
 
 

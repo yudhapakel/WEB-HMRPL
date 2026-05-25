@@ -42,10 +42,10 @@ const Awarding = () => {
             <p>Memuat penghargaan...</p>
           ) : (
             awards.map(award => (
-              <div key={award.id} className="col-lg-4 col-md-6 mb-4">
+              <div key={award.id} className="col-lg-4 col-md-6 col-sm-6 col-10 mb-4">
                 <div
                   className="award-card"
-                  // 👇 SEKARANG KITA BANGUN URL-NYA SECARA MANUAL 👇
+                  // SEKARANG KITA BANGUN URL-NYA SECARA MANUAL 👇
                   style={{ backgroundImage: `url(${process.env.REACT_APP_API_URL}/storage/${award.image_path})` }}
                 >
                   <div className="award-card-overlay">

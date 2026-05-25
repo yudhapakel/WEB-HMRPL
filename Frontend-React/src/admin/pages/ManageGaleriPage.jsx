@@ -15,7 +15,7 @@ const ManageGaleriPage = () => {
     const fetchImages = async () => {
       setLoading(true);
       try {
-        const response = await axiosInstance.get('/api/galeri');
+        const response = await axiosInstance.get('/api/galeri?limit=all');
         setImages(response.data.data); 
       } catch (error) {
         console.error("Gagal mengambil data galeri:", error);
