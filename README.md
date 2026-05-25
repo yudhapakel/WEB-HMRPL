@@ -99,17 +99,17 @@ Metode ini akan menjalankan Backend (Laravel), Frontend (React), dan Database (M
     ```bash
     cp Backend-Laravel/.env.example Backend-Laravel/.env
     ```
-    *Catatan: Pastikan `DB_HOST` di dalam `.env` diatur ke `mysql` (sesuai nama service di docker-compose).*
+    *Catatan: Pastikan `DB_HOST` di dalam `Backend-Laravel/.env` diatur ke `db` (sesuai nama service di docker-compose). Untuk setup lokal Docker, gunakan `DB_DATABASE=hima_db`, `DB_USERNAME=sail`, dan `DB_PASSWORD=password` sesuai `.env.example` root.*
 
 3.  **Jalankan Container**
     ```bash
-    docker-compose up -d --build
+    docker compose up -d --build
     ```
 
 4.  **Setup Database & Dependencies**
     Masuk ke dalam container backend untuk melakukan instalasi dependensi PHP dan migrasi database.
     ```bash
-    docker-compose exec app bash
+    docker compose exec app sh
     ```
     
     Setelah masuk ke terminal container (`root@...:/var/www`), jalankan perintah berikut:
@@ -123,7 +123,13 @@ Metode ini akan menjalankan Backend (Laravel), Frontend (React), dan Database (M
 
 5.  **Akses Aplikasi**
     * 🏠 **Frontend:** [http://localhost:3000](http://localhost:3000)
-    * 📡 **Backend API:** [http://localhost:8000](http://localhost:8000)
+    * 📡 **Backend API:** [http://localhost:8080](http://localhost:8080)
+
+    Catatan port Docker lokal:
+    * Frontend React dev server berjalan di port `3000`.
+    * Backend Laravel melalui Nginx berjalan di port `8080`.
+    * MySQL container diekspos ke host di port `33061`.
+
 
 ### Opsi 2: Instalasi Manual (Tanpa Docker)
 
