@@ -62,7 +62,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
-            className="col-md-8 order-md-1"
+            className="col-md-8 order-md-1" 
             variants={fadeInLeft}
             initial="hidden"
             whileInView="visible"
@@ -71,7 +71,7 @@ const Hero = () => {
           >
             <h2 className="kabinet-title">
               <span className="text-danger">KABINET </span>
-              <span className="text-warning">SYVELTA</span>
+              <span className="text-warning">FRATERNA</span>
             </h2>
             <p className="kabinet-subtitle">
               Badan Pengurus Himpunan Mahasiswa Rekayasa Perangkat Lunak 2026/2027 </p>

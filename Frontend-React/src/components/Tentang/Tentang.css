@@ -110,48 +110,118 @@
   border-radius: 2px;
 }
 
-/* Style untuk Visi */
-.visi-text {
-  font-size: 1.2rem;
-  color: #4a5568;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.9;
-  font-weight: 600;
+/* ============================================
+   VISI MISI SECTION — Light background
+   ============================================ */
+.visimisi-section {
+  padding: 70px 0;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
 }
 
-.highlight-blue {
+.visimisi-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(6, 137, 160, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.visimisi-section::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -60px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 123, 255, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.visimisi-heading {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #1a202c;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 14px;
+}
+
+.visimisi-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #0689A0, #007bff);
+  border-radius: 2px;
+}
+
+/* Visi Card */
+.visi-card {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 36px 48px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+.visi-card-text {
+  font-size: 1.35rem;
+  color: #4a5568;
+  line-height: 1.8;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+}
+
+.visi-card-text .highlight-blue {
   background: linear-gradient(135deg, #0689A0, #007bff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-weight: 800;
+  font-weight: 700;
 }
 
-/* Container untuk Misi */
+/* Misi Container */
 .misi-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
-/* Style untuk setiap item Misi */
+/* Misi Item */
 .misi-item {
   width: 100%;
-  max-width: 850px;
-  padding: 18px 30px;
-  border-radius: 14px;
-  border: none;
-  font-size: 1.05rem;
+  max-width: 750px;
+  padding: 24px 32px;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+  font-size: 1.15rem;
   font-weight: 500;
-  text-align: center;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  cursor: pointer;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  text-align: left;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: default;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  color: #334155;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .misi-item::before {
@@ -161,83 +231,77 @@
   top: 0;
   bottom: 0;
   width: 4px;
-  border-radius: 2px;
-  transition: width 0.3s ease;
+  border-radius: 0 2px 2px 0;
 }
 
-/* Efek Hover */
 .misi-item:hover {
-  color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  border-color: #e2e8f0;
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-.misi-item:hover::before {
-  width: 100%;
-  border-radius: 14px;
-  z-index: -1;
+.misi-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
-/* Warna border dan background hover */
-.misi-border-red::before {
-  background: linear-gradient(135deg, #dc3545, #e74c3c);
+.misi-text {
+  flex: 1;
+  line-height: 1.6;
 }
 
-.misi-border-red {
-  border-left: 4px solid #dc3545;
+/* Warna aksen per misi */
+.misi-border-red::before { background: linear-gradient(to bottom, #ef4444, #dc2626); }
+.misi-border-red .misi-number { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+
+.misi-border-orange::before { background: linear-gradient(to bottom, #f97316, #ea580c); }
+.misi-border-orange .misi-number { background: rgba(249, 115, 22, 0.1); color: #ea580c; }
+
+.misi-border-blue::before { background: linear-gradient(to bottom, #3b82f6, #2563eb); }
+.misi-border-blue .misi-number { background: rgba(59, 130, 246, 0.1); color: #2563eb; }
+
+.misi-border-green::before { background: linear-gradient(to bottom, #22c55e, #16a34a); }
+.misi-border-green .misi-number { background: rgba(34, 197, 94, 0.1); color: #16a34a; }
+
+
+
+
+/* Scrollable Tab Wrapper */
+.anggota-nav-scroll,
+.sub-nav-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin: 0 -16px;
+  padding: 0 16px;
 }
 
-.misi-border-red:hover {
-  background: linear-gradient(135deg, #dc3545, #e74c3c);
+.anggota-nav-scroll::-webkit-scrollbar,
+.sub-nav-scroll::-webkit-scrollbar {
+  display: none;
 }
-
-.misi-border-orange::before {
-  background: linear-gradient(135deg, #fd7e14, #f0ad4e);
-}
-
-.misi-border-orange {
-  border-left: 4px solid #fd7e14;
-}
-
-.misi-border-orange:hover {
-  background: linear-gradient(135deg, #fd7e14, #f0ad4e);
-}
-
-.misi-border-blue::before {
-  background: linear-gradient(135deg, #0d6efd, #3b82f6);
-}
-
-.misi-border-blue {
-  border-left: 4px solid #0d6efd;
-}
-
-.misi-border-blue:hover {
-  background: linear-gradient(135deg, #0d6efd, #3b82f6);
-}
-
-.misi-border-green::before {
-  background: linear-gradient(135deg, #198754, #22c55e);
-}
-
-.misi-border-green {
-  border-left: 4px solid #198754;
-}
-
-.misi-border-green:hover {
-  background: linear-gradient(135deg, #198754, #22c55e);
-}
-
 
 /* Navigasi Tab Anggota */
 .anggota-nav {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 10px;
+  flex-wrap: nowrap;
+  min-width: max-content;
 }
 
 .anggota-tab {
-  padding: 10px 24px;
+  padding: 10px 22px;
   border-radius: 50px;
   font-weight: 600;
   cursor: pointer;
@@ -245,7 +309,8 @@
   background-color: #fff;
   border: 1.5px solid #e2e8f0;
   color: #64748b;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  white-space: nowrap;
 }
 
 .anggota-tab.active {
@@ -264,7 +329,7 @@
 /* Kartu Anggota */
 .anggota-card {
   position: relative;
-  border-radius: 18px;
+  border-radius: 16px;
   overflow: hidden;
   color: white;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -272,8 +337,16 @@
 }
 
 .anggota-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Leader (Kadep) card — golden ring */
+.anggota-card-leader {
+  border: 2px solid transparent;
+  background-image: linear-gradient(#fff, #fff), linear-gradient(135deg, #f0ad4e, #ff8c00, #f0ad4e);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
 
 .anggota-image {
@@ -290,12 +363,13 @@
 
 .anggota-nama {
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 0;
+  line-height: 1.2;
 }
 
 .anggota-jabatan {
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   opacity: 0.9;
   margin: 0;
 }
@@ -304,12 +378,13 @@
 .sub-anggota-nav {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
+  min-width: max-content;
 }
 
 .sub-anggota-tab {
-  padding: 8px 20px;
+  padding: 8px 18px;
   border-radius: 50px;
   font-weight: 500;
   cursor: pointer;
@@ -317,7 +392,8 @@
   background-color: #fff;
   border: 1.5px solid #e2e8f0;
   color: #64748b;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
 }
 
 .sub-anggota-tab.active {
@@ -339,8 +415,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 24px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
 }
 
 
@@ -352,7 +428,115 @@
 
 
 .anggota-info h5 {
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+}
+
+/* Clickable card cursor */
+.anggota-card {
+  cursor: pointer;
+}
+
+/* ============================================
+   ZOOM MODAL (Lightbox)
+   ============================================ */
+.anggota-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 24px;
+}
+
+.anggota-modal-content {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+}
+
+.anggota-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.anggota-modal-close:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+.anggota-modal-image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+
+.anggota-modal-info {
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.anggota-modal-info h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 4px 0;
+}
+
+.anggota-modal-info p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
+@media (max-width: 576px) {
+  .anggota-modal-content {
+    max-width: 320px;
+    border-radius: 16px;
+  }
+
+  .anggota-modal-info {
+    padding: 16px 20px;
+  }
+
+  .anggota-modal-info h3 {
+    font-size: 1.05rem;
+  }
+
+  .anggota-modal-info p {
+    font-size: 0.82rem;
+  }
+
+  .anggota-modal-close {
+    width: 32px;
+    height: 32px;
+    top: 10px;
+    right: 10px;
+    font-size: 0.9rem;
+  }
 }
 
 /* === Tablet Responsive === */
@@ -398,8 +582,32 @@
     font-size: 1.8rem;
   }
 
-  .visi-text {
+  .visimisi-section {
+    padding: 50px 0;
+  }
+
+  .visimisi-heading {
+    font-size: 2.2rem;
+  }
+
+  .visi-card {
+    padding: 30px 36px;
+  }
+
+  .visi-card-text {
+    font-size: 1.25rem;
+  }
+
+  .misi-item {
+    padding: 20px 24px;
     font-size: 1.05rem;
+  }
+
+  .misi-number {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 1rem;
   }
 }
 
@@ -450,17 +658,43 @@
     height: 3px;
   }
 
-  .visi-text {
-    font-size: 0.88rem;
-    padding: 0 8px;
+  .visimisi-section {
+    padding: 40px 16px;
+  }
+
+  .visimisi-heading {
+    font-size: 1.8rem;
+    padding-bottom: 10px;
+  }
+
+  .visimisi-heading::after {
+    width: 50px;
+    height: 3px;
+  }
+
+  .visi-card {
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+
+  .visi-card-text {
+    font-size: 1.05rem;
     line-height: 1.7;
   }
 
   .misi-item {
-    padding: 12px 16px;
-    font-size: 0.85rem;
+    padding: 16px 20px;
+    font-size: 0.95rem;
     border-radius: 10px;
-    text-align: left;
+    gap: 14px;
+  }
+
+  .misi-number {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 0.9rem;
+    border-radius: 8px;
   }
 
   .misi-container {
@@ -468,39 +702,42 @@
   }
 
   .anggota-tab {
-    padding: 7px 14px;
-    font-size: 0.78rem;
+    padding: 8px 16px;
+    font-size: 0.8rem;
   }
 
   .sub-anggota-tab {
-    padding: 6px 12px;
+    padding: 6px 14px;
     font-size: 0.78rem;
   }
 
   .anggota-nav {
-    gap: 6px;
+    gap: 8px;
+    justify-content: flex-start;
   }
 
   .sub-anggota-nav {
-    gap: 6px;
+    gap: 8px;
+    justify-content: flex-start;
   }
 
   .anggota-nama {
-    font-size: 0.95rem;
-  }
-
-  .anggota-jabatan {
     font-size: 0.78rem;
   }
 
+  .anggota-jabatan {
+    font-size: 0.65rem;
+  }
+
   .anggota-info {
-    padding: 12px;
+    padding: 10px;
   }
 
   .anggota-card {
-    border-radius: 14px;
+    border-radius: 12px;
   }
 }
+
 
 
 /* === Struktur Organisasi Scrollable on Mobile === */

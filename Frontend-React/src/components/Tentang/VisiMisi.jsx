@@ -11,26 +11,29 @@ const VisiMisi = () => {
   ];
 
   return (
-    <section className="tentang-section">
+    <section className="visimisi-section">
       <div className="container">
-        {/* Baguian visi*/}
-        <div className="text-center mb-5">
-          <h2 className="section-title-dark with-line">Visi</h2>
+        {/* Bagian Visi */}
+        <div className="text-center mb-4">
+          <h2 className="visimisi-heading">Visi</h2>
         </div>
-        <p className="visi-text text-center">
-          Menjadikan HMRPL sebagai wadah bagi Mahasiswa S1 Rekayasa Perangkat Lunak untuk 
-          <span className="highlight-blue"> perubahan lebih baik</span> dengan 
-          <span className="highlight-blue"> bersinergi.</span>
-        </p>
+        <div className="visi-card">
+          <p className="visi-card-text">
+            Menjadikan HMRPL sebagai wadah bagi Mahasiswa S1 Rekayasa Perangkat Lunak untuk 
+            <span className="highlight-blue"> perubahan lebih baik</span> dengan 
+            <span className="highlight-blue"> bersinergi.</span>
+          </p>
+        </div>
 
-        {/* Bagian misi */}
-        <div className="text-center mt-5 mb-5 pt-4">
-          <h2 className="section-title-dark with-line">Misi</h2>
+        {/* Bagian Misi */}
+        <div className="text-center mt-5 mb-4 pt-3">
+          <h2 className="visimisi-heading">Misi</h2>
         </div>
         <div className="misi-container">
           {misiItems.map((item, index) => (
             <div key={index} className={`misi-item misi-border-${item.color}`}>
-              {item.text}
+              <span className="misi-number">{index + 1}</span>
+              <span className="misi-text">{item.text}</span>
             </div>
           ))}
         </div>
