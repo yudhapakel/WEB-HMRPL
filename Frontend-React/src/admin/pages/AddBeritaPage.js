@@ -75,7 +75,7 @@ const AddBeritaPage = () => {
         <div className="mb-4">
           <label className="form-label">Deskripsi Berita</label>
           <Editor
-            apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
+            tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.7.0/tinymce.min.js"
             value={content}
             onEditorChange={(newContent) => setContent(newContent)}
             init={{
