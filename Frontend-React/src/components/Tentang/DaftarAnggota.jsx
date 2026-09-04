@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axiosInstance from '../../api/axiosInstance';
 import './Tentang.css';
+import LoadingSpinner from '../LoadingSpinner';
 
 // Konfigurasi departemen & divisi (statis — jarang berubah)
 const DEPARTEMEN_CONFIG = {
@@ -39,6 +40,7 @@ const DaftarAnggota = () => {
   const [kepalaDeptMap, setKepalaDeptMap] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [staffMudaList, setStaffMudaList] = useState([]);
 
   // Fetch data anggota dari API
   useEffect(() => {
@@ -68,6 +70,7 @@ const DaftarAnggota = () => {
         }
 
         // Distribusi anggota ke grup yang sesuai
+        const staffMuda = [];
         data.forEach(anggota => {
           const dept = anggota.departemen;
           const imageUrl = anggota.image_path
@@ -80,6 +83,12 @@ const DaftarAnggota = () => {
             jabatan: anggota.jabatan,
             image: imageUrl,
           };
+
+          // Staff Muda dikumpulkan terpisah (bukan bagian tab departemen)
+          if (dept === 'staffmuda') {
+            staffMuda.push(anggotaFormatted);
+            return;
+          }
 
           // Cek apakah kadep
           if (anggota.is_kepala_departemen && dept !== 'inti') {
@@ -99,6 +108,9 @@ const DaftarAnggota = () => {
             }
           }
         });
+
+        staffMuda.sort((a, b) => (a.urutan || 0) - (b.urutan || 0));
+        setStaffMudaList(staffMuda);
 
         // Sort by urutan (API sudah bisa sort, tapi jaga-jaga)
         for (const deptKey of tabKeys) {
@@ -153,7 +165,7 @@ const DaftarAnggota = () => {
 
   const renderAnggotaCard = (anggota, isLeader = false) => (
     <div className={`anggota-card ${isLeader ? 'anggota-card-leader' : ''}`} onClick={() => openModal(anggota)}>
-      <img src={anggota.image} alt={anggota.nama} className="anggota-image" />
+      <img src={anggota.image} alt={anggota.nama} className="anggota-image img-shimmer" />
       <div className="anggota-info">
         <h5 className="anggota-nama">{anggota.nama}</h5>
         <p className="anggota-jabatan">{anggota.jabatan}</p>
@@ -195,7 +207,7 @@ const DaftarAnggota = () => {
     return (
       <section className="tentang-section bg-light">
         <div className="container text-center">
-          <p className="text-muted">Memuat data anggota...</p>
+          <LoadingSpinner text="Memuat data anggota..." />
         </div>
       </section>
     );
@@ -263,6 +275,22 @@ const DaftarAnggota = () => {
         <div className="row mt-4 justify-content-center">
           {renderAnggota()}
         </div>
+
+        {/* Staff Muda — section terpisah di bawah tab departemen */}
+        <div className="text-center mt-5 mb-4">
+          <h2 className="section-title-dark with-line">Staff Muda</h2>
+        </div>
+        {staffMudaList.length > 0 ? (
+          <div className="row mt-2 justify-content-center">
+            {staffMudaList.map(anggota => (
+              <div key={anggota.id} className="col-6 col-md-4 col-lg-3 mb-4">
+                {renderAnggotaCard(anggota)}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-muted">Tidak ada anggota Staff Muda untuk ditampilkan.</p>
+        )}
       </div>
 
       {/* Zoom Modal */}

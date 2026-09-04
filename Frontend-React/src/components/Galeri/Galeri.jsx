@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Galeri.css';
+import LoadingSpinner from '../LoadingSpinner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGaleri } from '../../Context/GaleriContext';
 import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa';
@@ -57,7 +58,7 @@ const Galeri = () => {
   }, [open, images]);
 
   if (loading && images.length === 0) {
-    return <p className="galeri-status-text text-center my-5">Memuat galeri...</p>;
+    return <LoadingSpinner text="Memuat galeri..." />;
   }
 
   if (!loading && images.length === 0) {
@@ -85,7 +86,7 @@ const Galeri = () => {
                   <img 
                     src={`${process.env.REACT_APP_API_URL}/storage/${gambar.image_path}`} 
                     alt={gambar.caption || `Galeri HMRPL ${gambar.id}`} 
-                    className="galeri-image" 
+                    className="galeri-image img-shimmer" 
                     loading="lazy"
                   />
                   <div className="galeri-card-hover-overlay">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BeritaList from '../components/Berita/BeritaList';
 import './BeritaPage.css';
+import LoadingSpinner from '../components/LoadingSpinner';
 import axiosInstance from '../api/axiosInstance'; // nanti diaktifin kalo api nya udah ada
 
 const BeritaPage = () => {
@@ -33,7 +34,7 @@ const BeritaPage = () => {
       </div>
 
       {loading ? (
-        <p className="text-center">Memuat berita...</p>
+        <LoadingSpinner text="Memuat berita..." />
       ) : (
         <BeritaList 
           berita={semuaBerita} 

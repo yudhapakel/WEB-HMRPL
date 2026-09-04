@@ -26,7 +26,7 @@ const BeritaList = ({ berita, currentPage, totalPages, onPageChange }) => {
             Selengkapnya <FaChevronRight size={12} />
           </div>
         </div>
-        <img src={`${process.env.REACT_APP_API_URL}/storage/${beritaUtama.image_path}`} alt={beritaUtama.title} className="berita-image-utama" />
+        <img src={`${process.env.REACT_APP_API_URL}/storage/${beritaUtama.image_path}`} alt={beritaUtama.title} className="berita-image-utama img-shimmer" />
       </div>
     </Link>
   </div>
@@ -38,7 +38,7 @@ const BeritaList = ({ berita, currentPage, totalPages, onPageChange }) => {
         {beritaLainnya.map(item => (
           <Link to={`/berita/${item.slug}`} key={item.id} className="col-lg-4 col-md-6 mb-4 berita-card-link">
             <div className="berita-card">
-              <img src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`} alt={item.title} className="berita-image-lainnya" />
+              <img src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`} alt={item.title} className="berita-image-lainnya img-shimmer" />
               <div className="berita-card-body">
                 <h6>{item.title}</h6>
                 <p className="berita-date">{item.date}</p>

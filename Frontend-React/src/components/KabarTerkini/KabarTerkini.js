@@ -5,6 +5,7 @@ import { FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../api/axiosInstance'; 
 import './KabarTerkini.css';
+import LoadingSpinner from '../LoadingSpinner';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -31,7 +32,7 @@ const KabarTerkini = () => {
   if (loading) {
     return (
       <section className="kabar-section">
-        <div className="container text-center"><p>Memuat Kabar Terkini...</p></div>
+        <div className="container text-center"><LoadingSpinner text="Memuat Kabar Terkini..." /></div>
       </section>
     );
   }
@@ -67,7 +68,7 @@ const KabarTerkini = () => {
                   </Link>
 
                 </div>
-                <img src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`} alt={item.title} className="kabar-image" />
+                <img src={`${process.env.REACT_APP_API_URL}/storage/${item.image_path}`} alt={item.title} className="kabar-image img-shimmer" />
               </div>
             </SwiperSlide>
           ))}

@@ -21,6 +21,10 @@ const DEPARTEMEN_CONFIG = {
       { id: 'kerjasama', nama: 'Kerjasama & Kewirausahaan' },
     ]
   },
+  staffmuda: {
+    label: 'Staff Muda',
+    divisi: [],
+  },
   mediakreatif: {
     label: 'Media Kreatif',
     divisi: [

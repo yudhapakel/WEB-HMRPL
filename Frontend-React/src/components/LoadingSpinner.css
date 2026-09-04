@@ -1,0 +1,37 @@
+/* Spinner + placeholder shimmer (anti-slop: ringan, nggak bom-bom) */
+.hmrpl-spinner-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hmrpl-spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid rgba(6, 137, 160, 0.18);
+  border-top-color: #0689a0;
+  border-radius: 50%;
+  animation: hmrpl-spin 0.7s linear infinite;
+}
+
+.hmrpl-spinner-text {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+@keyframes hmrpl-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Placeholder saat gambar masih load (astral) */
+.img-shimmer {
+  background: linear-gradient(100deg, #eef2f7 40%, #f7fafc 50%, #eef2f7 60%);
+  background-size: 200% 100%;
+  animation: hmrpl-shimmer 1.2s infinite;
+}
+
+@keyframes hmrpl-shimmer {
+  to { background-position: -200% 0; }
+}

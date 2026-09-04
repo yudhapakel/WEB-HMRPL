@@ -63,15 +63,9 @@ export const AuthProvider = ({ children }) => {
 
   const value = { user, login, logout, loading };
 
-  if (loading) {
-    return (
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'center', height:'100vh' }}>
-        <p>Loading Aplikasi...</p>
-      </div>
-    );
-  }
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    // Auth berjalan di background; jangan block seluruh aplikasi (halaman publik langsung render).
+    // Proteksi rute admin ditangani oleh ProtectedRoute yang memakai `loading`.
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

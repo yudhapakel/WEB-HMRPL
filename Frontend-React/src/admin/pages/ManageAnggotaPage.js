@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import axiosInstance from '../../api/axiosInstance';
 import { FaEdit, FaTrash, FaPlus, FaStar } from 'react-icons/fa';
 import './ManageAnggotaPage.css';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const DEPARTEMEN_OPTIONS = [
   { key: 'semua', label: 'Semua' },
   { key: 'inti', label: 'Inti' },
   { key: 'internal', label: 'Internal' },
   { key: 'eksternal', label: 'Eksternal' },
+  { key: 'staffmuda', label: 'Staff Muda' },
   { key: 'mediakreatif', label: 'Media Kreatif' },
 ];
 
@@ -50,7 +52,7 @@ const ManageAnggotaPage = () => {
     : anggota.filter(a => a.departemen === filterDept);
 
   if (loading) {
-    return <p>Memuat data anggota...</p>;
+    return <LoadingSpinner text="Memuat data anggota..." />;
   }
 
   return (
